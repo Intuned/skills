@@ -65,7 +65,7 @@ The craft's **inner async body** becomes the body of
 
 ## 6. Exceptions to faithful-port
 
-### 6a. Auth crafts → AuthSessions (ADR 0002)
+### 6a. Auth crafts → AuthSessions (DECISIONS.md §2)
 A craft that logs in (fills a login form, then navigates to a protected page):
 - Scaffold from `python-starter-auth` (or add the auth-sessions files).
 - Move the login steps into `auth-sessions/create.py` `async def create(page, params)`;
@@ -79,7 +79,7 @@ A craft that logs in (fills a login form, then navigates to a protected page):
 - Test: `intuned dev run authsession create '{creds}' --id test` then
   `intuned dev run api <name> '{}' --auth-session test`.
 
-### 6b. Protected sites → stealth + deployed gate (ADR 0003)
+### 6b. Protected sites → stealth + deployed gate (DECISIONS.md §3)
 If the target is bot-protected (not the sandbox/books/docs): set `headful: true`
 and `stealthMode.enabled: true` in the manifest (init with `--stealth`). A local
 block is expected; verify via deploy + `intuned platform runs start`. Add

@@ -44,7 +44,7 @@ preserved verbatim; only the boundary changes (browser bootstrap stripped,
 
 ### 2. `sandbox/login` — AuthSessions exception (auth)
 **Task:** log into the sandbox, land on the protected list, extract the rows.
-**Shows:** the one sanctioned re-architecture ([ADR 0002](../docs/adr/0002-auth-via-authsessions.md)).
+**Shows:** the one sanctioned re-architecture ([DECISIONS.md §2](../../skills/webwright-to-intuned/DECISIONS.md)).
 The inline login splits into [`auth-sessions/create.py`](./sandbox/login/intuned-project/auth-sessions/create.py)
 (craft's **live-verified** selectors) + a derived [`check.py`](./sandbox/login/intuned-project/auth-sessions/check.py);
 [`api/list.py`](./sandbox/login/intuned-project/api/list.py) runs already-authenticated.
@@ -68,4 +68,4 @@ faithful port, on an external site.
 ---
 
 All four conversions and the gotchas they surfaced are recorded in
-[`../docs/TEST-RESULTS.md`](../docs/TEST-RESULTS.md).
+[`../../skills/webwright-to-intuned/TEST-RESULTS.md`](../../skills/webwright-to-intuned/TEST-RESULTS.md).

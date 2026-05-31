@@ -2,8 +2,8 @@
 
 End-to-end verification of the skill by porting real Webwright crafts into
 deployed Intuned projects in a workspace. Each port was driven by hand following
-`reference/transformation-rules.md`; every gotcha hit was folded into
-`reference/gotchas.md`.
+`transformation-rules.md`; every gotcha hit was folded into
+`gotchas.md`.
 
 Pipeline verified per port: **validate craft → scaffold (`intuned dev init`) →
 transform → local gate (`intuned dev run`) → deploy (`intuned dev deploy`) →
@@ -14,7 +14,7 @@ platform standalone run (`intuned platform runs start`)**.
 | Craft (input) | Exercises | Local run | Deploy | Platform run | Result |
 |---|---|---|---|---|---|
 | `techcrunch_ai_craft` → `techcrunch-startup-news` / `news` | faithful scrape + params (`days_back`, `category_url`); dropped `output_filename` | ✅ 30 items | ✅ | ✅ **SUCCEEDED** | 30 items, identical local & platform |
-| `sandbox-login_craft` → `sandbox-login` / `list` | **AuthSessions exception** (ADR 0002): `create.py`+`check.py`, session-applied automation | ✅ create+check+run | ✅ | ✅ with `authSession:{id}` | 10 rows extracted |
+| `sandbox-login_craft` → `sandbox-login` / `list` | **AuthSessions exception** (DECISIONS.md §2): `create.py`+`check.py`, session-applied automation | ✅ create+check+run | ✅ | ✅ with `authSession:{id}` | 10 rows extracted |
 | `sandbox-pdf-crawl_craft` → `sandbox-pdf-crawl` / `crawl` | crawl, pagination helper, no fan-out | ✅ 2 PDFs | ✅ | ✅ **completed** | 2 unique PDF records |
 | `form-fill-dummy_craft` → `form-fill-dummy` / `submit` | multi-step form RPA, 9 params, **Browserbase block stripped** (G13) | ✅ all steps execute | ✅ | ✅ **completed** | faithful: `submitted=false` matches craft's final verdict (G14) |
 | `books-discover_craft` → `books-discover` / `discover` | real-site crawl, full pagination, **Browserbase block stripped** (G13), no fan-out | ✅ 1000 URLs / 50 pages | ✅ | ✅ **completed**, 1000 URLs / 50 pages | 1000 unique book URLs, matches craft |
@@ -37,14 +37,14 @@ standalone platform run completed successfully.
 > (`result.output or result`).
 
 ## What this proves
-- The **faithful-port contract** (ADR 0001) works: strip browser bootstrap →
+- The **faithful-port contract** (DECISIONS.md §1) works: strip browser bootstrap →
   `automation(page, params)`, `page.goto`→`go_to_url`, drop harness params
   (`output_filename`) and artifacts, defaults reproduce the task. A scrape ran
   byte-identical locally and on the platform.
-- The **AuthSessions exception** (ADR 0002) works **end to end on the platform**:
+- The **AuthSessions exception** (DECISIONS.md §2) works **end to end on the platform**:
   the craft's live-verified login selectors ported into `create.py`, a derived
   `check.py`, and a deployed run consuming a platform-created session.
-- The **local-vs-platform gate split** (ADR 0003) holds: unprotected sandbox/
+- The **local-vs-platform gate split** (DECISIONS.md §3) holds: unprotected sandbox/
   news targets pass locally; the platform run is the real gate.
 
 ## Gotchas discovered while testing (now in gotchas.md)

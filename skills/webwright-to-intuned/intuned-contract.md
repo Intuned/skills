@@ -79,7 +79,7 @@ from intuned_runtime.captcha import wait_for_captcha_solve
 ```
 
 - `extend_payload({"api": "...", "parameters": {...}})` — Jobs fan-out. NOT used
-  by default (ADR 0001).
+  by default (DECISIONS.md §1).
 - `await wait_for_captcha_solve(page=page, timeout_s=120.0)` — platform only.
 
 ## Intuned.jsonc manifest (key fields)

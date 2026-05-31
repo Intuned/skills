@@ -2,7 +2,7 @@
 
 Each entry: **Symptom → Cause → Rule**. Add one every time a port fails during
 testing. Seeded from ground-truth scaffolding; extended from the 10-task runs
-(see `../TEST-RESULTS.md`).
+(see `TEST-RESULTS.md`).
 
 ---
 
@@ -43,7 +43,7 @@ template's `intuned-runtime`/`intuned-browser` pins. Add task deps additively.
 **Cause:** Expecting stealth to work under `intuned dev run`.
 **Rule:** For protected sites, a local block is expected. Enable
 headful+stealth in the manifest and verify via `intuned platform runs start`.
-Never burn iterations trying to beat a wall locally. (ADR 0003)
+Never burn iterations trying to beat a wall locally. (DECISIONS.md §3)
 
 ## G7 — Return must be JSON-serializable
 **Symptom:** Run fails serializing the result.

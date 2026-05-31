@@ -23,12 +23,12 @@ one Intuned `automation` API, re-fitted only at Intuned's boundary.
   with an `argparse` wrapper, `plan.md`, `task.json`). If it isn't, stop and say so.
 
 ## Read first
-1. `reference/transformation-rules.md` — the step-by-step transform and gates.
-2. `reference/intuned-contract.md` — the exact target (API signature, SDK, CLI,
+1. `transformation-rules.md` — the step-by-step transform and gates.
+2. `intuned-contract.md` — the exact target (API signature, SDK, CLI,
    manifest), all verified against real scaffolds.
-3. `reference/gotchas.md` — the hardening layer. **Re-read before every port and
+3. `gotchas.md` — the hardening layer. **Re-read before every port and
    add to it after every failure.**
-4. `CONTEXT.md` — canonical vocabulary. `docs/adr/` — why the key decisions hold.
+4. `CONTEXT.md` — canonical vocabulary. `DECISIONS.md` — why the key decisions hold.
 
 ## Workflow (one port)
 1. **Validate** the input is a real craft; else fail loudly.
@@ -53,11 +53,11 @@ one Intuned `automation` API, re-fitted only at Intuned's boundary.
 7. On any failure, root-cause into a `gotchas.md` entry, fix, re-run.
 
 ## Exceptions to faithful-port (decide deliberately)
-- **Auth craft → AuthSessions** (ADR 0002): decompose login into
+- **Auth craft → AuthSessions** (DECISIONS.md §2): decompose login into
   `auth-sessions/create.py` + a derived `check.py`, enable `authSessions`; the
   `automation` assumes a valid session. Test with `dev run authsession create`
   then `--auth-session`.
-- **Protected site** (ADR 0003): headful + stealth in the manifest; the deployed
+- **Protected site** (DECISIONS.md §3): headful + stealth in the manifest; the deployed
   platform run is the only real gate. **Expected-rejection** tasks (LinkedIn) get
   no stealth — a clean reported rejection is the pass.
 - **No crawl fan-out** by default — a crawl returns a flat list from one API;

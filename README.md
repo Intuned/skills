@@ -28,9 +28,9 @@ Update later with `npx skills@latest update`.
 
 ## Skills
 
-| Skill | Category | What it does |
-|---|---|---|
-| [`webwright-to-intuned`](./skills/migration/webwright-to-intuned) | migration | Turn a [Webwright](https://github.com/microsoft/Webwright) "Crafted CLI" into a deployed, verified Intuned project. Ships 4 convert-and-compare examples. |
+| Skill | What it does |
+|---|---|
+| [`webwright-to-intuned`](./skills/webwright-to-intuned) | Turn a [Webwright](https://github.com/microsoft/Webwright) "Crafted CLI" into a deployed, verified Intuned project. Includes 4 convert-and-compare examples under [`examples/`](./examples/webwright-to-intuned). |
 
 _More Intuned skills land here over time (authoring from a spec, debugging failed
 runs, AuthSession setup, deploy/ops helpers, …)._
@@ -42,12 +42,11 @@ intuned-skills/
 ├── .claude-plugin/
 │   └── plugin.json          # lists every skill folder — the file the skills CLI reads
 ├── skills/
-│   └── <category>/<name>/   # one folder per skill
+│   └── <name>/              # one folder per skill (flat, no category folders)
 │       ├── SKILL.md         # required: frontmatter (name + description) + instructions
-│       ├── commands/        # optional slash commands
-│       ├── reference/       # optional progressive-disclosure docs
-│       └── examples/ …      # optional bundled assets
-├── docs/                    # repo-level docs
+│       ├── *.md             # optional flat reference docs beside SKILL.md
+│       └── scripts/         # optional executable helpers
+├── examples/<name>/         # optional, per-skill demo assets (kept out of the skill folder)
 ├── scripts/install-local.sh # symlink installer for non-CLI users
 ├── CONTEXT.md               # shared vocabulary across skills
 ├── CLAUDE.md                # how to add a skill (contributor guide)
@@ -57,9 +56,9 @@ intuned-skills/
 
 ## Adding a skill
 
-1. Create `skills/<category>/<your-skill>/SKILL.md` with YAML frontmatter
-   (`name`, trigger-rich `description`) and lean instructions; offload detail to
-   `reference/`.
+1. Create `skills/<your-skill>/SKILL.md` with YAML frontmatter (`name`,
+   trigger-rich `description`) and lean instructions; offload detail to flat
+   `.md` files beside it.
 2. Add its path to the `skills` array in `.claude-plugin/plugin.json`.
 3. Add a row to the **Skills** table above.
 

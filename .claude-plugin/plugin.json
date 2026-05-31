@@ -1,6 +1,6 @@
 {
   "name": "intuned-skills",
   "skills": [
-    "./skills/migration/webwright-to-intuned"
+    "./skills/webwright-to-intuned"
   ]
 }
