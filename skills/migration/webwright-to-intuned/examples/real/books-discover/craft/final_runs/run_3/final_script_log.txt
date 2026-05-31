@@ -1,0 +1,105 @@
+step 0 params: start_url=https://books.toscrape.com/ output_json_name=book_urls.json
+step 1 action: opened browser in mode=local
+step 2 action: opened listing page index=1 url=https://books.toscrape.com/ title='All products | Books to Scrape - Sandbox' pager='Page 1 of 50' extracted_this_page=20 unique_total=20 has_next=True
+step 3 action: followed next pagination to https://books.toscrape.com/catalogue/page-2.html
+step 3 action: opened listing page index=2 url=https://books.toscrape.com/catalogue/page-2.html title='All products | Books to Scrape - Sandbox' pager='Page 2 of 50' extracted_this_page=20 unique_total=40 has_next=True
+step 4 action: followed next pagination to https://books.toscrape.com/catalogue/page-3.html
+step 4 action: opened listing page index=3 url=https://books.toscrape.com/catalogue/page-3.html title='All products | Books to Scrape - Sandbox' pager='Page 3 of 50' extracted_this_page=20 unique_total=60 has_next=True
+step 5 action: followed next pagination to https://books.toscrape.com/catalogue/page-4.html
+step 5 action: opened listing page index=4 url=https://books.toscrape.com/catalogue/page-4.html title='All products | Books to Scrape - Sandbox' pager='Page 4 of 50' extracted_this_page=20 unique_total=80 has_next=True
+step 6 action: followed next pagination to https://books.toscrape.com/catalogue/page-5.html
+step 6 action: opened listing page index=5 url=https://books.toscrape.com/catalogue/page-5.html title='All products | Books to Scrape - Sandbox' pager='Page 5 of 50' extracted_this_page=20 unique_total=100 has_next=True
+step 7 action: followed next pagination to https://books.toscrape.com/catalogue/page-6.html
+step 7 action: opened listing page index=6 url=https://books.toscrape.com/catalogue/page-6.html title='All products | Books to Scrape - Sandbox' pager='Page 6 of 50' extracted_this_page=20 unique_total=120 has_next=True
+step 8 action: followed next pagination to https://books.toscrape.com/catalogue/page-7.html
+step 8 action: opened listing page index=7 url=https://books.toscrape.com/catalogue/page-7.html title='All products | Books to Scrape - Sandbox' pager='Page 7 of 50' extracted_this_page=20 unique_total=140 has_next=True
+step 9 action: followed next pagination to https://books.toscrape.com/catalogue/page-8.html
+step 9 action: opened listing page index=8 url=https://books.toscrape.com/catalogue/page-8.html title='All products | Books to Scrape - Sandbox' pager='Page 8 of 50' extracted_this_page=20 unique_total=160 has_next=True
+step 10 action: followed next pagination to https://books.toscrape.com/catalogue/page-9.html
+step 10 action: opened listing page index=9 url=https://books.toscrape.com/catalogue/page-9.html title='All products | Books to Scrape - Sandbox' pager='Page 9 of 50' extracted_this_page=20 unique_total=180 has_next=True
+step 11 action: followed next pagination to https://books.toscrape.com/catalogue/page-10.html
+step 11 action: opened listing page index=10 url=https://books.toscrape.com/catalogue/page-10.html title='All products | Books to Scrape - Sandbox' pager='Page 10 of 50' extracted_this_page=20 unique_total=200 has_next=True
+step 12 action: followed next pagination to https://books.toscrape.com/catalogue/page-11.html
+step 12 action: opened listing page index=11 url=https://books.toscrape.com/catalogue/page-11.html title='All products | Books to Scrape - Sandbox' pager='Page 11 of 50' extracted_this_page=20 unique_total=220 has_next=True
+step 13 action: followed next pagination to https://books.toscrape.com/catalogue/page-12.html
+step 13 action: opened listing page index=12 url=https://books.toscrape.com/catalogue/page-12.html title='All products | Books to Scrape - Sandbox' pager='Page 12 of 50' extracted_this_page=20 unique_total=240 has_next=True
+step 14 action: followed next pagination to https://books.toscrape.com/catalogue/page-13.html
+step 14 action: opened listing page index=13 url=https://books.toscrape.com/catalogue/page-13.html title='All products | Books to Scrape - Sandbox' pager='Page 13 of 50' extracted_this_page=20 unique_total=260 has_next=True
+step 15 action: followed next pagination to https://books.toscrape.com/catalogue/page-14.html
+step 15 action: opened listing page index=14 url=https://books.toscrape.com/catalogue/page-14.html title='All products | Books to Scrape - Sandbox' pager='Page 14 of 50' extracted_this_page=20 unique_total=280 has_next=True
+step 16 action: followed next pagination to https://books.toscrape.com/catalogue/page-15.html
+step 16 action: opened listing page index=15 url=https://books.toscrape.com/catalogue/page-15.html title='All products | Books to Scrape - Sandbox' pager='Page 15 of 50' extracted_this_page=20 unique_total=300 has_next=True
+step 17 action: followed next pagination to https://books.toscrape.com/catalogue/page-16.html
+step 17 action: opened listing page index=16 url=https://books.toscrape.com/catalogue/page-16.html title='All products | Books to Scrape - Sandbox' pager='Page 16 of 50' extracted_this_page=20 unique_total=320 has_next=True
+step 18 action: followed next pagination to https://books.toscrape.com/catalogue/page-17.html
+step 18 action: opened listing page index=17 url=https://books.toscrape.com/catalogue/page-17.html title='All products | Books to Scrape - Sandbox' pager='Page 17 of 50' extracted_this_page=20 unique_total=340 has_next=True
+step 19 action: followed next pagination to https://books.toscrape.com/catalogue/page-18.html
+step 19 action: opened listing page index=18 url=https://books.toscrape.com/catalogue/page-18.html title='All products | Books to Scrape - Sandbox' pager='Page 18 of 50' extracted_this_page=20 unique_total=360 has_next=True
+step 20 action: followed next pagination to https://books.toscrape.com/catalogue/page-19.html
+step 20 action: opened listing page index=19 url=https://books.toscrape.com/catalogue/page-19.html title='All products | Books to Scrape - Sandbox' pager='Page 19 of 50' extracted_this_page=20 unique_total=380 has_next=True
+step 21 action: followed next pagination to https://books.toscrape.com/catalogue/page-20.html
+step 21 action: opened listing page index=20 url=https://books.toscrape.com/catalogue/page-20.html title='All products | Books to Scrape - Sandbox' pager='Page 20 of 50' extracted_this_page=20 unique_total=400 has_next=True
+step 22 action: followed next pagination to https://books.toscrape.com/catalogue/page-21.html
+step 22 action: opened listing page index=21 url=https://books.toscrape.com/catalogue/page-21.html title='All products | Books to Scrape - Sandbox' pager='Page 21 of 50' extracted_this_page=20 unique_total=420 has_next=True
+step 23 action: followed next pagination to https://books.toscrape.com/catalogue/page-22.html
+step 23 action: opened listing page index=22 url=https://books.toscrape.com/catalogue/page-22.html title='All products | Books to Scrape - Sandbox' pager='Page 22 of 50' extracted_this_page=20 unique_total=440 has_next=True
+step 24 action: followed next pagination to https://books.toscrape.com/catalogue/page-23.html
+step 24 action: opened listing page index=23 url=https://books.toscrape.com/catalogue/page-23.html title='All products | Books to Scrape - Sandbox' pager='Page 23 of 50' extracted_this_page=20 unique_total=460 has_next=True
+step 25 action: followed next pagination to https://books.toscrape.com/catalogue/page-24.html
+step 25 action: opened listing page index=24 url=https://books.toscrape.com/catalogue/page-24.html title='All products | Books to Scrape - Sandbox' pager='Page 24 of 50' extracted_this_page=20 unique_total=480 has_next=True
+step 26 action: followed next pagination to https://books.toscrape.com/catalogue/page-25.html
+step 26 action: opened listing page index=25 url=https://books.toscrape.com/catalogue/page-25.html title='All products | Books to Scrape - Sandbox' pager='Page 25 of 50' extracted_this_page=20 unique_total=500 has_next=True
+step 27 action: followed next pagination to https://books.toscrape.com/catalogue/page-26.html
+step 27 action: opened listing page index=26 url=https://books.toscrape.com/catalogue/page-26.html title='All products | Books to Scrape - Sandbox' pager='Page 26 of 50' extracted_this_page=20 unique_total=520 has_next=True
+step 28 action: followed next pagination to https://books.toscrape.com/catalogue/page-27.html
+step 28 action: opened listing page index=27 url=https://books.toscrape.com/catalogue/page-27.html title='All products | Books to Scrape - Sandbox' pager='Page 27 of 50' extracted_this_page=20 unique_total=540 has_next=True
+step 29 action: followed next pagination to https://books.toscrape.com/catalogue/page-28.html
+step 29 action: opened listing page index=28 url=https://books.toscrape.com/catalogue/page-28.html title='All products | Books to Scrape - Sandbox' pager='Page 28 of 50' extracted_this_page=20 unique_total=560 has_next=True
+step 30 action: followed next pagination to https://books.toscrape.com/catalogue/page-29.html
+step 30 action: opened listing page index=29 url=https://books.toscrape.com/catalogue/page-29.html title='All products | Books to Scrape - Sandbox' pager='Page 29 of 50' extracted_this_page=20 unique_total=580 has_next=True
+step 31 action: followed next pagination to https://books.toscrape.com/catalogue/page-30.html
+step 31 action: opened listing page index=30 url=https://books.toscrape.com/catalogue/page-30.html title='All products | Books to Scrape - Sandbox' pager='Page 30 of 50' extracted_this_page=20 unique_total=600 has_next=True
+step 32 action: followed next pagination to https://books.toscrape.com/catalogue/page-31.html
+step 32 action: opened listing page index=31 url=https://books.toscrape.com/catalogue/page-31.html title='All products | Books to Scrape - Sandbox' pager='Page 31 of 50' extracted_this_page=20 unique_total=620 has_next=True
+step 33 action: followed next pagination to https://books.toscrape.com/catalogue/page-32.html
+step 33 action: opened listing page index=32 url=https://books.toscrape.com/catalogue/page-32.html title='All products | Books to Scrape - Sandbox' pager='Page 32 of 50' extracted_this_page=20 unique_total=640 has_next=True
+step 34 action: followed next pagination to https://books.toscrape.com/catalogue/page-33.html
+step 34 action: opened listing page index=33 url=https://books.toscrape.com/catalogue/page-33.html title='All products | Books to Scrape - Sandbox' pager='Page 33 of 50' extracted_this_page=20 unique_total=660 has_next=True
+step 35 action: followed next pagination to https://books.toscrape.com/catalogue/page-34.html
+step 35 action: opened listing page index=34 url=https://books.toscrape.com/catalogue/page-34.html title='All products | Books to Scrape - Sandbox' pager='Page 34 of 50' extracted_this_page=20 unique_total=680 has_next=True
+step 36 action: followed next pagination to https://books.toscrape.com/catalogue/page-35.html
+step 36 action: opened listing page index=35 url=https://books.toscrape.com/catalogue/page-35.html title='All products | Books to Scrape - Sandbox' pager='Page 35 of 50' extracted_this_page=20 unique_total=700 has_next=True
+step 37 action: followed next pagination to https://books.toscrape.com/catalogue/page-36.html
+step 37 action: opened listing page index=36 url=https://books.toscrape.com/catalogue/page-36.html title='All products | Books to Scrape - Sandbox' pager='Page 36 of 50' extracted_this_page=20 unique_total=720 has_next=True
+step 38 action: followed next pagination to https://books.toscrape.com/catalogue/page-37.html
+step 38 action: opened listing page index=37 url=https://books.toscrape.com/catalogue/page-37.html title='All products | Books to Scrape - Sandbox' pager='Page 37 of 50' extracted_this_page=20 unique_total=740 has_next=True
+step 39 action: followed next pagination to https://books.toscrape.com/catalogue/page-38.html
+step 39 action: opened listing page index=38 url=https://books.toscrape.com/catalogue/page-38.html title='All products | Books to Scrape - Sandbox' pager='Page 38 of 50' extracted_this_page=20 unique_total=760 has_next=True
+step 40 action: followed next pagination to https://books.toscrape.com/catalogue/page-39.html
+step 40 action: opened listing page index=39 url=https://books.toscrape.com/catalogue/page-39.html title='All products | Books to Scrape - Sandbox' pager='Page 39 of 50' extracted_this_page=20 unique_total=780 has_next=True
+step 41 action: followed next pagination to https://books.toscrape.com/catalogue/page-40.html
+step 41 action: opened listing page index=40 url=https://books.toscrape.com/catalogue/page-40.html title='All products | Books to Scrape - Sandbox' pager='Page 40 of 50' extracted_this_page=20 unique_total=800 has_next=True
+step 42 action: followed next pagination to https://books.toscrape.com/catalogue/page-41.html
+step 42 action: opened listing page index=41 url=https://books.toscrape.com/catalogue/page-41.html title='All products | Books to Scrape - Sandbox' pager='Page 41 of 50' extracted_this_page=20 unique_total=820 has_next=True
+step 43 action: followed next pagination to https://books.toscrape.com/catalogue/page-42.html
+step 43 action: opened listing page index=42 url=https://books.toscrape.com/catalogue/page-42.html title='All products | Books to Scrape - Sandbox' pager='Page 42 of 50' extracted_this_page=20 unique_total=840 has_next=True
+step 44 action: followed next pagination to https://books.toscrape.com/catalogue/page-43.html
+step 44 action: opened listing page index=43 url=https://books.toscrape.com/catalogue/page-43.html title='All products | Books to Scrape - Sandbox' pager='Page 43 of 50' extracted_this_page=20 unique_total=860 has_next=True
+step 45 action: followed next pagination to https://books.toscrape.com/catalogue/page-44.html
+step 45 action: opened listing page index=44 url=https://books.toscrape.com/catalogue/page-44.html title='All products | Books to Scrape - Sandbox' pager='Page 44 of 50' extracted_this_page=20 unique_total=880 has_next=True
+step 46 action: followed next pagination to https://books.toscrape.com/catalogue/page-45.html
+step 46 action: opened listing page index=45 url=https://books.toscrape.com/catalogue/page-45.html title='All products | Books to Scrape - Sandbox' pager='Page 45 of 50' extracted_this_page=20 unique_total=900 has_next=True
+step 47 action: followed next pagination to https://books.toscrape.com/catalogue/page-46.html
+step 47 action: opened listing page index=46 url=https://books.toscrape.com/catalogue/page-46.html title='All products | Books to Scrape - Sandbox' pager='Page 46 of 50' extracted_this_page=20 unique_total=920 has_next=True
+step 48 action: followed next pagination to https://books.toscrape.com/catalogue/page-47.html
+step 48 action: opened listing page index=47 url=https://books.toscrape.com/catalogue/page-47.html title='All products | Books to Scrape - Sandbox' pager='Page 47 of 50' extracted_this_page=20 unique_total=940 has_next=True
+step 49 action: followed next pagination to https://books.toscrape.com/catalogue/page-48.html
+step 49 action: opened listing page index=48 url=https://books.toscrape.com/catalogue/page-48.html title='All products | Books to Scrape - Sandbox' pager='Page 48 of 50' extracted_this_page=20 unique_total=960 has_next=True
+step 50 action: followed next pagination to https://books.toscrape.com/catalogue/page-49.html
+step 50 action: opened listing page index=49 url=https://books.toscrape.com/catalogue/page-49.html title='All products | Books to Scrape - Sandbox' pager='Page 49 of 50' extracted_this_page=20 unique_total=980 has_next=True
+step 51 action: followed next pagination to https://books.toscrape.com/catalogue/page-50.html
+step 51 action: opened listing page index=50 url=https://books.toscrape.com/catalogue/page-50.html title='All products | Books to Scrape - Sandbox' pager='Page 50 of 50' extracted_this_page=20 unique_total=1000 has_next=False
+step 52 action: reached final catalogue page with no next control visible unique_total=1000
+step 53 action: wrote deduplicated results to book_urls.json total_count=1000
+step 54 action: displayed final collected-result summary with total_count=1000
+final response: total_count=1000 book_urls_json=book_urls.json

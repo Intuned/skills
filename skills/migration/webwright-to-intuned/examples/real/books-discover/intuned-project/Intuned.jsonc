@@ -1,0 +1,32 @@
+// For more information, see our Intuned settings reference
+// https://intunedhq.com/docs/main/05-references/intuned-json
+{
+  "apiAccess": {
+    "enabled": true
+  },
+  "authSessions": {
+    "enabled": false
+  },
+  "replication": {
+    "maxConcurrentRequests": 1,
+    "size": "standard"
+  },
+  "metadata": {
+    "defaultRunPlaygroundInput": {
+      "apiName": "discover",
+      "parameters": {
+        "start_url": "https://books.toscrape.com/"
+      }
+    },
+    "template": {
+      "name": "starter",
+      "description": "Default Intuned project template for browser automation",
+      "tags": [
+        "starter",
+        "browser-sdk"
+      ]
+    }
+  },
+  "projectName": "books-discover",
+  "workspaceId": "YOUR_WORKSPACE_ID"
+}

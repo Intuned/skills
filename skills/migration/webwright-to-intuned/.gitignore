@@ -1,0 +1,10 @@
+# Python / Intuned project local artifacts
+.venv/
+__pycache__/
+*.pyc
+uv.lock
+.env
+# Intuned local auth session instances (never commit captured sessions)
+auth-sessions-instances/
+# OS
+.DS_Store

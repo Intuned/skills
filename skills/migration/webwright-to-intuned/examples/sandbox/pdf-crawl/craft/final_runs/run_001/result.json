@@ -1,0 +1,19 @@
+{
+  "start_url": "https://sandbox.intuned.dev/pdfs",
+  "visited_pages": [
+    "https://sandbox.intuned.dev/pdfs"
+  ],
+  "records": [
+    {
+      "product_name": "LG UltraFine 31.5-Inch Computer Monitor 32UP83A-W, IPS with HDR 10 Compatibility and AMD FreeSync",
+      "manufacturer": "LG",
+      "pdf_url": "https://intuned-docs-public-images.s3.amazonaws.com/32UP83A_ENG_US.pdf"
+    },
+    {
+      "product_name": "LG UltraFine UHD 27-Inch 4K UHD 2160p Computer Monitor 27UN850-W, IPS with VESA DisplayHDR 400, AMD FreeSync, and USB-C, White,Silver",
+      "manufacturer": "LG",
+      "pdf_url": "https://intuned-docs-public-images.s3.amazonaws.com/27UP600_27UP650_ENG_US.pdf"
+    }
+  ],
+  "total_count": 2
+}

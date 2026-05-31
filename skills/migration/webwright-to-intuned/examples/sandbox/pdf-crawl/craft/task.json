@@ -1,0 +1,5 @@
+{
+  "task": "Go to the Intuned sandbox PDFs page (https://sandbox.intuned.dev/pdfs). It lists products in a table with a \"Specs file\" PDF link per row. Crawl the page (and any pagination if present), collect every PDF document URL, and return the complete de-duplicated list of PDF URLs together with the associated product name/manufacturer for each and the total count.",
+  "task_id": "sandbox-pdf-crawl_craft",
+  "start_url": "https://sandbox.intuned.dev/pdfs"
+}

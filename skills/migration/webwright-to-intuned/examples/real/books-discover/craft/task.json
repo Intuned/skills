@@ -1,0 +1,5 @@
+{
+  "task": "Crawl books.toscrape.com starting from the homepage. Page through the full catalogue (follow the \"next\" pagination across all listing pages) and collect the URL of every individual book detail page. Return the complete, de-duplicated list of book detail page URLs along with the total count.",
+  "task_id": "books-discover_craft",
+  "start_url": "https://books.toscrape.com/"
+}

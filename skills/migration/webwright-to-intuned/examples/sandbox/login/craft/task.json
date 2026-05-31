@@ -1,0 +1,5 @@
+{
+  "task": "Log into the Intuned sandbox. Navigating to the protected page redirects to a login form; sign in with email \"demo@email.com\" and password \"DemoUser2024!\" (the demo credentials shown on the login page). After authentication you should land on the protected List (Auth) page. Extract every item shown in that authenticated list into a structured list and return it.",
+  "task_id": "sandbox-login_craft",
+  "start_url": "https://sandbox.intuned.dev/list-auth"
+}

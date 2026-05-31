@@ -1,0 +1,28 @@
+step 0 params: start_url=https://sandbox.intuned.dev/pdfs max_pages=25
+step 1 action: open listing page 1 at https://sandbox.intuned.dev/pdfs and inspect the products table
+step 1 observed_headers: ['Name', 'Manufacturer', 'Modal', 'Specs file']
+step 1 observed_row_count: 2
+step 1 extracted_record: product_name="LG UltraFine UHD 27-Inch 4K UHD 2160p Computer Monitor 27UN850-W, IPS with VESA DisplayHDR 400, AMD FreeSync, and USB-C, White,Silver" manufacturer="LG" pdf_url=https://intuned-docs-public-images.s3.amazonaws.com/27UP600_27UP650_ENG_US.pdf
+step 1 extracted_record: product_name="LG UltraFine 31.5-Inch Computer Monitor 32UP83A-W, IPS with HDR 10 Compatibility and AMD FreeSync" manufacturer="LG" pdf_url=https://intuned-docs-public-images.s3.amazonaws.com/32UP83A_ENG_US.pdf
+step 1 pagination: no further pagination detected
+step 2 action: capture final results summary with 2 unique PDF records
+final_response:
+{
+  "start_url": "https://sandbox.intuned.dev/pdfs",
+  "visited_pages": [
+    "https://sandbox.intuned.dev/pdfs"
+  ],
+  "records": [
+    {
+      "product_name": "LG UltraFine 31.5-Inch Computer Monitor 32UP83A-W, IPS with HDR 10 Compatibility and AMD FreeSync",
+      "manufacturer": "LG",
+      "pdf_url": "https://intuned-docs-public-images.s3.amazonaws.com/32UP83A_ENG_US.pdf"
+    },
+    {
+      "product_name": "LG UltraFine UHD 27-Inch 4K UHD 2160p Computer Monitor 27UN850-W, IPS with VESA DisplayHDR 400, AMD FreeSync, and USB-C, White,Silver",
+      "manufacturer": "LG",
+      "pdf_url": "https://intuned-docs-public-images.s3.amazonaws.com/27UP600_27UP650_ENG_US.pdf"
+    }
+  ],
+  "total_count": 2
+}

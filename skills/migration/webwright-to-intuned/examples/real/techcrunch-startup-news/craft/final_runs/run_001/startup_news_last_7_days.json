@@ -1,0 +1,326 @@
+{
+  "task": "Scrape TechCrunch startup news from the last 7 days",
+  "category_url": "https://techcrunch.com/category/startups/",
+  "days_back": 7,
+  "run_timestamp": "2026-05-28T15:06:38.916842+03:00",
+  "cutoff_timestamp": "2026-05-21T15:06:38.916842+03:00",
+  "count": 22,
+  "items": [
+    {
+      "i": 0,
+      "text": "VENTURE\nTriomics nabs $22M to bring oncology-specific AI to cancer centers\nMarina Temkin\n15 hours ago",
+      "title": "Triomics nabs $22M to bring oncology-specific AI to cancer centers",
+      "href": "https://techcrunch.com/2026/05/27/triomics-nabs-22m-to-bring-oncology-specific-ai-to-cancer-centers/",
+      "datetime": "2026-05-27T14:11:15-07:00",
+      "time_text": "15 hours ago",
+      "authors": [
+        "Marina Temkin"
+      ],
+      "categories": [
+        "Venture"
+      ],
+      "datetime_iso": "2026-05-27T14:11:15-07:00"
+    },
+    {
+      "i": 2,
+      "text": "AI\nYour SEO strategy is optimized for a search engine that no longer exists.\nRebecca Bellan\nTheresa Loconsolo\n17 hours ago",
+      "title": "Your SEO strategy is optimized for a search engine that no longer exists.",
+      "href": "https://techcrunch.com/podcast/your-seo-strategy-is-optimized-for-a-search-engine-that-no-longer-exists/",
+      "datetime": "2026-05-27T11:39:17-07:00",
+      "time_text": "17 hours ago",
+      "authors": [
+        "Rebecca Bellan",
+        "Theresa Loconsolo"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "datetime_iso": "2026-05-27T11:39:17-07:00"
+    },
+    {
+      "i": 5,
+      "text": "IN BRIEF\nAI coding startup Cognition raises $1B at $25B pre-money valuation\nJulie Bort\n20 hours ago",
+      "title": "AI coding startup Cognition raises $1B at $25B pre-money valuation",
+      "href": "https://techcrunch.com/2026/05/27/ai-coding-startup-cognition-raises-1b-at-25b-pre-money-valuation/",
+      "datetime": "2026-05-27T09:00:00-07:00",
+      "time_text": "20 hours ago",
+      "authors": [
+        "Julie Bort"
+      ],
+      "categories": [],
+      "datetime_iso": "2026-05-27T09:00:00-07:00"
+    },
+    {
+      "i": 7,
+      "text": "TECHCRUNCH DISRUPT 2026\nStartup Battlefield 200 applications close today: Nominate a founder or submit your startup\nTechCrunch Events\n22 hours ago",
+      "title": "Startup Battlefield 200 applications close today: Nominate a founder or submit your startup",
+      "href": "https://techcrunch.com/2026/05/27/startup-battlefield-200-applications-close-today-nominate-a-founder-or-submit-your-startup/",
+      "datetime": "2026-05-27T07:15:00-07:00",
+      "time_text": "22 hours ago",
+      "authors": [
+        "TechCrunch Events"
+      ],
+      "categories": [],
+      "datetime_iso": "2026-05-27T07:15:00-07:00"
+    },
+    {
+      "i": 9,
+      "text": "TECHCRUNCH DISRUPT 2026\nTechCrunch Disrupt 2026 Early Bird ticket savings end in 3 days\nTechCrunch Events\n22 hours ago",
+      "title": "TechCrunch Disrupt 2026 Early Bird ticket savings end in 3 days",
+      "href": "https://techcrunch.com/2026/05/27/techcrunch-disrupt-2026-early-bird-ticket-savings-end-in-3-days/",
+      "datetime": "2026-05-27T07:00:00-07:00",
+      "time_text": "22 hours ago",
+      "authors": [
+        "TechCrunch Events"
+      ],
+      "categories": [],
+      "datetime_iso": "2026-05-27T07:00:00-07:00"
+    },
+    {
+      "i": 11,
+      "text": "HARDWARE\nSOND, a sleep tech startup from Bose’s former head of sleep, exits stealth with $7M\nSarah Perez\n22 hours ago",
+      "title": "SOND, a sleep tech startup from Bose’s former head of sleep, exits stealth with $7M",
+      "href": "https://techcrunch.com/2026/05/27/sond-a-sleep-tech-startup-from-boses-former-head-of-sleep-exits-stealth-with-7m/",
+      "datetime": "2026-05-27T07:00:00-07:00",
+      "time_text": "22 hours ago",
+      "authors": [
+        "Sarah Perez"
+      ],
+      "categories": [
+        "Hardware"
+      ],
+      "datetime_iso": "2026-05-27T07:00:00-07:00"
+    },
+    {
+      "i": 13,
+      "text": "STARTUPS\nTech CEOs are apparently suffering from AI psychosis\nJulie Bort\n24 hours ago",
+      "title": "Tech CEOs are apparently suffering from AI psychosis",
+      "href": "https://techcrunch.com/2026/05/27/tech-ceos-are-apparently-suffering-from-ai-psychosis/",
+      "datetime": "2026-05-27T05:30:00-07:00",
+      "time_text": "24 hours ago",
+      "authors": [
+        "Julie Bort"
+      ],
+      "categories": [
+        "Startups"
+      ],
+      "datetime_iso": "2026-05-27T05:30:00-07:00"
+    },
+    {
+      "i": 15,
+      "text": "STARTUPS\nAirbnb-backed WeRoad raises $58M to take its group travel platform to the US\nLauren Forristal\n1 day ago",
+      "title": "Airbnb-backed WeRoad raises $58M to take its group travel platform to the US",
+      "href": "https://techcrunch.com/2026/05/27/airbnb-backed-weroad-raises-58m-to-take-its-group-travel-platform-to-the-us/",
+      "datetime": "2026-05-27T01:00:00-07:00",
+      "time_text": "1 day ago",
+      "authors": [
+        "Lauren Forristal"
+      ],
+      "categories": [
+        "Startups"
+      ],
+      "datetime_iso": "2026-05-27T01:00:00-07:00"
+    },
+    {
+      "i": 17,
+      "text": "TECHCRUNCH DISRUPT 2026\nWhat we’re looking for in Startup Battlefield 2026, and how to apply in time for the May 27 deadline\nIsabelle Johannessen\n2 days ago",
+      "title": "What we’re looking for in Startup Battlefield 2026, and how to apply in time for the May 27 deadline",
+      "href": "https://techcrunch.com/2026/05/26/what-were-looking-for-in-startup-battlefield-2026-and-how-to-apply-in-time-for-the-may-27-deadline/",
+      "datetime": "2026-05-26T15:55:01-07:00",
+      "time_text": "2 days ago",
+      "authors": [
+        "Isabelle Johannessen"
+      ],
+      "categories": [],
+      "datetime_iso": "2026-05-26T15:55:01-07:00"
+    },
+    {
+      "i": 19,
+      "text": "IN BRIEF\nOpenRouter more than doubles valuation to $1.3B in a year\nJulie Bort\n2 days ago",
+      "title": "OpenRouter more than doubles valuation to $1.3B in a year",
+      "href": "https://techcrunch.com/2026/05/26/openrouter-more-than-doubles-valuation-to-1-3b-in-a-year/",
+      "datetime": "2026-05-26T11:33:01-07:00",
+      "time_text": "2 days ago",
+      "authors": [
+        "Julie Bort"
+      ],
+      "categories": [],
+      "datetime_iso": "2026-05-26T11:33:01-07:00"
+    },
+    {
+      "i": 21,
+      "text": "TECHCRUNCH DISRUPT 2026\nTechCrunch Disrupt 2026 Early Bird ticket rates end May 29\nTechCrunch Events\n2 days ago",
+      "title": "TechCrunch Disrupt 2026 Early Bird ticket rates end May 29",
+      "href": "https://techcrunch.com/2026/05/26/techcrunch-disrupt-2026-early-bird-ticket-rates-end-may-29/",
+      "datetime": "2026-05-26T07:00:00-07:00",
+      "time_text": "2 days ago",
+      "authors": [
+        "TechCrunch Events"
+      ],
+      "categories": [],
+      "datetime_iso": "2026-05-26T07:00:00-07:00"
+    },
+    {
+      "i": 23,
+      "text": "IN BRIEF\nAmazon fulfillment competitor Stord raises $250M at $3B valuation\nJulie Bort\n2 days ago",
+      "title": "Amazon fulfillment competitor Stord raises $250M at $3B valuation",
+      "href": "https://techcrunch.com/2026/05/26/amazon-fulfillment-competitor-stord-raises-250m-at-3b-valuation/",
+      "datetime": "2026-05-26T05:00:00-07:00",
+      "time_text": "2 days ago",
+      "authors": [
+        "Julie Bort"
+      ],
+      "categories": [],
+      "datetime_iso": "2026-05-26T05:00:00-07:00"
+    },
+    {
+      "i": 25,
+      "text": "AI\nWhat ClickUp’s mass layoff tells us about the future of work\nMarina Temkin\n3 days ago",
+      "title": "What ClickUp’s mass layoff tells us about the future of work",
+      "href": "https://techcrunch.com/2026/05/25/what-clickups-mass-layoff-tells-us-about-the-future-of-work/",
+      "datetime": "2026-05-25T09:00:00-07:00",
+      "time_text": "3 days ago",
+      "authors": [
+        "Marina Temkin"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "datetime_iso": "2026-05-25T09:00:00-07:00"
+    },
+    {
+      "i": 27,
+      "text": "STARTUPS\nThe pitch trick that helped an esports startup raise $20M when VCs only wanted AI\nJulie Bort\n3 days ago",
+      "title": "The pitch trick that helped an esports startup raise $20M when VCs only wanted AI",
+      "href": "https://techcrunch.com/2026/05/25/the-pitch-trick-that-helped-an-esports-startup-raise-20m-when-vcs-only-wanted-ai/",
+      "datetime": "2026-05-25T08:00:00-07:00",
+      "time_text": "3 days ago",
+      "authors": [
+        "Julie Bort"
+      ],
+      "categories": [
+        "Startups"
+      ],
+      "datetime_iso": "2026-05-25T08:00:00-07:00"
+    },
+    {
+      "i": 29,
+      "text": "TECHCRUNCH DISRUPT 2026\nStartup Battlefield 200 applications close in days: Apply before May 27\nTechCrunch Events\n3 days ago",
+      "title": "Startup Battlefield 200 applications close in days: Apply before May 27",
+      "href": "https://techcrunch.com/2026/05/25/startup-battlefield-200-applications-close-in-days-apply-before-may-27/",
+      "datetime": "2026-05-25T07:30:00-07:00",
+      "time_text": "3 days ago",
+      "authors": [
+        "TechCrunch Events"
+      ],
+      "categories": [],
+      "datetime_iso": "2026-05-25T07:30:00-07:00"
+    },
+    {
+      "i": 31,
+      "text": "TECHCRUNCH DISRUPT 2026\n5 days left: Save up to $410 on TechCrunch Disrupt 2026 passes before prices increase\nTechCrunch Events\n3 days ago",
+      "title": "5 days left: Save up to $410 on TechCrunch Disrupt 2026 passes before prices increase",
+      "href": "https://techcrunch.com/2026/05/25/5-days-left-save-up-to-410-on-techcrunch-disrupt-2026-passes-before-prices-increase/",
+      "datetime": "2026-05-25T07:00:00-07:00",
+      "time_text": "3 days ago",
+      "authors": [
+        "TechCrunch Events"
+      ],
+      "categories": [],
+      "datetime_iso": "2026-05-25T07:00:00-07:00"
+    },
+    {
+      "i": 33,
+      "text": "CLIMATE\nSolarSquare in talks to raise up to $60M as India’s rooftop solar market draws major VC interest\nJagmeet Singh\n5 days ago",
+      "title": "SolarSquare in talks to raise up to $60M as India’s rooftop solar market draws major VC interest",
+      "href": "https://techcrunch.com/2026/05/23/solarsquare-in-talks-to-raise-up-to-60m-as-indias-rooftop-solar-market-draws-major-vc-interest/",
+      "datetime": "2026-05-23T13:03:13-07:00",
+      "time_text": "5 days ago",
+      "authors": [
+        "Jagmeet Singh"
+      ],
+      "categories": [
+        "Climate"
+      ],
+      "datetime_iso": "2026-05-23T13:03:13-07:00"
+    },
+    {
+      "i": 35,
+      "text": "STARTUPS\nPeec, one of Berlin’s rising startups, more than doubled annualized revenue in months to $10M, sources say\nAnna Heim\nMay 23, 2026",
+      "title": "Peec, one of Berlin’s rising startups, more than doubled annualized revenue in months to $10M, sources say",
+      "href": "https://techcrunch.com/2026/05/23/peec-one-of-berlins-rising-startups-more-than-doubled-annualized-revenue-in-months-to-10m-sources-say/",
+      "datetime": "2026-05-23T00:01:00-07:00",
+      "time_text": "May 23, 2026",
+      "authors": [
+        "Anna Heim"
+      ],
+      "categories": [
+        "Startups"
+      ],
+      "datetime_iso": "2026-05-23T00:01:00-07:00"
+    },
+    {
+      "i": 37,
+      "text": "VENTURE\nHow VCs and founders use inflated ‘ARR’ to crown AI startups \nMarina Temkin\nMay 22, 2026",
+      "title": "How VCs and founders use inflated ‘ARR’ to crown AI startups",
+      "href": "https://techcrunch.com/2026/05/22/how-vcs-and-founders-use-inflated-arr-to-kingmake-ai-startups/",
+      "datetime": "2026-05-22T13:40:48-07:00",
+      "time_text": "May 22, 2026",
+      "authors": [
+        "Marina Temkin"
+      ],
+      "categories": [
+        "Venture"
+      ],
+      "datetime_iso": "2026-05-22T13:40:48-07:00"
+    },
+    {
+      "i": 39,
+      "text": "STARTUPS\nElon Musk can’t hear you over the sound of his $1.75 trillion IPO\nTheresa Loconsolo\nKirsten Korosec\nSean O'Kane\nAnthony Ha\nMay 22, 2026",
+      "title": "Elon Musk can’t hear you over the sound of his $1.75 trillion IPO",
+      "href": "https://techcrunch.com/podcast/elon-musk-cant-hear-you-over-the-sound-of-his-1-75-trillion-ipo/",
+      "datetime": "2026-05-22T11:17:07-07:00",
+      "time_text": "May 22, 2026",
+      "authors": [
+        "Theresa Loconsolo",
+        "Kirsten Korosec",
+        "Sean O'Kane",
+        "Anthony Ha"
+      ],
+      "categories": [
+        "Startups"
+      ],
+      "datetime_iso": "2026-05-22T11:17:07-07:00"
+    },
+    {
+      "i": 44,
+      "text": "VENTURE\nThis young startup is taking on a fragrance industry that hasn’t changed in almost half a century\nDominic-Madori Davis\nMay 21, 2026",
+      "title": "This young startup is taking on a fragrance industry that hasn’t changed in almost half a century",
+      "href": "https://techcrunch.com/2026/05/21/a-new-fragrance-company-raises-2-million-to-find-new-scent-molecules/",
+      "datetime": "2026-05-21T09:00:00-07:00",
+      "time_text": "May 21, 2026",
+      "authors": [
+        "Dominic-Madori Davis"
+      ],
+      "categories": [
+        "Venture"
+      ],
+      "datetime_iso": "2026-05-21T09:00:00-07:00"
+    },
+    {
+      "i": 46,
+      "text": "APPS\nMaka Kids is redefining kids’ screen time with a streaming app optimized for well-being, not engagement\nAisha Malik\nMay 21, 2026",
+      "title": "Maka Kids is redefining kids’ screen time with a streaming app optimized for well-being, not engagement",
+      "href": "https://techcrunch.com/2026/05/21/maka-kids-is-redefining-kids-screen-time-with-a-streaming-app-optimized-for-well-being-not-engagement/",
+      "datetime": "2026-05-21T07:00:00-07:00",
+      "time_text": "May 21, 2026",
+      "authors": [
+        "Aisha Malik"
+      ],
+      "categories": [
+        "Apps"
+      ],
+      "datetime_iso": "2026-05-21T07:00:00-07:00"
+    }
+  ]
+}

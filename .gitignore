@@ -1,0 +1,8 @@
+.DS_Store
+# Generated Intuned project artifacts inside example projects
+**/.venv/
+**/__pycache__/
+**/*.pyc
+**/uv.lock
+**/.env
+**/auth-sessions-instances/
