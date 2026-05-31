@@ -1,6 +1,6 @@
 # Webwright → Intuned Skill
 
-The domain for a Claude Code skill that transforms a parameterized Webwright
+The domain for an agent skill that transforms a parameterized Webwright
 browser-automation script into a deployed, hosted Intuned project.
 
 ## Language
@@ -47,9 +47,3 @@ solving and proxies) which **cannot** be exercised by a local run — so a
 protected-site port is verified by a deployed `intuned platform runs start`,
 not by `intuned dev run`.
 _Avoid_: blocked site, hard site.
-
-**Expected-rejection task**:
-A port whose success condition is a clean, reported block (e.g. LinkedIn behind
-an auth wall). The skill must **not** enable stealth/captcha to defeat the wall;
-a graceful rejection — local and deployed — is the pass.
-_Avoid_: failing task, blocked task.
