@@ -79,15 +79,16 @@ A craft that logs in (fills a login form, then navigates to a protected page):
 - Test: `intuned dev run authsession create '{creds}' --id test` then
   `intuned dev run api <name> '{}' --auth-session test`.
 
-### 6b. Protected sites → stealth + deployed gate (DECISIONS.md §3)
-If the target is bot-protected (not the sandbox/books/docs): set `headful: true`
-and `stealthMode.enabled: true` in the manifest (init with `--stealth`). A local
-block is expected; verify via deploy + `intuned platform runs start`. Add
-`captchaSolver` (needs headful+stealth) or a per-run `proxy` only if the deployed
-run shows that wall. **Expected-rejection tasks (LinkedIn): do NOT enable
-stealth/captcha** — a clean reported rejection is the pass.
+### 6b. Bot-detection blocks → stealth + deployed gate (DECISIONS.md §3)
+If a run is blocked by anti-bot defenses, don't conclude the port is broken:
+stealth, captcha solving, and proxies run only on the deployed platform, never
+under local `intuned dev run`. Set `headful: true` and `stealthMode.enabled: true`
+in the manifest (init with `--stealth`) and verify via deploy +
+`intuned platform runs start`. Add `captchaSolver` (needs headful+stealth) or a
+per-run `proxy` only if the deployed run is still walled. Configure per the docs:
+https://intunedhq.com/docs/main/02-features/stealth-mode-captcha-solving-proxies
 
-## 7. Pipeline & gates (one `/intuned-port` run)
+## 7. Pipeline & gates (one port)
 
 1. Validate input is a real craft (else fail loud).
 2. `intuned dev init <task_id> --template <python-starter|python-starter-auth> --language python --install-deps --non-interactive [--stealth]`.
