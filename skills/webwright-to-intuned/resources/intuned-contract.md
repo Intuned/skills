@@ -82,27 +82,21 @@ from intuned_runtime.captcha import wait_for_captcha_solve
   by default (DECISIONS.md §1).
 - `await wait_for_captcha_solve(page=page, timeout_s=120.0)` — platform only.
 
-## Intuned.jsonc manifest (key fields)
+## Intuned.jsonc manifest
 
-```jsonc
-{
-  "projectName": "<task_id>",
-  "workspaceId": "<from auth whoami>",
-  "apiAccess": { "enabled": true },          // enable so platform runs work
-  "authSessions": { "enabled": false },      // true for auth ports, type "API"
-  "replication": { "maxConcurrentRequests": 1, "size": "standard" },
-  "headful": false,                          // true for protected sites
-  "stealthMode": { "enabled": false },       // true for protected sites (PLATFORM ONLY)
-  "captchaSolver": {                         // only if a captcha wall appears; needs headful+stealth
-    "enabled": true,
-    "cloudflare": { "enabled": true },
-    "settings": { "autoSolve": true, "solveDelay": 2000, "maxRetries": 6, "timeout": 30000 }
-  },
-  "metadata": {
-    "defaultRunPlaygroundInput": { "apiName": "<name>", "parameters": { ...task defaults... } }
-  }
-}
-```
+The scaffold writes a working manifest. Full field reference (the authoritative
+schema, with every option and examples):
+https://intunedhq.com/docs/main/05-references/intuned-json
+
+A port only needs to touch a few fields:
+- `apiAccess.enabled: true` — required so platform runs work.
+- `authSessions.enabled: true` — auth ports only.
+- `headful: true` + `stealthMode.enabled: true` — when a run is blocked by anti-bot
+  defenses (platform-only; see DECISIONS.md §3).
+- `captchaSolver` — only if a captcha wall persists after stealth (needs headful+stealth).
+- `metadata.defaultRunPlaygroundInput` — the API name plus the task's default params.
+
+Leave everything else (`replication`, `workspaceId`, etc.) as the scaffold sets it.
 
 ## CLI commands (verified, v0.1.8)
 
@@ -130,4 +124,4 @@ intuned platform runs get <run-id>                    # poll result
 - Python **3.12 only** (`requires-python = ">=3.12,<3.13"`). py3.10+ syntax fine.
 - Playwright **1.56** is pinned by the template; stealth needs ≥1.55 (ok).
 - `automation` is **async**; the craft's `asyncio.run(...)` wrapper must be removed.
-- Stealth / captcha do **not** run locally — verify protected sites via deploy.
+- Stealth / captcha do **not** run locally — verify via a deployed run.

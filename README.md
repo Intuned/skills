@@ -10,13 +10,13 @@ Intuned platform. Install them into Claude Code, Cursor, Codex, and any other
 All skills at once, via the [`skills` CLI](https://skills.sh):
 
 ```bash
-npx skills@latest add intunedhq/skills
+npx skills@latest add Intuned/skills
 ```
 
 A single skill:
 
 ```bash
-npx skills@latest add intunedhq/skills --skill webwright-to-intuned
+npx skills@latest add Intuned/skills --skill webwright-to-intuned
 ```
 
 This symlinks each skill into every selected agent's skills directory (e.g.
@@ -30,7 +30,7 @@ Update later with `npx skills@latest update`.
 
 | Skill | What it does |
 |---|---|
-| [`webwright-to-intuned`](./skills/webwright-to-intuned) | Turn a [Webwright](https://github.com/microsoft/Webwright) "Crafted CLI" into a deployed, verified Intuned project. Includes 4 convert-and-compare examples under [`examples/`](./examples/webwright-to-intuned). |
+| [`webwright-to-intuned`](./skills/webwright-to-intuned) | Turn a [Webwright](https://github.com/microsoft/Webwright) "Crafted CLI" into a deployed, verified Intuned project. Includes 4 example crafts to port under [`examples/`](./examples/webwright-to-intuned). |
 
 _More Intuned skills land here over time (authoring from a spec, debugging failed
 runs, AuthSession setup, deploy/ops helpers, …)._
@@ -39,12 +39,10 @@ runs, AuthSession setup, deploy/ops helpers, …)._
 
 ```
 intuned-skills/
-├── .claude-plugin/
-│   └── plugin.json          # lists every skill folder — the file the skills CLI reads
 ├── skills/
 │   └── <name>/              # one folder per skill (flat, no category folders)
 │       ├── SKILL.md         # required: frontmatter (name + description) + instructions
-│       ├── *.md             # optional flat reference docs beside SKILL.md
+│       ├── resources/       # optional reference docs (*.md), referenced from SKILL.md
 │       └── scripts/         # optional executable helpers
 ├── examples/<name>/         # optional, per-skill demo assets (kept out of the skill folder)
 ├── scripts/install-local.sh # symlink installer for non-CLI users
@@ -57,10 +55,10 @@ intuned-skills/
 ## Adding a skill
 
 1. Create `skills/<your-skill>/SKILL.md` with YAML frontmatter (`name`,
-   trigger-rich `description`) and lean instructions; offload detail to flat
-   `.md` files beside it.
-2. Add its path to the `skills` array in `.claude-plugin/plugin.json`.
-3. Add a row to the **Skills** table above.
+   trigger-rich `description`) and lean instructions; offload detail to `.md`
+   files in a `resources/` subfolder beside it. The `skills` CLI discovers it by
+   scanning for `SKILL.md` — nothing to register.
+2. Add a row to the **Skills** table above.
 
 See [`CLAUDE.md`](./CLAUDE.md) for conventions.
 

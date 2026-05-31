@@ -38,20 +38,18 @@ reused) and a login craft decomposes into it cleanly. Cost: more surface area
 `--auth-session <id>`). The trickiest derived artifact is `check.py`; verify its
 logged-in signal in the test loop, never assume it.
 
-## 3. Local runs verify logic; the deployed platform run is the gate for protected sites
+## 3. Local runs verify logic; the deployed platform run is the gate when a run is blocked
 
 Stealth mode and CAPTCHA solving work **only on the deployed platform**, never
 under local `intuned dev run` (proxies and `headful` are also platform/run-level).
+That is a platform fact, not a claim about any particular target.
 
-- **Unprotected** targets (Intuned sandbox, books.toscrape.com, docs): the local
-  run is the authoritative green-gate before deploy.
-- **Protected** targets (Airbnb, CoinMarketCap, major retailers): a local run will
-  likely be blocked, and that block is **expected — not a port failure**. Enable
-  `headful` + `stealthMode` (and `captchaSolver`/`proxy` if the deployed run shows
-  a wall) in `Intuned.jsonc`, deploy, then `intuned platform runs start` + poll
-  `runs get`. The deployed run is the only meaningful gate.
-
-So a naive "must be green locally before deploy" is wrong for protected sites and
-is relaxed there. **Exception within the exception:** an **expected-rejection**
-task (LinkedIn behind an auth wall) must NOT enable stealth/captcha to defeat the
-wall — a clean reported rejection, locally and deployed, is its pass.
+So don't pre-classify a site or assume any outcome — run it and observe. If the
+local run returns the expected data, that's the green gate before deploy. If the
+local run is blocked by anti-bot defenses, that block is **not by itself a port
+failure**: it may be detection that only the platform's stealth/captcha/proxy can
+clear. Enable `headful` + `stealthMode` (and `captchaSolver`/`proxy` if the
+deployed run is still walled) in `Intuned.jsonc`, deploy, then
+`intuned platform runs start` + poll `runs get` — the deployed run is the gate.
+Configure these per the docs:
+https://intunedhq.com/docs/main/02-features/stealth-mode-captcha-solving-proxies

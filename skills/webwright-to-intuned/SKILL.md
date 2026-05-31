@@ -4,10 +4,11 @@ description: >-
   Transform a Webwright "Crafted CLI" (the parameterized final_script.py produced
   by a `webwright craft` run) into a deployed, hosted Intuned project. Use when
   the user wants to port, convert, host, or deploy a Webwright craft/reusable CLI
-  to Intuned, or says "turn this craft into an Intuned project", "host this on
-  Intuned", "/intuned-port". Faithfully maps one parameterized craft function to
-  one Intuned `automation` API, scaffolds the project, runs it locally, deploys
-  it, and verifies a standalone platform run.
+  to the cloud — Intuned is the hosting target — or says "turn this craft into an
+  Intuned project", "host this on Intuned", "host this webwright on the cloud",
+  "deploy this craft to the cloud", "run this webwright in the cloud". Faithfully
+  maps one parameterized craft function to one Intuned `automation` API, scaffolds
+  the project, runs it locally, deploys it, and verifies a standalone platform run.
 ---
 
 # Webwright → Intuned
@@ -17,25 +18,30 @@ it end to end. The contract is a **faithful 1:1 port**: one craft function →
 one Intuned `automation` API, re-fitted only at Intuned's boundary.
 
 ## Prerequisites
-- The Intuned CLI is installed and authenticated (`intuned auth whoami` shows a
-  workspace). The skill never logs the user in or creates accounts.
+- The Intuned CLI is installed and authenticated. If the `intuned` command isn't
+  found, install it first: `npm i -g @intuned/cli`. Then confirm auth with
+  `intuned auth whoami` (it should show a workspace). The skill never logs the
+  user in or creates accounts — if `whoami` fails, stop and ask the user to
+  authenticate.
 - Input is a Webwright **craft output directory** (contains `final_script.py`
   with an `argparse` wrapper, `plan.md`, `task.json`). If it isn't, stop and say so.
 
 ## Read first
-1. `transformation-rules.md` — the step-by-step transform and gates.
-2. `intuned-contract.md` — the exact target (API signature, SDK, CLI,
+Supporting docs live in `resources/` beside this file.
+1. `resources/transformation-rules.md` — the step-by-step transform and gates.
+2. `resources/intuned-contract.md` — the exact target (API signature, SDK, CLI,
    manifest), all verified against real scaffolds.
-3. `gotchas.md` — the hardening layer. **Re-read before every port and
+3. `resources/gotchas.md` — the hardening layer. **Re-read before every port and
    add to it after every failure.**
-4. `CONTEXT.md` — canonical vocabulary. `DECISIONS.md` — why the key decisions hold.
+4. `resources/CONTEXT.md` — canonical vocabulary. `resources/DECISIONS.md` — why
+   the key decisions hold.
 
 ## Workflow (one port)
 1. **Validate** the input is a real craft; else fail loudly.
 2. **Scaffold** `intuned dev init <task_id> --template <python-starter | python-starter-auth>
    --language python --install-deps --non-interactive [--stealth]` into
    `intuned_projects/<task_id>/`.
-3. **Transform** per `transformation-rules.md`:
+3. **Transform** per `resources/transformation-rules.md`:
    - strip the browser bootstrap + `asyncio.run` wrapper; the inner async body
      becomes `async def automation(page, params=None, **_kwargs)`;
    - map surviving params (snake_case preserved, harness params dropped+logged)
@@ -45,21 +51,27 @@ one Intuned `automation` API, re-fitted only at Intuned's boundary.
      return substantive data minus harness fields;
    - set `apiAccess.enabled: true` and the Playground default input in `Intuned.jsonc`.
 4. **Local gate:** `intuned dev run api <name> '{}'`; compare output to the craft's
-   `final_runs/` known-good shape/count. (Protected site: a block is expected —
-   don't fight it locally.)
-5. **Deploy:** `intuned dev deploy --non-interactive` (after the local gate).
+   `final_runs/` known-good shape/count. If the run is blocked by anti-bot
+   defenses, don't keep fighting it locally — stealth/captcha/proxy only apply on
+   the deployed platform (see step 6 and the bot-detection note below).
+5. **Deploy:** after the local gate passes, **ask the user whether to deploy to
+   Intuned** (surface the target workspace when you ask). Only on a yes, run
+   `intuned dev deploy --non-interactive`; otherwise stop here.
 6. **Platform run (final gate):** `intuned platform runs start '{"api":"<name>","parameters":{}}'
    -p <task_id>`; poll `intuned platform runs get <id>` until terminal.
-7. On any failure, root-cause into a `gotchas.md` entry, fix, re-run.
+7. On any failure, root-cause into a `resources/gotchas.md` entry, fix, re-run.
 
 ## Exceptions to faithful-port (decide deliberately)
-- **Auth craft → AuthSessions** (DECISIONS.md §2): decompose login into
+- **Auth craft → AuthSessions** (resources/DECISIONS.md §2): decompose login into
   `auth-sessions/create.py` + a derived `check.py`, enable `authSessions`; the
   `automation` assumes a valid session. Test with `dev run authsession create`
   then `--auth-session`.
-- **Protected site** (DECISIONS.md §3): headful + stealth in the manifest; the deployed
-  platform run is the only real gate. **Expected-rejection** tasks (LinkedIn) get
-  no stealth — a clean reported rejection is the pass.
+- **Bot-detection block** (resources/DECISIONS.md §3): if a run is blocked by
+  anti-bot defenses, don't conclude the port is broken — stealth, captcha solving,
+  and proxies run only on the deployed platform. Set `headful` + `stealthMode` in
+  the manifest and verify with a deployed run; add `captchaSolver`/`proxy` if the
+  deployed run is still walled. Configure per the Intuned docs:
+  https://intunedhq.com/docs/main/02-features/stealth-mode-captcha-solving-proxies
 - **No crawl fan-out** by default — a crawl returns a flat list from one API;
   `extend_payload` is opt-in only.
 

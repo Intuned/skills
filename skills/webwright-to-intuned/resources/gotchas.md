@@ -1,8 +1,7 @@
 # Gotchas (living hardening layer)
 
 Each entry: **Symptom → Cause → Rule**. Add one every time a port fails during
-testing. Seeded from ground-truth scaffolding; extended from the 10-task runs
-(see `TEST-RESULTS.md`).
+testing. Seeded from ground-truth scaffolding and extended across real porting runs.
 
 ---
 
@@ -39,11 +38,12 @@ the craft's concrete defaults, so empty-params reproduces the original task.
 template's `intuned-runtime`/`intuned-browser` pins. Add task deps additively.
 
 ## G6 — Stealth/captcha are platform-only
-**Symptom:** Local run blocked on a protected site; agent "fixes" it forever.
-**Cause:** Expecting stealth to work under `intuned dev run`.
-**Rule:** For protected sites, a local block is expected. Enable
-headful+stealth in the manifest and verify via `intuned platform runs start`.
-Never burn iterations trying to beat a wall locally. (DECISIONS.md §3)
+**Symptom:** Local run blocked by anti-bot defenses; agent "fixes" it forever.
+**Cause:** Expecting stealth/captcha to work under `intuned dev run`.
+**Rule:** Stealth, captcha solving, and proxies run only on the deployed platform.
+Don't burn local iterations trying to beat a wall — enable headful+stealth in the
+manifest and verify via `intuned platform runs start`. (DECISIONS.md §3; docs:
+https://intunedhq.com/docs/main/02-features/stealth-mode-captcha-solving-proxies)
 
 ## G7 — Return must be JSON-serializable
 **Symptom:** Run fails serializing the result.
