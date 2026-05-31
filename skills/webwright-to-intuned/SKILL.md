@@ -39,8 +39,10 @@ Supporting docs live in `resources/` beside this file.
 ## Workflow (one port)
 1. **Validate** the input is a real craft; else fail loudly.
 2. **Scaffold** `intuned dev init <task_id> --template <python-starter | python-starter-auth>
-   --language python --install-deps --non-interactive [--stealth]` into
-   `intuned_projects/<task_id>/`.
+   --language python --install-deps --non-interactive` into
+   `intuned_projects/<task_id>/`. Don't pass `--stealth` up front — stealth is
+   **reactive**: enable it only after an observed block (step 4 / the bot-detection
+   note), never because a site "looks" protected.
 3. **Transform** per `resources/transformation-rules.md`:
    - strip the browser bootstrap + `asyncio.run` wrapper; the inner async body
      becomes `async def automation(page, params=None, **_kwargs)`;

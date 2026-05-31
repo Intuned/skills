@@ -91,13 +91,15 @@ https://intunedhq.com/docs/main/02-features/stealth-mode-captcha-solving-proxies
 ## 7. Pipeline & gates (one port)
 
 1. Validate input is a real craft (else fail loud).
-2. `intuned dev init <task_id> --template <python-starter|python-starter-auth> --language python --install-deps --non-interactive [--stealth]`.
+2. `intuned dev init <task_id> --template <python-starter|python-starter-auth> --language python --install-deps --non-interactive`.
+   (No `--stealth` by default — it's reactive; add it only after an observed block, per rule 6b.)
 3. Transform per rules 1–6; write all files.
 4. **Local gate:** `intuned dev run api <name> '{}'` (auth: create session first).
    Pass = output matches the craft's `final_runs/` known-good shape/count.
-   Protected site: tolerate a block if logic reached the wall.
+   If the run is blocked by anti-bot defenses, don't pre-judge the site — a block
+   isn't a port failure if the logic reached the wall; escalate via rule 6b.
 5. **Deploy:** `intuned dev deploy --non-interactive` (gated on step 4).
 6. **Platform run (final gate):** `intuned platform runs start '{"api":"<name>","parameters":{}}' -p <task_id>`
-   → poll `intuned platform runs get <id>`. The only real gate for protected sites.
+   → poll `intuned platform runs get <id>`. This deployed run is the real gate when a local run was blocked.
 7. On any failure: root-cause → add a `gotchas.md` entry (symptom → cause → rule)
-   → fix → re-run. Iterate until pass (or clean reject).
+   → fix → re-run. Iterate until pass.

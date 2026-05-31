@@ -105,7 +105,7 @@ intuned auth whoami                                   # confirm login + workspac
 intuned dev list-templates                            # template ids
 intuned dev init <dir> --template python-starter \
     --language python --project-name <task_id> \
-    --install-deps --non-interactive [--stealth]      # scaffold
+    --install-deps --non-interactive [--stealth]      # scaffold (omit --stealth unless a block is observed)
 # transform files in-place, then:
 intuned dev run api <name> '<json-params>'            # LOCAL run (no stealth/captcha)
 intuned dev run api <name> '<json>' --auth-session <id> --keep-browser-open --trace

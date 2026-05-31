@@ -41,9 +41,9 @@ as opposed to a scheduled Job.
 _Avoid_: invocation, execution, call.
 
 **Protected site**:
-A target that blocks automated traffic (fingerprint/IP/captcha). Requires
-Intuned's platform-only defenses (headful + stealth mode, optionally captcha
-solving and proxies) which **cannot** be exercised by a local run — so a
-protected-site port is verified by a deployed `intuned platform runs start`,
-not by `intuned dev run`.
+A target *found* to block automated traffic (fingerprint/IP/captcha) — identified
+by an observed block, never pre-judged. Intuned's defenses (headful + stealth mode,
+optionally captcha solving and proxies) are **platform-only** and can't be
+exercised by a local run, so such a port is verified by a deployed
+`intuned platform runs start`, not by `intuned dev run`.
 _Avoid_: blocked site, hard site.
