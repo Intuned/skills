@@ -19,12 +19,8 @@ A single skill:
 npx skills@latest add Intuned/skills --skill webwright-to-intuned
 ```
 
-This symlinks each skill into every selected agent's skills directory (e.g.
-`~/.claude/skills/<name>`) and records them in `~/.agents/.skill-lock.json`.
-Update later with `npx skills@latest update`.
-
-> **No `skills` CLI?** Run `scripts/install-local.sh` to symlink the skills in
-> this repo straight into `~/.claude/skills/`.
+Update later with `npx skills@latest update`. No `skills` CLI? Run
+`scripts/install-local.sh` to symlink the skills straight into `~/.claude/skills/`.
 
 ## Skills
 
@@ -32,35 +28,9 @@ Update later with `npx skills@latest update`.
 |---|---|
 | [`webwright-to-intuned`](./skills/webwright-to-intuned) | Turn a [Webwright](https://github.com/microsoft/Webwright) "Crafted CLI" into a deployed, verified Intuned project. Includes 4 example crafts to port under [`examples/`](./examples/webwright-to-intuned). |
 
-_More Intuned skills land here over time (authoring from a spec, debugging failed
-runs, AuthSession setup, deploy/ops helpers, …)._
+## Contributing
 
-## Repository layout
-
-```
-intuned-skills/
-├── skills/
-│   └── <name>/              # one folder per skill (flat, no category folders)
-│       ├── SKILL.md         # required: frontmatter (name + description) + instructions
-│       ├── resources/       # optional reference docs (*.md), referenced from SKILL.md
-│       └── scripts/         # optional executable helpers
-├── examples/<name>/         # optional, per-skill demo assets (kept out of the skill folder)
-├── scripts/install-local.sh # symlink installer for non-CLI users
-├── CONTEXT.md               # shared vocabulary across skills
-├── CLAUDE.md                # how to add a skill (contributor guide)
-├── LICENSE
-└── README.md
-```
-
-## Adding a skill
-
-1. Create `skills/<your-skill>/SKILL.md` with YAML frontmatter (`name`,
-   trigger-rich `description`) and lean instructions; offload detail to `.md`
-   files in a `resources/` subfolder beside it. The `skills` CLI discovers it by
-   scanning for `SKILL.md` — nothing to register.
-2. Add a row to the **Skills** table above.
-
-See [`CLAUDE.md`](./CLAUDE.md) for conventions.
+Want to add a skill? See [`CLAUDE.md`](./CLAUDE.md) for conventions.
 
 ## License
 
