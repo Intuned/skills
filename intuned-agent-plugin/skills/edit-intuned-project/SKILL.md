@@ -150,7 +150,7 @@ When you write or edit API code directly (a small inline change), let `implement
 
 ## Editing Jobs
 
-If the user asks to add, change, or remove a job (schedule, payload, configuration, proxy, etc.), read the files in the `jobs/` directory and edit the relevant `.job.json` file directly.
+If the user asks to add, change, or remove a job (schedule, payload, configuration, proxy, etc.), read the files in the `intuned-resources/jobs/` directory and edit the relevant `.job.json` file directly.
 
 > **Tip:** Code-origin Jobs are managed by editing the `*.job.json` file (then `intuned dev deploy`). API-origin Jobs are managed via `intuned platform jobs update | pause | resume | delete`. Exception: `pause` and `resume` work on either origin (operational toggles, not edits).
 
