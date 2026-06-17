@@ -1,13 +1,7 @@
 {
   "browser": {
     "command": "uvx",
-    "args": [
-      "--index",
-      "https://test.pypi.org/simple/",
-      "--index-strategy",
-      "unsafe-best-match",
-      "intuned-agent-mcp"
-    ],
+    "args": ["intuned-agent-mcp"],
     "env": {
       "INTUNED_USE_CLI_AI_GATEWAY": "1",
       "INTUNED_DISABLE_CAPTCHA_TOOL": "1"
