@@ -24,9 +24,33 @@ Update later with `npx skills@latest update`. No `skills` CLI? Run
 
 ## Skills
 
-| Skill | What it does |
-|---|---|
+| Skill                                                   | What it does                                                                                                                                                                                                |
+| ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`webwright-to-intuned`](./skills/webwright-to-intuned) | Turn a [Webwright](https://github.com/microsoft/Webwright) "Crafted CLI" into a deployed, verified Intuned project. Includes 4 example crafts to port under [`examples/`](./examples/webwright-to-intuned). |
+
+## Plugin
+
+This repo also ships the **Intuned Agent Plugin**, it runs
+the full Intuned automation agent locally in your own project: the workflow and
+capability skills, the browser MCP, and the CDP hooks. It lives under
+[`intuned-plugin/`](./intuned-plugin) and installs differently from the skills
+above.
+
+Install it with the Intuned CLI:
+
+```bash
+npm install -g @intuned/cli
+intunedctl install plugin          # installs into ./intuned-plugin
+```
+
+Then launch Claude Code with it from your project:
+
+```bash
+claude --plugin-dir ./intuned-plugin
+```
+
+See [`intuned-plugin/README.md`](./intuned-plugin/README.md) for what it provides
+and how it works.
 
 ## Contributing
 
