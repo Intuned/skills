@@ -1,4 +1,4 @@
-## intunedctl platform workspace env-vars
+## intuned platform workspace env-vars
 
 Manage **workspace-scoped** environment variables on the Intuned platform. These vars are available across all projects in the workspace, unlike `platform env-vars` which is scoped to a single project.
 
@@ -8,21 +8,21 @@ If a project-level env var and a workspace-level env var share the same key, the
 
 `--envs` accepts a comma-separated list of `AUTHORING`,`PUBLISHED`. Default is `PUBLISHED`. Same semantics as project env vars.
 
-### `intunedctl platform workspace env-vars list [options]`
+### `intuned platform workspace env-vars list [options]`
 
 List all workspace env vars.
 
 - `-l, --limit <n>` / `-o, --offset <n>`: pagination.
 - `--json`.
 
-### `intunedctl platform workspace env-vars get <key> [options]`
+### `intuned platform workspace env-vars get <key> [options]`
 
 Get a single workspace env var by key.
 
 - `<key>` (required).
 - `--json`.
 
-### `intunedctl platform workspace env-vars create [options]`
+### `intuned platform workspace env-vars create [options]`
 
 Create a new workspace env var.
 
@@ -32,7 +32,7 @@ Create a new workspace env var.
 - `--envs <envs>` (default `PUBLISHED`).
 - `--json`.
 
-### `intunedctl platform workspace env-vars update <current-key> [options]`
+### `intuned platform workspace env-vars update <current-key> [options]`
 
 Update by current key. Flags omitted are left unchanged.
 
@@ -40,7 +40,7 @@ Update by current key. Flags omitted are left unchanged.
 - `--key`, `--value`, `--description`, `--envs`: as above.
 - `--json`.
 
-### `intunedctl platform workspace env-vars delete <key> [options]`
+### `intuned platform workspace env-vars delete <key> [options]`
 
 Delete by key.
 

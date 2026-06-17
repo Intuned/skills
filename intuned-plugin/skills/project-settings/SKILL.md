@@ -7,18 +7,18 @@ description: "Reference for the `Intuned.json` project configuration file — wh
 
 Configuration for `Intuned.json` at the project root — controls how the project runs locally and on the Intuned Platform.
 
-Many settings have their own home: stealth and the CAPTCHA solver in the `bot-detection` skill; proxy in the `proxy` skill; auth sessions in the `auth-sessions` skill; project identity (`projectName`) via `intunedctl dev provision` (see `create-intuned-project`). Read this page to understand what the fields mean when you inspect or edit `Intuned.json`; reach for `search_intuned` → `query_docs_filesystem_intuned` for anything not covered here.
+Many settings have their own home: stealth and the CAPTCHA solver in the `bot-detection` skill; proxy in the `proxy` skill; auth sessions in the `auth-sessions` skill; project identity (`projectName`) via `intuned dev provision` (see `create-intuned-project`). Read this page to understand what the fields mean when you inspect or edit `Intuned.json`; reach for `search_intuned` → `query_docs_filesystem_intuned` for anything not covered here.
 
 ## Core properties
 
-| Field               | Type    | Notes                                                                                                                                                                                                       |
-| ------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `replication`       | object  | `maxConcurrentRequests` (number, default `1`) + `size` (`"standard"` \| `"large"` \| `"x-large"`, default `"standard"`)                                                                                     |
-| `apiAccess.enabled` | boolean | default `true`. Set `false` for jobs-only projects                                                                                                                                                          |
-| `authSessions`      | object  | `enabled` (bool), `type` (`"API"` \| `"MANUAL"`); MANUAL also needs `startUrl`, `finishUrl`, `browserMode` (`"fullscreen"` \| `"kiosk"`). Full flow lives in the `auth-sessions` skill                       |
-| `headful`           | boolean | default `false`. Required `true` for CAPTCHA solving                                                                                                                                                        |
-| `browserSize`       | object  | `width` 200–3840 (default `1024`), `height` 200–2160 (default `800`)                                                                                                                                        |
-| `region`            | string  | default `"us"`. Options: `us`, `au`, `ca`, `nl`, `mx`, `ro`, `se`, `sg`, `es`, `za`, `de`, `in`, `hk`, `jp`, `pl`, `fr`, `gb`                                                                               |
+| Field               | Type    | Notes                                                                                                                                                                                  |
+| ------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `replication`       | object  | `maxConcurrentRequests` (number, default `1`) + `size` (`"standard"` \| `"large"` \| `"x-large"`, default `"standard"`)                                                                |
+| `apiAccess.enabled` | boolean | default `true`. Set `false` for jobs-only projects                                                                                                                                     |
+| `authSessions`      | object  | `enabled` (bool), `type` (`"API"` \| `"MANUAL"`); MANUAL also needs `startUrl`, `finishUrl`, `browserMode` (`"fullscreen"` \| `"kiosk"`). Full flow lives in the `auth-sessions` skill |
+| `headful`           | boolean | default `false`. Required `true` for CAPTCHA solving                                                                                                                                   |
+| `browserSize`       | object  | `width` 200–3840 (default `1024`), `height` 200–2160 (default `800`)                                                                                                                   |
+| `region`            | string  | default `"us"`. Options: `us`, `au`, `ca`, `nl`, `mx`, `ro`, `se`, `sg`, `es`, `za`, `de`, `in`, `hk`, `jp`, `pl`, `fr`, `gb`                                                          |
 
 ## Anti-bot toggles — `stealthMode` / `captchaSolver`
 
@@ -33,8 +33,18 @@ Sinks deliver Run results to an external system (webhook or S3-compatible bucket
 {
   "defaults": {
     "sink": {
-      "dev":      { "type": "webhook", "url": "https://example.com/hook", "skipOnFail": false },
-      "deployed": { "type": "s3", "bucket": "my-bucket", "accessKeyId": "...", "secretAccessKey": "...", "skipOnFail": false }
+      "dev": {
+        "type": "webhook",
+        "url": "https://example.com/hook",
+        "skipOnFail": false
+      },
+      "deployed": {
+        "type": "s3",
+        "bucket": "my-bucket",
+        "accessKeyId": "...",
+        "secretAccessKey": "...",
+        "skipOnFail": false
+      }
     }
   }
 }
@@ -68,7 +78,11 @@ A representative `Intuned.json` — not every field is required; use this to ori
   "captchaSolver": { "enabled": false },
   "defaults": {
     "sink": {
-      "deployed": { "type": "webhook", "url": "https://example.com/hook", "skipOnFail": false }
+      "deployed": {
+        "type": "webhook",
+        "url": "https://example.com/hook",
+        "skipOnFail": false
+      }
     }
   }
 }

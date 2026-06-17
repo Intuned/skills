@@ -7,7 +7,7 @@ description: "Add, change, or extend APIs in an existing local Intuned project. 
 
 Add, modify, or extend an existing Intuned browser automation project in the user's local repo. Explore the site yourself with the browser tools, pick the approach based on how big the change is, and use the capability skills (`build-selectors`, `implement-api`) for selector and API work — offloading them to sub-agents when the work is substantial (see "Implementation via Capability Skills").
 
-The project is expected to already be **provisioned** on the platform (it exists in the repo). If `Intuned.json` has no `projectName`, the project was never provisioned — mention that platform commands and deploy need `intunedctl dev provision` first, and offer to run it. Changes are shipped with `intunedctl dev deploy`, which you **suggest at the end** (don't deploy unprompted).
+The project is expected to already be **provisioned** on the platform (it exists in the repo). If `Intuned.json` has no `projectName`, the project was never provisioned — mention that platform commands and deploy need `intuned dev provision` first, and offer to run it. Changes are shipped with `intuned dev deploy`, which you **suggest at the end** (don't deploy unprompted).
 
 If the user is requesting to create a complete new project, and not to make edits on the current project, then you must call `create-intuned-project` skill.
 
@@ -136,7 +136,7 @@ For data-source and API work, lean on these capabilities — don't hand-write se
 
 Pick selectors, the network request, or both per API depending on where the data lives.
 
-**Offload substantial work to a sub-agent.** When adding a new API or doing a complex change, have a sub-agent work out the data source (`build-selectors` and/or `find-network-requests`) and run `implement-api` — tell it which capabilities to load, and pass the API name/path, the relevant change/plan details verbatim, the URL(s) (every page the selectors must verify against, or where you saw the request), and a browser tab id. Have it report its findings and test the result locally. Independent APIs can run in parallel — give each sub-agent its own tab via `intunedctl dev browser tabs create` so they don't collide. For a small single-API tweak, doing it inline is fine.
+**Offload substantial work to a sub-agent.** When adding a new API or doing a complex change, have a sub-agent work out the data source (`build-selectors` and/or `find-network-requests`) and run `implement-api` — tell it which capabilities to load, and pass the API name/path, the relevant change/plan details verbatim, the URL(s) (every page the selectors must verify against, or where you saw the request), and a browser tab id. Have it report its findings and test the result locally. Independent APIs can run in parallel — give each sub-agent its own tab via `intuned dev browser tabs create` so they don't collide. For a small single-API tweak, doing it inline is fine.
 
 ### When to use them
 
@@ -152,7 +152,7 @@ When you write or edit API code directly (a small inline change), let `implement
 
 If the user asks to add, change, or remove a job (schedule, payload, configuration, proxy, etc.), read the files in the `jobs/` directory and edit the relevant `.job.json` file directly.
 
-> **Tip:** Code-origin Jobs are managed by editing the `*.job.json` file (then `intunedctl dev deploy`). API-origin Jobs are managed via `intunedctl platform jobs update | pause | resume | delete`. Exception: `pause` and `resume` work on either origin (operational toggles, not edits).
+> **Tip:** Code-origin Jobs are managed by editing the `*.job.json` file (then `intuned dev deploy`). API-origin Jobs are managed via `intuned platform jobs update | pause | resume | delete`. Exception: `pause` and `resume` work on either origin (operational toggles, not edits).
 
 For the full job schema and workflow, load the `manage-jobs` skill.
 
@@ -165,7 +165,7 @@ These are common project-level configuration changes made by editing `Intuned.js
 These edits may include:
 
 - Enabling headful mode
-- Setting up a proxy (normal user-supplied proxy: `intunedctl dev proxy set <url>` — see the `proxy` skill)
+- Setting up a proxy (normal user-supplied proxy: `intuned dev proxy set <url>` — see the `proxy` skill)
 - Editing Replications
 - Control deployed project region
 - Configuring `stealthMode` / `captchaSolver` (see the `bot-detection` skill)
@@ -181,11 +181,11 @@ For configuration syntax and the full field reference, load the `project-setting
 
 Refer to `test-intuned-project` skill.
 
-Run the edited APIs locally to test your work with `intunedctl dev attempt api <name> <parameters_path>` (set `export MODE=generate_code` first — local testing mode that mocks file/attachment uploads; see `dev_attempt.md`).
+Run the edited APIs locally to test your work with `intuned dev attempt api <name> <parameters_path>` (set `export MODE=generate_code` first — local testing mode that mocks file/attachment uploads; see `dev_attempt.md`).
 
 Test your changes before completing. If something fails, use the trace file with the `trace-debugging` skill (read the trace directly).
 
-For end-to-end platform testing (significant logic change, `extend_payload` chain behavior, sinks, or any OOM-prone code), invoke the `test-intuned-project` skill before running `intunedctl dev test-job`.
+For end-to-end platform testing (significant logic change, `extend_payload` chain behavior, sinks, or any OOM-prone code), invoke the `test-intuned-project` skill before running `intuned dev test-job`.
 
 ### Build verification (required)
 
@@ -206,7 +206,7 @@ After successfully completing the task or making a code change, end with a conci
 - **Flag anything that didn't work** or any limitation (e.g. a partially blocked site).
 - **No jargon** — no selectors, no internal process details.
 
-To ship the changes to the platform, deploy with `intunedctl dev deploy`. Mention this as the next step if the user wants the changes live. Skip the summary for rejected tasks or failures where no code was changed.
+To ship the changes to the platform, deploy with `intuned dev deploy`. Mention this as the next step if the user wants the changes live. Skip the summary for rejected tasks or failures where no code was changed.
 
 ## Rules Summary
 
@@ -217,7 +217,7 @@ To ship the changes to the platform, deploy with `intunedctl dev deploy`. Mentio
 5. **Explore the site yourself** — do exploration in your main loop; offload selector-building and implementation to sub-agents for substantial work
 6. **All selectors from build tools** — never write selectors manually; use the `build-selectors` skill
 7. **Test your changes** — run the API at least once
-8. **End with a chat summary** — concise plain-text recap; deploy via `intunedctl dev deploy`
+8. **End with a chat summary** — concise plain-text recap; deploy via `intuned dev deploy`
 
 ---
 

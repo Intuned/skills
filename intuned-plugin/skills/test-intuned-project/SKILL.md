@@ -7,12 +7,12 @@ description: "Run and monitor a platform end-to-end test job for Intuned APIs. U
 
 ## Local Testing
 
-Local testing is simply running the API locally with `intunedctl dev attempt api <name> <parameters path> [--auth-session]` or `intunedctl dev run api <name> <parameters path> [--auth-session]`
+Local testing is simply running the API locally with `intuned dev attempt api <name> <parameters path> [--auth-session]` or `intuned dev run api <name> <parameters path> [--auth-session]`
 
 It also includes running the Auth-session APIs:
 
 ```bash
-intunedctl dev attempt authsession <name> <parameters path> [--id]
+intuned dev attempt authsession <name> <parameters path> [--id]
 ```
 
 These will run the APIs on a local browser. The user can see the API executing in action, you can run with headless or headful browsers.
@@ -29,7 +29,7 @@ You must always confirm with the user before running E2E tests.
 
 # E2E: Test Intuned Project
 
-This is the capability of running and monitoring an Intuned **test job** end-to-end with `intunedctl dev test-job`: trigger it, poll until terminal, download the JSONL results, and diagnose any failures. Test jobs are ephemeral platform executions that simulate actual E2E job execution for validating your code — they run the project's code from the current directory in the cloud, without a real deploy. They are **not** platform Jobs: they never appear on the platform `jobs` list, produce no persistent JobRun, and exist only to verify APIs and job configs end-to-end. Results download as local artifact files under `.intuned-agent/`.
+This is the capability of running and monitoring an Intuned **test job** end-to-end with `intuned dev test-job`: trigger it, poll until terminal, download the JSONL results, and diagnose any failures. Test jobs are ephemeral platform executions that simulate actual E2E job execution for validating your code — they run the project's code from the current directory in the cloud, without a real deploy. They are **not** platform Jobs: they never appear on the platform `jobs` list, produce no persistent JobRun, and exist only to verify APIs and job configs end-to-end. Results download as local artifact files under `.intuned-agent/`.
 
 > Unlike local `dev attempt` (which mocks uploads under `MODE=generate_code`), a test job runs in the cloud with **real** attachment uploads to managed S3 — so it's where real attachment results get validated. This requires the project to be provisioned.
 
@@ -61,13 +61,13 @@ Fix any mismatches before proceeding.
 **If `intuned-resources/jobs/` contains `.job.json` files**: Read the `job.json` file and ensure it has correct APIs and parameters. Then trigger one test job per file:
 
 ```bash
-intunedctl dev test-job trigger --from-job-config intuned-resources/jobs/<name>.job.json --max-runs <n> --json
+intuned dev test-job trigger --from-job-config intuned-resources/jobs/<name>.job.json --max-runs <n> --json
 ```
 
 **If no `intuned-resources/jobs/` directory or no `.job.json` files exist**, fall back to inline payloads using the API names and parameters from `.parameters/`:
 
 ```bash
-intunedctl dev test-job trigger '[{"apiName":"<api-name>","parameters":{}}]' --max-runs <n> --json
+intuned dev test-job trigger '[{"apiName":"<api-name>","parameters":{}}]' --max-runs <n> --json
 ```
 
 #### Picking `--max-runs`
@@ -83,7 +83,7 @@ A small sample that exercises the parent and a handful of chained children is us
 When `authSessions.enabled` is `true` in `Intuned.json`, you **must** pass `--auth-session-input` with the path to the credentials file, **Do NOT read that file, it has sensitive data** — pass the path only so the values never enter your context:
 
 ```bash
-intunedctl dev test-job trigger --from-job-config intuned-resources/jobs/<name>.job.json --auth-session-input .parameters/auth-sessions/create/default.json --json
+intuned dev test-job trigger --from-job-config intuned-resources/jobs/<name>.job.json --auth-session-input .parameters/auth-sessions/create/default.json --json
 ```
 
 **Response**:
@@ -103,7 +103,7 @@ After triggering, poll the test job until it reaches a terminal state, then move
 Poll the test job status using `--wait-for 4m` to block for up to 4 minutes per poll:
 
 ```bash
-intunedctl dev test-job result <runId> --quiet --wait-for 4m --json
+intuned dev test-job result <runId> --quiet --wait-for 4m --json
 ```
 
 For this polling loop, always use `--wait-for 4m`. Set the Bash tool timeout to `300000` (5 minutes) so the command isn't killed mid-wait. **Never use `sleep` or `timeout`** — the `--wait-for` flag handles the waiting.
@@ -133,7 +133,7 @@ While `pending`, poll again — test jobs with many runs can take a long time, s
 
 For any non-`failed` terminal status, proceed to Step 3 (Analyze), then Step 4/5 (Download / Debug). Use the diagnostics to fix any code, then re-trigger a test job and poll again to verify.
 
-**If progress stalls**: if the progress numbers haven't changed for several consecutive polls, stop waiting. Decide whether to keep polling, or terminate the test job with `intunedctl dev test-job terminate <runId>` and re-trigger after investigating. Don't loop forever on a stalled job.
+**If progress stalls**: if the progress numbers haven't changed for several consecutive polls, stop waiting. Decide whether to keep polling, or terminate the test job with `intuned dev test-job terminate <runId>` and re-trigger after investigating. Don't loop forever on a stalled job.
 
 **Handling Failures**:
 
@@ -186,7 +186,7 @@ Example: `list.py` extends to `details.py` → 10 successful + 3 failed means `l
 
 ```bash
 mkdir -p .intuned-agent/test_runs/<run_id>/<api-name>
-intunedctl dev test-job download <run_id> --quiet
+intuned dev test-job download <run_id> --quiet
 ```
 
 The result file is a jsonl File that contains each run's result.
@@ -362,13 +362,13 @@ All extended Payloads should work without errors and return results as expected.
 
 ## Quick Reference
 
-| Command                                                                                                          | Purpose                       |
-| ---------------------------------------------------------------------------------------------------------------- | ----------------------------- |
-| `intunedctl dev test-job trigger --from-job-config intuned-resources/jobs/<name>.job.json --max-runs <n> --json` | Start test (from jobs/)       |
-| `intunedctl dev test-job trigger '[{"apiName":"..."}]' --max-runs <n> --json`                                    | Start test (inline, fallback) |
-| `intunedctl dev test-job result <runId> --quiet --wait-for 4m --json`                                            | Poll status (blocks up to 4m) |
-| `intunedctl dev test-job download <run_id> --quiet`                                                              | Download results              |
-| `intunedctl dev test-job terminate <run_id> --json`                                                              | Terminate a running test      |
+| Command                                                                                                       | Purpose                       |
+| ------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| `intuned dev test-job trigger --from-job-config intuned-resources/jobs/<name>.job.json --max-runs <n> --json` | Start test (from jobs/)       |
+| `intuned dev test-job trigger '[{"apiName":"..."}]' --max-runs <n> --json`                                    | Start test (inline, fallback) |
+| `intuned dev test-job result <runId> --quiet --wait-for 4m --json`                                            | Poll status (blocks up to 4m) |
+| `intuned dev test-job download <run_id> --quiet`                                                              | Download results              |
+| `intuned dev test-job terminate <run_id> --json`                                                              | Terminate a running test      |
 
 ---
 

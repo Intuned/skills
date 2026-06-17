@@ -1,9 +1,9 @@
-## intunedctl dev test-job
+## intuned dev test-job
 
 Run and manage test executions. Use these commands to trigger test runs using code from the current directory, check test results, and download them.
 This is useful to perform an End to End test for an API on Intuned's platform.
 
-- `intunedctl dev test-job trigger [payloads] [options]`:
+- `intuned dev test-job trigger [payloads] [options]`:
   - Trigger a new test run with code from the current directory. This uploads the local project code and runs it as a test on the platform.
   - Two modes:
     - **Job config mode**: `--from-job-config <path>` — loads `payload` and `configuration` from a `.job.json` file.
@@ -18,7 +18,7 @@ This is useful to perform an End to End test for an API on Intuned's platform.
     - `-q, --quiet`: Suppress progress messages.
     - `--json`: Output as JSON.
 
-- `intunedctl dev test-job result <run-id> [options]`:
+- `intuned dev test-job result <run-id> [options]`:
   - Get the result of a test run.
   - `<run-id>`: The ID of the test run.
   - Options:
@@ -26,14 +26,14 @@ This is useful to perform an End to End test for an API on Intuned's platform.
     - `--json`: Output as JSON.
     - `-w, --wait-for <duration>`: Wait for the test to complete before returning results. Accepts durations like `'30s'`, `'5m'`.
 
-- `intunedctl dev test-job download <run-id> [options]`:
+- `intuned dev test-job download <run-id> [options]`:
   - Download test results to a file.
   - `<run-id>`: The ID of the test run.
   - Options:
     - `-q, --quiet`: Suppress progress messages.
     - `-w, --wait-for <duration>`: Wait for the test to complete before downloading. Accepts durations like `'30s'`, `'5m'`.
 
-- `intunedctl dev test-job terminate <run-id> [options]`:
+- `intuned dev test-job terminate <run-id> [options]`:
   - Terminate a running test job. Use when a test run is stalled, no longer needed, or you want to stop it before completion.
   - `<run-id>`: The ID of the test run to terminate.
   - Options:

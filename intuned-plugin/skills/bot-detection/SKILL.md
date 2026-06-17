@@ -16,7 +16,7 @@ When a page is blocked, shows a CAPTCHA, or returns bot-detection signals, this 
 | Stealth Mode        | Browser-fingerprint / automation detection | Configure now, **runs only when deployed** | Yes                     |
 | CAPTCHA Solver      | CAPTCHA / browser-check challenges         | Configure now, **runs only when deployed** | Yes                     |
 
-**The headful mode and proxy are the only levers you can exercise and verify in local dev.** Stealth mode and the CAPTCHA solver are platform features: you **can and should** enable and configure them, write their config into `Intuned.json` now so they take effect the moment the project is deployed. You simply can't _run or validate_ them in local dev; to confirm they actually help, deploy the project (`intunedctl dev deploy`) and run it on the platform (deployed run / `intunedctl dev test-job`).
+**The headful mode and proxy are the only levers you can exercise and verify in local dev.** Stealth mode and the CAPTCHA solver are platform features: you **can and should** enable and configure them, write their config into `Intuned.json` now so they take effect the moment the project is deployed. You simply can't _run or validate_ them in local dev; to confirm they actually help, deploy the project (`intuned dev deploy`) and run it on the platform (deployed run / `intuned dev test-job`).
 
 ## Detecting a block
 
@@ -34,15 +34,14 @@ Treat any of these as a bot-detection signal:
 
 1. **Identify the block type.** Is it an IP/geo block (403/429, "Access Denied", unreachable) or an explicit CAPTCHA / browser-check / fingerprint challenge?
 
-2. **If it could be headless detection and you're running headless: restart headful and retry first.** Many sites only block or mis-render for headless browsers, and headful is the cheapest lever you can verify locally. Restart with `intunedctl dev browser start` (omit `--headless`) and retry the same page before the deploy-only levers.
+2. **If it could be headless detection and you're running headless: restart headful and retry first.** Many sites only block or mis-render for headless browsers, and headful is the cheapest lever you can verify locally. Restart with `intuned dev browser start` (omit `--headless`) and retry the same page before the deploy-only levers.
 
 3. **If a proxy could fix it** (IP block, geo-restriction, rate limiting): use a **user-supplied** proxy if the user has one (it works locally, so you can verify it), or suggest Intuned's **auto proxy** if they don't (platform-provided, deployed only). **See the `proxy` skill** for which to use and the exact commands. If a user-supplied proxy restores access locally, you're done.
 
 4. **If only stealth mode or the CAPTCHA solver would fix it** (browser fingerprint detection, or a CAPTCHA that no proxy resolves):
-
    - You **cannot** unblock this in local dev. Do not attempt to solve the CAPTCHA yourself, and do not click inside the CAPTCHA widget.
    - **Configure the right feature in `Intuned.json` now** so it takes effect once deployed (details below).
-   - Tell the user clearly: this site needs stealth / CAPTCHA solving, which only run on the platform. They must **deploy** (`intunedctl dev deploy`) and validate via a **deployed run** or `intunedctl dev test-job` — it can't be confirmed with local `dev attempt` / `dev run`.
+   - Tell the user clearly: this site needs stealth / CAPTCHA solving, which only run on the platform. They must **deploy** (`intuned dev deploy`) and validate via a **deployed run** or `intuned dev test-job` — it can't be confirmed with local `dev attempt` / `dev run`.
 
 5. **Do NOT fall back to WebSearch** to scrape content — the browser (local or deployed) is the only valid access path. If you can't proceed locally, write the config, explain the deploy-and-test path, and stop. Don't silently skip live exploration and write code blind.
 
@@ -55,10 +54,10 @@ Stealth mode is a specialized browser configuration that patches automation-fram
 Enable it by using the CLI command:
 
 ```bash
-intunedctl dev stealth enable
+intuned dev stealth enable
 ```
 
-The `intunedctl dev stealth` command writes the config in Intuned settings for you.
+The `intuned dev stealth` command writes the config in Intuned settings for you.
 
 **Requirements & limitations:**
 
@@ -75,7 +74,7 @@ The CAPTCHA solver is an Intuned platform feature that automatically detects and
 ### Enable it in `Intuned.json`
 
 ```bash
-intunedctl dev captcha-solve enable
+intuned dev captcha-solve enable
 ```
 
 The solver requires, mandatorily:
@@ -83,7 +82,7 @@ The solver requires, mandatorily:
 - `headful: true`
 - `stealthMode.enabled: true`
 
-The `intunedctl dev captcha-solve` command writes this config for you (`headful: true` + `stealthMode.enabled: true` + a `captchaSolver` block):
+The `intuned dev captcha-solve` command writes this config for you (`headful: true` + `stealthMode.enabled: true` + a `captchaSolver` block):
 
 ```json
 {
@@ -108,7 +107,7 @@ The `intunedctl dev captcha-solve` command writes this config for you (`headful:
 | `maxRetries` | `3`        | Max solve attempts before failing          |
 | `timeout`    | `30000` ms | Max wait time for resolution               |
 
-Increase `timeout` and `maxRetries` for complex CAPTCHAs. This config only takes effect on a **deployed** platform run — there is no local solver to renavigate against. Validate it via a deployed run / `intunedctl dev test-job`.
+Increase `timeout` and `maxRetries` for complex CAPTCHAs. This config only takes effect on a **deployed** platform run — there is no local solver to renavigate against. Validate it via a deployed run / `intuned dev test-job`.
 
 ### Wire the wait helpers into automation code
 
@@ -165,7 +164,7 @@ await withWaitForCaptchaSolve(
     timeoutInMs: 120000,
     settleDurationMs: 5000,
     waitForNetworkSettled: true,
-  }
+  },
 );
 ```
 

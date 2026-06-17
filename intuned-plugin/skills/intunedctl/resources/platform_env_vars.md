@@ -1,4 +1,4 @@
-## intunedctl platform env-vars
+## intuned platform env-vars
 
 Manage **project-scoped** environment variables on the Intuned platform. These vars are available to APIs that run within this specific project.
 
@@ -11,7 +11,7 @@ The `--envs` flag controls where the variable is exposed. Supported values are `
 - `AUTHORING`: variable is available in the authoring environment (during dev / agent / IDE work).
 - `PUBLISHED`: variable is available in deployed (production) runs.
 
-### `intunedctl platform env-vars list [options]`
+### `intuned platform env-vars list [options]`
 
 List all project env vars.
 
@@ -19,7 +19,7 @@ List all project env vars.
 - `-l, --limit <n>` / `-o, --offset <n>`: pagination.
 - `--json`.
 
-### `intunedctl platform env-vars get <key> [options]`
+### `intuned platform env-vars get <key> [options]`
 
 Get a single env var by key.
 
@@ -27,7 +27,7 @@ Get a single env var by key.
 - `-p, --project-name <name>`: optional.
 - `--json`.
 
-### `intunedctl platform env-vars create [options]`
+### `intuned platform env-vars create [options]`
 
 Create a new project env var.
 
@@ -38,7 +38,7 @@ Create a new project env var.
 - `-p, --project-name <name>`: optional.
 - `--json`.
 
-### `intunedctl platform env-vars update <current-key> [options]`
+### `intuned platform env-vars update <current-key> [options]`
 
 Update an existing env var by its current key. Any flag you omit is left unchanged.
 
@@ -50,7 +50,7 @@ Update an existing env var by its current key. Any flag you omit is left unchang
 - `-p, --project-name <name>`: optional.
 - `--json`.
 
-### `intunedctl platform env-vars delete <key> [options]`
+### `intuned platform env-vars delete <key> [options]`
 
 Delete an env var by key.
 
@@ -63,6 +63,6 @@ Delete an env var by key.
 
 For the full decision (which store to use, the AUTHORING/PUBLISHED rule, resolution order), load the **`manage-env-vars`** skill. In brief:
 
-- **Don't put secret values through the agent.** Hand the user the command to run with a `<value>` placeholder — `intunedctl platform env-vars create --key KEY --value <value> ...` (project-level) or `platform workspace env-vars create ...` (workspace-level) — and they fill the value and run it. For local-only, ask them to add `KEY=<value>` to `.env`. Never paste the value into chat or run the command yourself with the secret.
+- **Don't put secret values through the agent.** Hand the user the command to run with a `<value>` placeholder — `intuned platform env-vars create --key KEY --value <value> ...` (project-level) or `platform workspace env-vars create ...` (workspace-level) — and they fill the value and run it. For local-only, ask them to add `KEY=<value>` to `.env`. Never paste the value into chat or run the command yourself with the secret.
 - **A platform var is only available to local `dev attempt`/`dev run` if it includes `--envs AUTHORING`** — the default (`PUBLISHED`) is deployed-only. Default to `--envs AUTHORING,PUBLISHED` so the value works both locally and after deploy.
 - Before collecting a new value, consider running `platform workspace env-vars list` — if the key already exists at workspace level, it's inherited by every project (project-level overrides it per project).

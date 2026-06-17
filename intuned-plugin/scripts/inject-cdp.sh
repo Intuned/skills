@@ -23,7 +23,7 @@ echo "$(date): Extracted TOOL_INPUT: $TOOL_INPUT" >> "$DEBUG_LOG"
 TARGET_ID_MAP="{}"
 echo "$(date): Fetching browser tabs for target ID mapping" >> "$DEBUG_LOG"
 
-TABS_OUTPUT=$(cd "$CWD" && intunedctl dev browser tabs list --json 2>> "$DEBUG_LOG")
+TABS_OUTPUT=$(cd "$CWD" && intuned dev browser tabs list --json 2>> "$DEBUG_LOG")
 TABS_EXIT_CODE=$?
 
 if [ $TABS_EXIT_CODE -eq 0 ]; then
@@ -41,7 +41,7 @@ fi
 # Get browser status from CLI
 echo "$(date): Fetching browser status for CDP address" >> "$DEBUG_LOG"
 
-STATUS_OUTPUT=$(cd "$CWD" && intunedctl dev browser status --json 2>> "$DEBUG_LOG")
+STATUS_OUTPUT=$(cd "$CWD" && intuned dev browser status --json 2>> "$DEBUG_LOG")
 STATUS_EXIT_CODE=$?
 
 if [ $STATUS_EXIT_CODE -eq 0 ]; then

@@ -17,19 +17,19 @@ The capability is supplying values an API shouldn't have hard-coded — API keys
 
 ## Where to store — three places
 
-| Store | How (the user does this — `<value>` is their placeholder to fill) | Scope | Best for |
-|---|---|---|---|
-| **Local `.env`** | ask the user to add `KEY=<value>` to `.env` at the project root (git-ignored) | local dev only | Local-only builds, quick iteration, values you don't want on the platform |
-| **Project env var** | give the user this to run: `intunedctl platform env-vars create --key KEY --value <value> --envs AUTHORING,PUBLISHED` | this project | Per-project secrets that also work in deployed runs |
-| **Workspace env var** | give the user this to run: `intunedctl platform workspace env-vars create --key KEY --value <value> --envs AUTHORING,PUBLISHED` | every project in the workspace | Shared keys reused across projects (common API keys, service creds) |
+| Store                 | How (the user does this — `<value>` is their placeholder to fill)                                                            | Scope                          | Best for                                                                  |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------------------------------------------------- |
+| **Local `.env`**      | ask the user to add `KEY=<value>` to `.env` at the project root (git-ignored)                                                | local dev only                 | Local-only builds, quick iteration, values you don't want on the platform |
+| **Project env var**   | give the user this to run: `intuned platform env-vars create --key KEY --value <value> --envs AUTHORING,PUBLISHED`           | this project                   | Per-project secrets that also work in deployed runs                       |
+| **Workspace env var** | give the user this to run: `intuned platform workspace env-vars create --key KEY --value <value> --envs AUTHORING,PUBLISHED` | every project in the workspace | Shared keys reused across projects (common API keys, service creds)       |
 
-You provide the exact command (or `.env` line) with the real key name and a `<value>` placeholder; **the user fills the value and runs it / saves the file themselves.** Don't substitute the value or run the command yourself. The `intunedctl` skill has the full flag reference for `platform env-vars` and `platform workspace env-vars`.
+You provide the exact command (or `.env` line) with the real key name and a `<value>` placeholder; **the user fills the value and runs it / saves the file themselves.** Don't substitute the value or run the command yourself. The `intuned` skill has the full flag reference for `platform env-vars` and `platform workspace env-vars`.
 
 ## The `--envs` rule — the part that's easy to get wrong
 
 Each platform env var is exposed to one or both **environments**, set with `--envs`:
 
-- **`AUTHORING`** — available during local/dev/agent work, i.e. to `intunedctl dev attempt` and `intunedctl dev run`.
+- **`AUTHORING`** — available during local/dev/agent work, i.e. to `intuned dev attempt` and `intuned dev run`.
 - **`PUBLISHED`** — available in deployed (production) runs.
 
 **The default is `PUBLISHED` only.** A var created with the default is **NOT visible to local `dev attempt`/`dev run`** — only after deploy. So:
@@ -48,7 +48,7 @@ When `dev attempt`/`dev run` build the environment, values resolve in this order
 2. **Project** `AUTHORING` vars (override workspace on key clash)
 3. **`.env` / `process.env`** (override remote vars on key clash)
 
-So a key in `.env` wins locally over the same key stored on the platform. Before creating a new platform var, you can check whether it already exists at workspace level (`intunedctl platform workspace env-vars list`) so you don't shadow it unintentionally.
+So a key in `.env` wins locally over the same key stored on the platform. Before creating a new platform var, you can check whether it already exists at workspace level (`intuned platform workspace env-vars list`) so you don't shadow it unintentionally.
 
 ## Quick recipe
 

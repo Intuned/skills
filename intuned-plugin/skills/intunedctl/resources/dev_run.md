@@ -1,8 +1,8 @@
-## intunedctl dev run
+## intuned dev run
 
-`dev run` executes a full Run (with retry logic) locally. Use it when you want to mirror production behavior end-to-end. For a single attempt without retries, use `intunedctl dev attempt` instead.
+`dev run` executes a full Run (with retry logic) locally. Use it when you want to mirror production behavior end-to-end. For a single attempt without retries, use `intuned dev attempt` instead.
 
-### `intunedctl dev run api <api-name> <parameters> [options]`
+### `intuned dev run api <api-name> <parameters> [options]`
 
 Execute an API run locally.
 
@@ -18,7 +18,7 @@ Common options:
 - `-o, --output-file <path>`: write the run result (and extended payloads) to a JSON file instead of stdout.
 - `--proxy <url>`, `--headless`, `--trace`, `--traces-path <path>`, `--timeout <time>`, `--start-to-end-timeout <time>`, `--keep-browser-open`, `--cdp-url <url>`, `--cdp-browser-name <name>`, `--cdp-tab-id <id>`.
 
-### `intunedctl dev run authsession create <parameters> [options]`
+### `intuned dev run authsession create <parameters> [options]`
 
 Run a full AuthSession:Create. Auth sessions must be enabled in `Intuned.json`.
 
@@ -27,7 +27,7 @@ Run a full AuthSession:Create. Auth sessions must be enabled in `Intuned.json`.
 - `--check-retries <n>` / `--create-retries <n>`: retry counts for the post-create validity check and the create step itself.
 - Shared options: `--proxy`, `--timeout`, `--start-to-end-timeout`, `--headless`, `--trace`, `--traces-path`, `--auth-session-instances-path`, `--keep-browser-open`, `--cdp-url`, `--cdp-browser-name`, `--cdp-tab-id`.
 
-### `intunedctl dev run authsession validate <id> [options]`
+### `intuned dev run authsession validate <id> [options]`
 
 Run a full AuthSession:Validate against an existing session.
 
@@ -36,7 +36,7 @@ Run a full AuthSession:Validate against an existing session.
 - `--check-retries <n>` / `--create-retries <n>`: retry counts (create-retries only applies if `--auto-recreate` is set).
 - Shared options as above.
 
-### `intunedctl dev run authsession update <id> [options]`
+### `intuned dev run authsession update <id> [options]`
 
 Run a full AuthSession:Update on an existing session.
 
