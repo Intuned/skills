@@ -40,7 +40,7 @@ Install it with the Intuned CLI:
 
 ```bash
 npm install -g @intuned/cli
-intunedctl install plugin          # installs into ./intuned-plugin
+intuned install plugin          # installs into ./intuned-plugin
 ```
 
 Then launch Claude Code with it from your project:

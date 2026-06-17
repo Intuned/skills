@@ -28,26 +28,26 @@ Once you identify the type, use the matching lookup command below to retrieve th
 ### Run ID → fetch run details
 
 ```bash
-intunedctl platform runs get <run-id> -p <project-name>
+intuned platform runs get <run-id> -p <project-name>
 ```
 
 From the result you can read: API name, parameters, attempt count, error message, proxy. Then fetch attempt details:
 
 ```bash
 # Get details for the latest (or a specific) attempt
-intunedctl platform attempts get <run-id> [attempt-number] -p <project-name> --json
+intuned platform attempts get <run-id> [attempt-number] -p <project-name> --json
 
 # Download logs for the attempt
-intunedctl platform attempts log <run-id> [attempt-number] -p <project-name>
+intuned platform attempts log <run-id> [attempt-number] -p <project-name>
 
 # Download Playwright trace for the attempt
-intunedctl platform attempts trace <run-id> [attempt-number] -p <project-name>
+intuned platform attempts trace <run-id> [attempt-number] -p <project-name>
 ```
 
 ### Job Run ID → fetch job run details
 
 ```bash
-intunedctl platform jobruns get <job-run-id> -p <project-name> --json
+intuned platform jobruns get <job-run-id> -p <project-name> --json
 ```
 
 The owning job is resolved automatically from the run ID — no need to look it up first.
@@ -56,7 +56,7 @@ From the result you can read: job configuration snapshot, proxy URL, successful/
 
 ```bash
 # List all runs belonging to this job run
-intunedctl platform runs list -p <project-name> -f "job_run_id=<job-run-id>"
+intuned platform runs list -p <project-name> -f "job_run_id=<job-run-id>"
 ```
 
 Then follow up with `runs get` / `attempts get` for each failing run ID returned above.
@@ -64,24 +64,24 @@ Then follow up with `runs get` / `attempts get` for each failing run ID returned
 ### Issue ID → fetch issue details
 
 ```bash
-intunedctl platform issues get <issue-ref> -p <project-name> --json
+intuned platform issues get <issue-ref> -p <project-name> --json
 ```
 
 From the result you can read: issue explanation, affected API, linked run IDs, parameters. Follow up with `runs get` / `attempts get` on the linked run IDs.
 
 ```bash
 # List all open issues in the project
-intunedctl platform issues list -p <project-name>
+intuned platform issues list -p <project-name>
 ```
 
 ### Free-text request → check recent runs & issues first
 
 ```bash
 # List recent runs (filter by status if needed)
-intunedctl platform runs list -p <project-name> -f "status=FAILED" -f "job_run_id=jr_...."
+intuned platform runs list -p <project-name> -f "status=FAILED" -f "job_run_id=jr_...."
 
 # List open issues
-intunedctl platform issues list -p <project-name>
+intuned platform issues list -p <project-name>
 ```
 
 Pick the most relevant failing run or issue, then use the corresponding `get` commands above to gather full context.
@@ -103,7 +103,7 @@ Read the user's description carefully. Then check the existing project:
 
 If `Intuned.json` has `authSessions.enabled: true` or you see `auth-sessions/` API files, **immediately load the `auth-sessions` skill** before proceeding.
 
-This skill assumes the project is already **provisioned and deployed** (that's how it has platform Runs/Issues to investigate). If `Intuned.json` has no `projectName` and platform lookups fail, the project was never provisioned — tell the user it needs `intunedctl dev provision` first, and work from the local code/symptoms instead.
+This skill assumes the project is already **provisioned and deployed** (that's how it has platform Runs/Issues to investigate). If `Intuned.json` has no `projectName` and platform lookups fail, the project was never provisioned — tell the user it needs `intuned dev provision` first, and work from the local code/symptoms instead.
 
 Check if the Run/Jobrun had a Proxy configured.
 
@@ -119,7 +119,7 @@ Use the commands from the **Entry Point** section above to retrieve run/job run/
 - Playwright trace and logs
 
 **Note:** The `-p` option for project flag is optional if the project is already set in `Intuned.json`.
-You must confirm if `Intuned.json` has "projectName" or not. If it doesn't, then all `intunedctl platform` commands should be used with `-p`.
+You must confirm if `Intuned.json` has "projectName" or not. If it doesn't, then all `intuned platform` commands should be used with `-p`.
 
 **Important**: When checking older runs or investigating multiple job runs, do not rely on successful, failed, or total run counts. There can be silent errors. Look into the logs and Playwright traces directly and give an accurate response based on facts — not assumptions based on dates, run counts, or day of execution.
 
@@ -155,14 +155,14 @@ After fetching run and attempt details, check the **attempt-level** error codes.
 To inspect the attempt error, run:
 
 ```bash
-intunedctl platform attempts get <run-id> [attempt-number] -p <project-name> --json
+intuned platform attempts get <run-id> [attempt-number] -p <project-name> --json
 ```
 
 The error code is at `error.code` and the documentation URL is at `error.doc_url` in the command output.
 
 #### Memory-related
 
-`script-process-crashed` repeated across all 3 attempts is almost always OOM — treat it as fixable. Load the `platform-errors` skill and follow its "Out of Memory" remediation. Skip Step 3 (local reproduction) — `intunedctl dev attempt api` runs outside the platform's memory cap and proves nothing about OOM. **Validation requires `intunedctl dev test-job`** at the original failing scale; a local run alone never qualifies. Always invoke the `test-intuned-project` skill before running `intunedctl dev test-job`.
+`script-process-crashed` repeated across all 3 attempts is almost always OOM — treat it as fixable. Load the `platform-errors` skill and follow its "Out of Memory" remediation. Skip Step 3 (local reproduction) — `intuned dev attempt api` runs outside the platform's memory cap and proves nothing about OOM. **Validation requires `intuned dev test-job`** at the original failing scale; a local run alone never qualifies. Always invoke the `test-intuned-project` skill before running `intuned dev test-job`.
 
 #### Platform-level — not something a code fix can resolve
 
@@ -200,7 +200,7 @@ Without the proxy, your local results are meaningless — they do not reflect re
 Load the `proxy` skill, then set it:
 
 ```bash
-intunedctl dev proxy set "<proxy-url>"
+intuned dev proxy set "<proxy-url>"
 ```
 
 Only after confirming the proxy is active should you proceed.
@@ -208,7 +208,7 @@ Only after confirming the proxy is active should you proceed.
 Run the failing API locally with trace enabled:
 
 ```bash
-intunedctl dev attempt api <api-name> .parameters/api/<api-name>/default.json --trace --cdp-browser-name "default" --cdp-tab-id <tab_id>
+intuned dev attempt api <api-name> .parameters/api/<api-name>/default.json --trace --cdp-browser-name "default" --cdp-tab-id <tab_id>
 ```
 
 Use the Bash tool to run the command and set the `timeout` to at least `600000` (10 min). If it exits with code `143`, call `extendTimeout` inside the API code and increase the Bash `timeout`.
@@ -229,7 +229,7 @@ Analyze all available evidence:
 
 If the error matches a known platform error (Execution Timeout, CAPTCHA Solving Timeout, Out of Memory, Result Too Big), load the `platform-errors` skill for detailed causes, solutions, and how to identify each error in traces.
 
-If the issue is auth-related (login failures, expired sessions, credential errors), load the `auth-sessions` skill. For deployed projects, also check the platform auth session state using `intunedctl platform authsessions` commands — the session may be expired, missing, or not yet created on the platform. The `intunedctl` skill's `platform authsessions` reference has the full command set and debugging workflow.
+If the issue is auth-related (login failures, expired sessions, credential errors), load the `auth-sessions` skill. For deployed projects, also check the platform auth session state using `intuned platform authsessions` commands — the session may be expired, missing, or not yet created on the platform. The `intuned` skill's `platform authsessions` reference has the full command set and debugging workflow.
 
 If the failure is a missing or wrong secret/config value (a missing API key, token, or endpoint), check the project's environment variables — see the `manage-env-vars` skill. Remember a platform var must include `AUTHORING` to be visible to local `dev attempt`/`dev run`.
 
@@ -272,7 +272,7 @@ For a small fix you edit directly, load the `intuned-browser` skill for the avai
 Re-run the API locally with trace enabled:
 
 ```bash
-intunedctl dev attempt api <api-name> .parameters/api/<api-name>/default.json --trace --cdp-browser-name "default" --cdp-tab-id <tab_id>
+intuned dev attempt api <api-name> .parameters/api/<api-name>/default.json --trace --cdp-browser-name "default" --cdp-tab-id <tab_id>
 ```
 
 Use the Bash tool to run the command and set the `timeout` to at least `600000` (10 min). If it exits with code `143`, call `extendTimeout` inside the API code and increase the Bash `timeout`.
@@ -294,7 +294,7 @@ Only ask when you need clarification — ground the question in what you found a
 
 If the failure is caused by bot detection or a CAPTCHA challenge, always check `Intuned.json` first to see what's already configured. Then read the **`bot-detection`** skill and follow its procedure for the full priority order.
 
-> **Note:** stealth mode and the CAPTCHA solver are configured in `Intuned.json` (and the solver's code helpers) and only engage on a deployed run — there's nothing to enable or test locally. Locally, the lever that works is a normal user-supplied proxy (`intunedctl dev proxy set <url>` — see the `proxy` skill). If the original run used a proxy, you must already have it set from the Proxy Gate in Step 3.
+> **Note:** stealth mode and the CAPTCHA solver are configured in `Intuned.json` (and the solver's code helpers) and only engage on a deployed run — there's nothing to enable or test locally. Locally, the lever that works is a normal user-supplied proxy (`intuned dev proxy set <url>` — see the `proxy` skill). If the original run used a proxy, you must already have it set from the Proxy Gate in Step 3.
 
 ---
 
@@ -311,7 +311,7 @@ When given more than one issue, work through all of them — fully resolve each 
 ### Step 1: Read the Issue
 
 ```bash
-intunedctl platform issues get <issue-id> -p <project-name> --json
+intuned platform issues get <issue-id> -p <project-name> --json
 ```
 
 The issue record contains:
@@ -328,9 +328,9 @@ Treat the title and explanation as orientation only: they tell you _that_ someth
 Use linked run IDs (when present) and any paths the explanation implies to gather evidence:
 
 ```bash
-intunedctl platform runs get <run-id> -p <project-name>
-intunedctl platform attempts log <run-id> [attempt-number] -p <project-name>
-intunedctl platform attempts trace <run-id> [attempt-number] -p <project-name>
+intuned platform runs get <run-id> -p <project-name>
+intuned platform attempts log <run-id> [attempt-number] -p <project-name>
+intuned platform attempts trace <run-id> [attempt-number] -p <project-name>
 ```
 
 Read logs and traces systematically until you can explain _why_ the failure occurred and what change will fix it. The issue text does not contain that answer for you.
@@ -352,7 +352,7 @@ After successfully fixing the issue or making a code change, end with a concise 
 - **Flag anything unresolved** or any limitation.
 - **No jargon** — no selectors, no internal process details.
 
-To ship the fix to the platform, deploy with `intunedctl dev deploy`. Mention this as the next step if the user wants it live. Skip the summary for rejected tasks, non-fixable platform errors, or failures where no code was changed.
+To ship the fix to the platform, deploy with `intuned dev deploy`. Mention this as the next step if the user wants it live. Skip the summary for rejected tasks, non-fixable platform errors, or failures where no code was changed.
 
 ## Rules Summary
 
@@ -361,7 +361,7 @@ To ship the fix to the platform, deploy with `intunedctl dev deploy`. Mention th
 3. **Reproduce before fixing** — confirm the issue locally when possible. **If the run had a proxy, you MUST set it before any local reproduction or testing. Results without the proxy are invalid and do not reflect real-world conditions.**
 4. **Minimal fixes** — fix the root cause, don't refactor surrounding code
 5. **Test your fix** — re-run the API at least once
-6. **End with a chat summary** — concise plain-text recap; deploy via `intunedctl dev deploy`
+6. **End with a chat summary** — concise plain-text recap; deploy via `intuned dev deploy`
 
 ---
 

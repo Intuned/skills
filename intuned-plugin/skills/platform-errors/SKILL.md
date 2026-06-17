@@ -118,25 +118,25 @@ If you find one, fix it directly — no spec change needed.
 1. **Split the API with `extend_payload`** so each item runs in a fresh worker. Plan-independent and preferred when feasible — see how APIs chain to each other.
 2. **Upgrade `replication.size`** in `Intuned.json`:
 
-   | `replication.size` | RAM | vCPU |
-   |---|---|---|
-   | `standard` (default) | 2 GB | 6 shared |
-   | `large` | 4 GB | 8 shared |
-   | `x-large` | 8 GB | 1 performance |
+   | `replication.size`   | RAM  | vCPU          |
+   | -------------------- | ---- | ------------- |
+   | `standard` (default) | 2 GB | 6 shared      |
+   | `large`              | 4 GB | 8 shared      |
+   | `x-large`            | 8 GB | 1 performance |
 
    `large` and `x-large` are gated by the workspace plan:
 
-   | Plan | Sizes available |
-   |---|---|
-   | `FREE` | `standard` only |
+   | Plan        | Sizes available                |
+   | ----------- | ------------------------------ |
+   | `FREE`      | `standard` only                |
    | `DEVELOPER` | `standard`, `large`, `x-large` |
-   | `STARTUP` | `standard`, `large`, `x-large` |
+   | `STARTUP`   | `standard`, `large`, `x-large` |
 
-   Run `intunedctl auth whoami` to read the workspace's **Plan**. If the target size is available, surface the upgrade as one of the options the user can choose. If it's gated, surface both options: upgrade the plan to unlock the larger size, or stay on the current plan.
+   Run `intuned auth whoami` to read the workspace's **Plan**. If the target size is available, surface the upgrade as one of the options the user can choose. If it's gated, surface both options: upgrade the plan to unlock the larger size, or stay on the current plan.
 
 Both options are user-owned (size = billing, split = API contract). Don't apply either without asking. Same for memory-saving refactors that drop state or change return shape.
 
-**Validation — e2e is required.** A local `intunedctl dev attempt api` runs outside the platform's memory cap and proves nothing about OOM. Always validate with the `test-intuned-project` skill (`intunedctl dev test-job`) at the original failing scale and parameters. A local run alone never qualifies as a passing fix.
+**Validation — e2e is required.** A local `intuned dev attempt api` runs outside the platform's memory cap and proves nothing about OOM. Always validate with the `test-intuned-project` skill (`intuned dev test-job`) at the original failing scale and parameters. A local run alone never qualifies as a passing fix.
 
 **Identifying in trace**: OOM crashes often produce a truncated trace because the process was killed mid-write. Signals: all 3 attempts fail identically with `script-process-crashed`, the trace ends mid-aggregation/serialization, multiple pages/tabs open simultaneously without being closed.
 
@@ -180,7 +180,6 @@ See the **bot-detection** skill for stealth-mode and detection remediation.
 **Solutions**:
 
 - **Preferred**: Pass the navigation/action as `func` to the wrapper pattern, which enables `wait_for_network_settled=True` by default:
-
   - **Python**:
 
   ```python
@@ -196,7 +195,7 @@ See the **bot-detection** skill for stealth-mode and detection remediation.
     async (page) => {
       await goToUrl({ page, url });
     },
-    { page, timeoutInMs: 120_000 }
+    { page, timeoutInMs: 120_000 },
   );
   ```
 

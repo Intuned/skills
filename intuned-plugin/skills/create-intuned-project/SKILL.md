@@ -112,7 +112,7 @@ As you explore, collect URLs for each page type. The sub-agent that builds each 
 - **Pages with unique URLs** (e.g., `/product/123`, `/product/456`): Click into multiple different entities and record each URL. Aim for 3+ but collect as many as you naturally visit during exploration.
 - **Single-URL pages**: If all content is on one URL (list page, SPA, single form), that's fine — note it in the plan so `build-selectors` knows.
 
-Use `intunedctl dev browser tabs list` to get URLs of open tabs. All collected URLs go in the plan under `### URLs Discovered`.
+Use `intuned dev browser tabs list` to get URLs of open tabs. All collected URLs go in the plan under `### URLs Discovered`.
 
 ### Plan Rules
 
@@ -416,7 +416,7 @@ When a field is required for chaining (like `details_url` for list -> detail), c
 
 Initialize the project files **before you present the plan for approval** — that lets you confirm the language and show the user the file tree as part of the plan. This is local file setup only; **don't provision or deploy here** — you provision in Phase 3 (after the plan is approved), and deploy is suggested at the end.
 
-**Load the `initialize-project` skill** and follow it to choose the template that fits the goal, run `intunedctl dev init`, and install dependencies. `intunedctl dev init` creates `Intuned.json` from the template — you'll set its real metadata in Phase 3. Show the user the file-tree summary before moving on.
+**Load the `initialize-project` skill** and follow it to choose the template that fits the goal, run `intuned dev init`, and install dependencies. `intuned dev init` creates `Intuned.json` from the template — you'll set its real metadata in Phase 3. Show the user the file-tree summary before moving on.
 
 ## Present the Plan for Approval
 
@@ -434,7 +434,6 @@ Once the plan is approved, set up the project yourself directly. You stub the AP
    - Never touch auto-generated files: `pyproject.toml` (Python); `package.json`, `tsconfig.json` (TypeScript).
    - Never read anything under `.parameters/auth-sessions/create/` (credentials).
 2. **Stub the API files**: write one file per planned API at `api/<api-name>.{py|ts}` (hyphenated names, matching the plan) so the Phase 4 sub-agents have functions to fill in. Use the file shapes from the `implement-api` skill (and its `api-patterns.md`), but leave them as **mocks**:
-
    - the imports the API needs, and a `DATA_SCHEMA` with **empty** `properties` (`array` for list APIs, `object` for detail/simple);
    - a **navigate** function, an **action/extract** function, and **pagination** functions if the plan calls for them; name them from the plan and leave each body as a `# TODO:` / `// TODO:` describing the plan's steps and returning an empty result;
    - the **`automation`** (Python) or **`handler`** (TypeScript) entry point wiring navigate, then action, then `validate_data_using_schema`, plus an `extend_payload` block only for APIs that chain;
@@ -449,7 +448,6 @@ Once the plan is approved, set up the project yourself directly. You stub the AP
 4. **`.gitignore`** — ensure it ignores `.intuned/`, `.intuned-agent/`, `traces/`, `.env`, `.venv/`, `node_modules/`, `__pycache__/`. Append any missing lines; don't reorder existing ones.
 5. **Install dependencies** if not already: `uv sync` (Python) or `yarn install` (TypeScript).
 6. **Provision the project** — register the platform-side project now. This does **not** deploy or run anything; it just creates the project so platform-scoped features (project env vars, and **attachment / managed-S3 uploads**, and End-To-End testing) work while you build, and so deploying at the end is a single step. Provisioning is what lets the runtime upload attachments — without it, attachment uploads fail with a `401`.
-
    1. **Pick a name for the project**: Pick a descriptive name for the project you are creating and provision it, proceed with this without confirming with the user.
       **Name rules:** 1–200 chars; letters, numbers, hyphens, underscores only; must start and end with a letter or number; hyphens/underscores only between alphanumeric segments.
 
@@ -458,10 +456,10 @@ Once the plan is approved, set up the project yourself directly. You stub the AP
    3. **Provision** (it reads the name from the settings file):
 
       ```bash
-      intunedctl dev provision --non-interactive
+      intuned dev provision --non-interactive
       ```
 
-   4. **Confirm it worked** — run `intunedctl platform project get --json`; it should return the project. **Provision exactly once** — don't re-provision under another name. On a **409 / "already exists"** conflict, the name is taken (often by an existing IDE project) — ask the user for a different name rather than silently appending suffixes.
+   4. **Confirm it worked** — run `intuned platform project get --json`; it should return the project. **Provision exactly once** — don't re-provision under another name. On a **409 / "already exists"** conflict, the name is taken (often by an existing IDE project) — ask the user for a different name rather than silently appending suffixes.
 
 You write the README in the final step. Proceed to Phase 4.
 
@@ -483,13 +481,13 @@ This applies to both DOM and Network approaches, Including all Crawlers, RPAs, A
   1. **Work out the data source** — use `build-selectors` (`build_reliable_selector` / `build_field_selector`) for DOM selectors and/or `find-network-requests` for the backend request, following the plan's extraction method.
   2. **Write the API implementation** — follow `implement-api` to fill in the navigate / action / pagination functions and the entry point, mapping each schema field to its selector or response field. Mark a schema field required only if it appears on every page tested.
   3. **Write the API's default input file** at `.parameters/api/<api>/default.json` — a representative input; for a chained/detail API, an example of the forwarded payload.
-  4. **Test it locally** with `intunedctl dev attempt api` and fix until it passes. Use small values for parameters, don't run the API across many pages.
-- If auth is enabled, the sub-agent does **not** log in or handle auth itself — the browser is already authenticated from the auth step. It builds selectors on the protected pages as normal, and adds `--auth-session <id>` to its test command (`intunedctl dev attempt api <name> <params> --auth-session <id> --cdp-browser-name default`), which injects the saved session. Pass it the **auth session ID** from the auth step.
+  4. **Test it locally** with `intuned dev attempt api` and fix until it passes. Use small values for parameters, don't run the API across many pages.
+- If auth is enabled, the sub-agent does **not** log in or handle auth itself — the browser is already authenticated from the auth step. It builds selectors on the protected pages as normal, and adds `--auth-session <id>` to its test command (`intuned dev attempt api <name> <params> --auth-session <id> --cdp-browser-name default`), which injects the saved session. Pass it the **auth session ID** from the auth step.
 - Ask it to **report back**: the functions it implemented, and the local test result (pass/fail with the parameters it used).
 
 ### Parallelism and browser tabs
 
-Independent APIs can be built **in parallel** — one sub-agent each (for example, 2 sub-agents building 2 different APIs at once). **Each parallel sub-agent needs its own browser tab** so they don't collide: create one per API with `intunedctl dev browser tabs create` and pass that tab id in the sub-agent's prompt. A list→detail chain is two APIs that can run in parallel (you collected detail URLs during exploration).
+Independent APIs can be built **in parallel** — one sub-agent each (for example, 2 sub-agents building 2 different APIs at once). **Each parallel sub-agent needs its own browser tab** so they don't collide: create one per API with `intuned dev browser tabs create` and pass that tab id in the sub-agent's prompt. A list→detail chain is two APIs that can run in parallel (you collected detail URLs during exploration).
 
 ### Auth-First Sequencing (if auth is enabled)
 
@@ -513,9 +511,9 @@ Full sequence (auth is serialized — no parallel sub-agents during these steps)
 ```bash
 # The browser is authenticated from Phase 2 exploration.
 # Restart to a clean, logged-out state — the sub-agent must see the login form to build its selectors.
-intunedctl dev browser stop
-intunedctl dev browser start --headless
-intunedctl dev browser tabs create   # → returns the id for the new tab
+intuned dev browser stop
+intuned dev browser start --headless
+intuned dev browser tabs create   # → returns the id for the new tab
 ```
 
 **Step 2 — Spawn one auth sub-agent** (covering both `auth-sessions/create` and `auth-sessions/check`):
@@ -525,10 +523,9 @@ In its prompt (tell it to load `build-selectors`, `implement-api`, and the `auth
 - The browser is in a fresh, logged-out state at the login page. Give it the **login URL**, the `auth-sessions/create` + `auth-sessions/check` sections from the plan (verbatim), and the **browser tab id**.
 - Use the `auth-sessions` skill's `list-credentials.sh` to get the stored credential field names (it lists them without exposing values). Always fill credentials via the auth-param mechanism — never literal values.
 - It must do the full job in one pass, **without restarting the browser**:
-
   1. **Build selectors** with `build-selectors` for all login form fields, the success indicator (`create`), and the logged-in check element (`check`). Build the login-form selectors while logged out, then log in to build the success/check selectors — it must see both states.
   2. **Implement** `auth-sessions/create.{py|ts}` and `auth-sessions/check.{py|ts}` following `implement-api`.
-  3. **Run and verify** both with the `intunedctl` commands from the `auth-sessions` skill (those commands handle the login lifecycle themselves). Report the resulting **auth session ID** — other APIs will reference it.
+  3. **Run and verify** both with the `intuned` commands from the `auth-sessions` skill (those commands handle the login lifecycle themselves). Report the resulting **auth session ID** — other APIs will reference it.
 
 ### For Each Remaining API
 
@@ -682,7 +679,7 @@ Two layers of testing. The **local API tests are already done by the API sub-age
 
 ### Local API tests
 
-Each API was **already tested locally by its sub-agent in Phase 4**: the sub-agent ran `intunedctl dev attempt api <name> <param>...`, reported pass/fail, and the full result was saved under `.intuned-agent/platform-attempts/...`. Take the sub-agents' results instead: read the saved result files and confirm the whole set holds together (the automation works, every expected field is populated, no execution errors).
+Each API was **already tested locally by its sub-agent in Phase 4**: the sub-agent ran `intuned dev attempt api <name> <param>...`, reported pass/fail, and the full result was saved under `.intuned-agent/platform-attempts/...`. Take the sub-agents' results instead: read the saved result files and confirm the whole set holds together (the automation works, every expected field is populated, no execution errors).
 
 Local testing is **limited**: it covers one API at a time and does NOT exercise `extend_payload` / API chaining (that only runs as a job, see the e2e test below).
 
@@ -717,7 +714,7 @@ Key implementation notes:
 To run locally:
 
 ```bash
-intunedctl dev attempt api <name> <parameters_path>
+intuned dev attempt api <name> <parameters_path>
 ```
 ````
 
@@ -741,7 +738,7 @@ Load the **`test-intuned-project`** skill — it's the source of truth for trigg
 2. **Trigger one test job from it** — one run covers the whole project and the full chain:
 
    ```bash
-   intunedctl dev test-job trigger --from-job-config intuned-resources/jobs/e2e.job.json --max-runs <n> --json
+   intuned dev test-job trigger --from-job-config intuned-resources/jobs/e2e.job.json --max-runs <n> --json
 ````
 
 Pick `--max-runs <n>` per the `test-intuned-project` skill.
@@ -756,13 +753,13 @@ The project is done when every API passes local tests (and the end-to-end test j
 
 - **Lead with the result** — "Done. Here's what's ready:" then list each API and what it does.
 - **Flag anything that didn't work** — briefly, what and why, including any limitation you hit.
-- **How to run** — how the user runs it locally (`intunedctl dev attempt api ...` / running a job). Keep it short.
+- **How to run** — how the user runs it locally (`intuned dev attempt api ...` / running a job). Keep it short.
 - **Suggest going live** — the project is built, tested, and already provisioned (it runs locally for now). When they're ready, you can put it live on the Intuned platform (scheduled Jobs, on-demand Runs) by **deploying**. Offer it; don't do it unprompted.
 
 To go live (only once the user agrees):
 
 ```bash
-intunedctl dev deploy --non-interactive
+intuned dev deploy --non-interactive
 ```
 
 ## Consulting the docs

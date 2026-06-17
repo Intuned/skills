@@ -1,4 +1,4 @@
-## intunedctl platform authsessions
+## intuned platform authsessions
 
 Manage platform auth sessions for a deployed project. Use these commands to create, inspect, validate, update, and delete auth sessions on the Intuned platform.
 
@@ -6,7 +6,7 @@ Manage platform auth sessions for a deployed project. Use these commands to crea
 
 ---
 
-- `intunedctl platform authsessions list [options]`:
+- `intuned platform authsessions list [options]`:
   - List all auth sessions for a project.
   - Options:
     - `-p, --project-name <name>`: Project name (overrides settings file).
@@ -16,7 +16,7 @@ Manage platform auth sessions for a deployed project. Use these commands to crea
     - `--json`: Output as JSON.
   - Session states: `READY` (valid), `PENDING` (being created/updated), `EXPIRED` (invalid, needs recreation).
 
-- `intunedctl platform authsessions get <auth-session-id> [options]`:
+- `intuned platform authsessions get <auth-session-id> [options]`:
   - Get detailed information about a specific auth session.
   - `<auth-session-id>`: The ID of the auth session.
   - Returns: `id`, `state`, `type`, `environment`, `created_at`, `updated_at`, `proxy`.
@@ -24,7 +24,7 @@ Manage platform auth sessions for a deployed project. Use these commands to crea
     - `-p, --project-name <name>`: Project name (overrides settings file).
     - `--json`: Output as JSON.
 
-- `intunedctl platform authsessions create <auth-session-id> [options]`:
+- `intuned platform authsessions create <auth-session-id> [options]`:
   - Create a new auth session on the platform. Triggers the `auth-sessions/create` API with the provided credentials.
   - `<auth-session-id>`: The ID to assign to the new auth session (e.g. `default`, `admin`).
   - Options:
@@ -35,7 +35,7 @@ Manage platform auth sessions for a deployed project. Use these commands to crea
     - `--json`: Output as JSON.
   - Use `--wait` when you need to confirm the session was created successfully before proceeding.
 
-- `intunedctl platform authsessions update <auth-session-id> [options]`:
+- `intuned platform authsessions update <auth-session-id> [options]`:
   - Re-run the create flow for an existing auth session (e.g. to refresh credentials or fix an expired session).
   - `<auth-session-id>`: The ID of the auth session to update.
   - Options:
@@ -45,7 +45,7 @@ Manage platform auth sessions for a deployed project. Use these commands to crea
     - `--wait [duration]`: Wait for completion. Same behavior as `create --wait`.
     - `--json`: Output as JSON.
 
-- `intunedctl platform authsessions validate <auth-session-id> [options]`:
+- `intuned platform authsessions validate <auth-session-id> [options]`:
   - Validate an existing auth session by running the `auth-sessions/check` API. Always polls until done or timeout.
   - `<auth-session-id>`: The ID of the auth session to validate.
   - Options:
@@ -54,7 +54,7 @@ Manage platform auth sessions for a deployed project. Use these commands to crea
     - `--json`: Output as JSON.
   - Exits with error if validation fails or times out. Use this to confirm a session is healthy before running APIs.
 
-- `intunedctl platform authsessions delete <auth-session-id> [options]`:
+- `intuned platform authsessions delete <auth-session-id> [options]`:
   - Delete an auth session permanently.
   - `<auth-session-id>`: The ID of the auth session to delete.
   - Options:
@@ -69,18 +69,18 @@ When investigating a failing auth session on the platform:
 
 ```bash
 # 1. List all sessions to find the one you're looking for and check its state
-intunedctl platform authsessions list -p <project-name>
+intuned platform authsessions list -p <project-name>
 
 # 2. Inspect the specific session
-intunedctl platform authsessions get <auth-session-id> -p <project-name>
+intuned platform authsessions get <auth-session-id> -p <project-name>
 
 # 3. Validate it to confirm whether it's still authenticated
-intunedctl platform authsessions validate <auth-session-id> -p <project-name>
+intuned platform authsessions validate <auth-session-id> -p <project-name>
 
 # 4a. If expired/invalid — update (re-run create with existing or new credentials)
-intunedctl platform authsessions update <auth-session-id> -p <project-name> --wait
+intuned platform authsessions update <auth-session-id> -p <project-name> --wait
 
 # 4b. Or delete and recreate with fresh credentials
-intunedctl platform authsessions delete <auth-session-id> -p <project-name>
-intunedctl platform authsessions create <auth-session-id> -p <project-name> --input '{"username":"...","password":"..."}' --wait
+intuned platform authsessions delete <auth-session-id> -p <project-name>
+intuned platform authsessions create <auth-session-id> -p <project-name> --input '{"username":"...","password":"..."}' --wait
 ```

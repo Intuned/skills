@@ -1,8 +1,8 @@
-## intunedctl platform project
+## intuned platform project
 
 Manage and inspect projects on the Intuned platform.
 
-- `intunedctl platform project list [options]`:
+- `intuned platform project list [options]`:
   - List all projects in the workspace.
   - Options:
     - `--limit <number>`: Maximum number of projects to return (default: 50).
@@ -10,7 +10,7 @@ Manage and inspect projects on the Intuned platform.
     - `--ai-enabled`: Only show projects with AI enabled (agent_level >= 1).
     - `--json`: Output as JSON. Returns `[{ "name": "...", "language": "TypeScript" | "Python" }]`.
 
-- `intunedctl platform project get [options]`:
+- `intuned platform project get [options]`:
   - Get detailed information about a specific project.
   - Options:
     - `-p, --project-name <name>`: Project name (overrides settings file).

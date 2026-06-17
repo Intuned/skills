@@ -20,7 +20,7 @@ Before reaching for any proxy, confirm the site is actually **IP-blocking** (tes
 **If the user does NOT have a proxy** — suggest Intuned's **auto proxy** (`intuned://auto`). It's platform-provided, so the user doesn't need to supply or pay for one. Like stealth mode and the CAPTCHA solver, it's a **deployed** feature: configure it now and it takes effect once the project runs on the platform — it does **not** engage in local dev (the CLI will note "auto proxy is not available in connected mode; it will be resolved on deployed projects"). Set it on the **deployed** proxy only:
 
 ```bash
-intunedctl dev proxy set "intuned://auto" --deployed
+intuned dev proxy set "intuned://auto" --deployed
 ```
 
 (equivalently, `proxy.deployed: "intuned://auto"` in `Intuned.json`). Don't set `intuned://auto` as the local dev proxy — it has no effect there.
@@ -30,13 +30,13 @@ intunedctl dev proxy set "intuned://auto" --deployed
 Set the proxy and restart the browser in a single step:
 
 ```bash
-intunedctl dev proxy set "<proxy-url>"
+intuned dev proxy set "<proxy-url>"
 ```
 
 To also apply the proxy when the project runs on the Intuned platform (deployed), add `--deployed`:
 
 ```bash
-intunedctl dev proxy set "<proxy-url>" --deployed
+intuned dev proxy set "<proxy-url>" --deployed
 ```
 
 Use `--deployed` selectively — only when the site also blocks Intuned's platform IPs in production.
@@ -58,7 +58,7 @@ The CLI writes this config for you, but you can also set it directly:
 
 | Field      | Description                                              |
 | ---------- | -------------------------------------------------------- |
-| `dev`      | Proxy used during local development (`intunedctl dev`)   |
+| `dev`      | Proxy used during local development (`intuned dev`)      |
 | `deployed` | Proxy used when the project runs on the Intuned platform |
 
 ## Proxy types

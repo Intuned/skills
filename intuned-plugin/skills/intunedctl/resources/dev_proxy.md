@@ -1,8 +1,8 @@
-## intunedctl dev proxy
+## intuned dev proxy
 
 Manage the dev proxy used by local browser instances. By default, setting/clearing restarts the browser.
 
-### `intunedctl dev proxy set <proxy-url> [options]`
+### `intuned dev proxy set <proxy-url> [options]`
 
 Set the dev proxy. Proxy URL format: `http://username:password@domain:port`.
 
@@ -13,7 +13,7 @@ Set the dev proxy. Proxy URL format: `http://username:password@domain:port`.
 - `--settings-format <format>`: settings file format override.
 - `--json`: machine-readable output.
 
-### `intunedctl dev proxy clear [options]`
+### `intuned dev proxy clear [options]`
 
 Clear both the dev and deployed proxy.
 

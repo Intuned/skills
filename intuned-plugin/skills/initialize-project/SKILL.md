@@ -5,7 +5,7 @@ description: "Turn an empty workspace into an Intuned project — pick the langu
 
 # Initialize Project
 
-The capability is turning an empty workspace into an Intuned project: pick the language and a template, create it with `intunedctl dev init`, and install dependencies. Use the language the user already specified; if none was given, ask whether they want TypeScript or Python. **Do NOT add "(Recommended)"** to either option — both are equally supported. The only exception: when the user explicitly says "crawler", **Python is preferred** unless they request otherwise.
+The capability is turning an empty workspace into an Intuned project: pick the language and a template, create it with `intuned dev init`, and install dependencies. Use the language the user already specified; if none was given, ask whether they want TypeScript or Python. **Do NOT add "(Recommended)"** to either option — both are equally supported. The only exception: when the user explicitly says "crawler", **Python is preferred** unless they request otherwise.
 
 ## What the template gives you
 
@@ -18,7 +18,7 @@ A template is a real, runnable starting point. Its **folder layout** shows how a
 Always list templates dynamically first — never hardcode template IDs. Filter to the **starter** templates with `--tag starter`:
 
 ```bash
-intunedctl dev list-templates --language <python|typescript> --tag starter
+intuned dev list-templates --language <python|typescript> --tag starter
 ```
 
 This outputs a JSON array of templates:
@@ -42,7 +42,7 @@ Pick the template that best matches the user's request:
 ## Initializing the project
 
 ```bash
-intunedctl dev init . --template <template-id> --language <language> --non-interactive --install-deps
+intuned dev init . --template <template-id> --language <language> --non-interactive --install-deps
 ```
 
 This creates all project files in the current workspace directory and installs dependencies. The `.` argument targets the current directory; `--non-interactive` is required so the CLI runs without prompts.
@@ -50,7 +50,7 @@ This creates all project files in the current workspace directory and installs d
 If any file being written already exists, the command errors and lists the conflicting files. Unrelated files already in the directory are not affected. To force overwriting existing files, add `--overwrite`:
 
 ```bash
-intunedctl dev init . --template <template-id> --language <language> --non-interactive --overwrite --install-deps
+intuned dev init . --template <template-id> --language <language> --non-interactive --overwrite --install-deps
 ```
 
 **Optional capability flags** — add these flags based on what was encountered during exploration. They bake the settings directly into `Intuned.json` at init time:
@@ -61,7 +61,7 @@ intunedctl dev init . --template <template-id> --language <language> --non-inter
 - `--proxy <url>` — sets the dev proxy URL (`proxy.dev` in `Intuned.json`). Add this if a user-supplied proxy was required to access the site during exploration (never invent a URL).
 - `--proxy-deployed` — also sets the deployed proxy to the same URL (`proxy.deployed` in `Intuned.json`). Only add this alongside `--proxy` if the user confirmed they want the proxy to apply when the project runs on the Intuned platform.
 
-**Important:** The `intunedctl dev init` command will show you what files were added, modified, line insertions and deletions. It will NOT show insertions and deletions of sensitive data such as user credentials under `.parameters` (e.g. `auth-sessions`). If the summary indicates those paths changed, you still **cannot** trust any template credentials for the user’s target site—**ask for the correct credentials** for the requested website (see [What the template gives you](#what-the-template-gives-you)). Do not read credential files to verify or copy values.
+**Important:** The `intuned dev init` command will show you what files were added, modified, line insertions and deletions. It will NOT show insertions and deletions of sensitive data such as user credentials under `.parameters` (e.g. `auth-sessions`). If the summary indicates those paths changed, you still **cannot** trust any template credentials for the user’s target site—**ask for the correct credentials** for the requested website (see [What the template gives you](#what-the-template-gives-you)). Do not read credential files to verify or copy values.
 
 Give a close look at what changed and what is added. If a file was overwritten, review the changes and apply what you need.
 

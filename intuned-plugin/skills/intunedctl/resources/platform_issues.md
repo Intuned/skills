@@ -1,17 +1,15 @@
-## intunedctl platform issues
+## intuned platform issues
 
 Manage project issues. Use these commands to list and inspect issues detected on the platform for a deployed project.
 
-- `intunedctl platform issues get <issue-ref> [options]`:
-
+- `intuned platform issues get <issue-ref> [options]`:
   - Get detailed information about a specific issue by its ID.
   - `<issue-ref>`: The ID of the issue.
   - Options:
     - `-p, --project-name <name>`: Project name (overrides settings file).
     - `--json`: Output as JSON.
 
-- `intunedctl platform issues list [options]`:
-
+- `intuned platform issues list [options]`:
   - List issues for a project. Supports pagination and filtering.
   - Options:
     - `-p, --project-name <name>`: Project name (overrides settings file).
