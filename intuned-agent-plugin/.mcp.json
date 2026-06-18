@@ -1,0 +1,14 @@
+{
+  "browser": {
+    "command": "uvx",
+    "args": ["intuned-agent-mcp"],
+    "env": {
+      "INTUNED_USE_CLI_AI_GATEWAY": "1",
+      "INTUNED_DISABLE_CAPTCHA_TOOL": "1"
+    }
+  },
+  "intuned-docs": {
+    "type": "http",
+    "url": "https://intunedhq.com/docs/mcp"
+  }
+}
