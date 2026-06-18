@@ -525,7 +525,7 @@ In its prompt (tell it to load `build-selectors`, `implement-api`, and the `auth
 - It must do the full job in one pass, **without restarting the browser**:
   1. **Build selectors** with `build-selectors` for all login form fields, the success indicator (`create`), and the logged-in check element (`check`). Build the login-form selectors while logged out, then log in to build the success/check selectors — it must see both states.
   2. **Implement** `auth-sessions/create.{py|ts}` and `auth-sessions/check.{py|ts}` following `implement-api`.
-  3. **Run and verify** both with the `intuned` commands from the `auth-sessions` skill (those commands handle the login lifecycle themselves). Report the resulting **auth session ID** — other APIs will reference it.
+  3. **Run and verify** both with the `intuned-cli` commands from the `auth-sessions` skill (those commands handle the login lifecycle themselves). Report the resulting **auth session ID** — other APIs will reference it.
 
 ### For Each Remaining API
 

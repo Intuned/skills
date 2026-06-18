@@ -1,6 +1,6 @@
 # Running Auth sessions APIs
 
-Auth session APIs (`create` and `check`) are not called directly — they run through `intuned` commands that manage the full lifecycle: running the code, capturing browser state, saving it, and validating it. The credentials are read from `.parameters/auth-sessions/create/default.json`, which the user fills in directly — you write the file with empty placeholder fields and ask them to enter the values there, never in chat, and you never read it back (see `first-time-authentication.md`). Always use `intuned` commands for this — do not run the files directly.
+Auth session APIs (`create` and `check`) are not called directly — they run through `intuned-cli` commands that manage the full lifecycle: running the code, capturing browser state, saving it, and validating it. The credentials are read from `.parameters/auth-sessions/create/default.json`, which the user fills in directly — you write the file with empty placeholder fields and ask them to enter the values there, never in chat, and you never read it back (see `first-time-authentication.md`). Always use `intuned-cli` commands for this — do not run the files directly.
 
 ## CLI Commands
 
@@ -18,7 +18,7 @@ Use the Bash tool to run the command and set the `timeout` to at least `600000` 
 
 ## Testing Auth Sessions
 
-**Always use `intuned` commands to test auth session APIs — do not run the files directly.**
+**Always use `intuned-cli` commands to test auth session APIs — do not run the files directly.**
 
 All commands support `--cdp-tab-id <tab_id>` to run on your assigned tab.
 

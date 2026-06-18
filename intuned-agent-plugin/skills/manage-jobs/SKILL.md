@@ -18,7 +18,7 @@ Job (blueprint)
               └── Attempt 1, Attempt 2, etc.
 ```
 
-Jobs are tightly coupled with the way APIs chain to each other — understand how APIs connect (`extend_payload` and chaining) before composing job payloads. Jobs run on the Intuned Platform and can be controlled via `intuned`.
+Jobs are tightly coupled with the way APIs chain to each other — understand how APIs connect (`extend_payload` and chaining) before composing job payloads. Jobs run on the Intuned Platform and can be controlled via `intuned` cli.
 
 ### Jobs vs. test jobs
 

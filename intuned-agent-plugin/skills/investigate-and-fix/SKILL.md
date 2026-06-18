@@ -229,7 +229,7 @@ Analyze all available evidence:
 
 If the error matches a known platform error (Execution Timeout, CAPTCHA Solving Timeout, Out of Memory, Result Too Big), load the `platform-errors` skill for detailed causes, solutions, and how to identify each error in traces.
 
-If the issue is auth-related (login failures, expired sessions, credential errors), load the `auth-sessions` skill. For deployed projects, also check the platform auth session state using `intuned platform authsessions` commands — the session may be expired, missing, or not yet created on the platform. The `intuned` skill's `platform authsessions` reference has the full command set and debugging workflow.
+If the issue is auth-related (login failures, expired sessions, credential errors), load the `auth-sessions` skill. For deployed projects, also check the platform auth session state using `intuned platform authsessions` commands — the session may be expired, missing, or not yet created on the platform. The `intuned-cli` skill's `platform authsessions` reference has the full command set and debugging workflow.
 
 If the failure is a missing or wrong secret/config value (a missing API key, token, or endpoint), check the project's environment variables — see the `manage-env-vars` skill. Remember a platform var must include `AUTHORING` to be visible to local `dev attempt`/`dev run`.
 

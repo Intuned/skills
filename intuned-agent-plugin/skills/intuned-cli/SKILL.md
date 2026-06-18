@@ -1,11 +1,11 @@
 ---
-name: intuned
+name: intuned-cli
 description: "Reference for the intuned CLI — what each command does and when to use it. Load when you need the right command for a browser, dev, or platform operation."
 ---
 
 # Intuned CLI
 
-`intuned` has two command families: **`dev`** for local development and browser automation, and **`platform`** for managing deployed platform resources. Each command below points to a resource with full flags and usage — read it for the command you need.
+`intuned` cli has two command families: **`dev`** for local development and browser automation, and **`platform`** for managing deployed platform resources. Each command below points to a resource with full flags and usage — read it for the command you need.
 
 ## `intuned dev` — local development
 

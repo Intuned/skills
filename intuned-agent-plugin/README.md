@@ -4,7 +4,7 @@ A Claude Code plugin that brings the **Intuned automation agent** into your
 workflow — build, edit, test, and debug browser automations locally, right in
 your own project, from the command line.
 
-Plugin name: **`intuned`** → skills invoke as `/intuned:create-intuned-project`,
+Plugin name: **`intuned-mcp-plugin`** → skills invoke as `/intuned:create-intuned-project`,
 etc.; browser tools are `mcp__plugin_intuned_browser__*`.
 
 ## Features

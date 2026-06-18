@@ -23,7 +23,7 @@ The capability is supplying values an API shouldn't have hard-coded — API keys
 | **Project env var**   | give the user this to run: `intuned platform env-vars create --key KEY --value <value> --envs AUTHORING,PUBLISHED`           | this project                   | Per-project secrets that also work in deployed runs                       |
 | **Workspace env var** | give the user this to run: `intuned platform workspace env-vars create --key KEY --value <value> --envs AUTHORING,PUBLISHED` | every project in the workspace | Shared keys reused across projects (common API keys, service creds)       |
 
-You provide the exact command (or `.env` line) with the real key name and a `<value>` placeholder; **the user fills the value and runs it / saves the file themselves.** Don't substitute the value or run the command yourself. The `intuned` skill has the full flag reference for `platform env-vars` and `platform workspace env-vars`.
+You provide the exact command (or `.env` line) with the real key name and a `<value>` placeholder; **the user fills the value and runs it / saves the file themselves.** Don't substitute the value or run the command yourself. The `intuned-cli` skill has the full flag reference for `platform env-vars` and `platform workspace env-vars`.
 
 ## The `--envs` rule — the part that's easy to get wrong
 

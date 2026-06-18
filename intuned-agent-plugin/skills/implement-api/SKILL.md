@@ -242,7 +242,7 @@ Create it with `mkdir -p .parameters/api/<api-name>` then write the file. Don't 
 
 ## Testing locally
 
-Run the API with `export MODE=generate_code && intuned dev attempt api <name> <params>` (see `intuned`'s `dev_attempt.md`). generate_code MODE is local testing mode, which mocks file/attachment uploads (no real S3 or provisioned project needed). For an attachment API, you'll get mock `Attachment` objects back; a non-empty list means the upload path works. Real uploads happen later on `dev test-job` / deployed runs.
+Run the API with `export MODE=generate_code && intuned dev attempt api <name> <params>` (see `intuned-cli`'s `dev_attempt.md`). generate_code MODE is local testing mode, which mocks file/attachment uploads (no real S3 or provisioned project needed). For an attachment API, you'll get mock `Attachment` objects back; a non-empty list means the upload path works. Real uploads happen later on `dev test-job` / deployed runs.
 
 ## Build verification
 

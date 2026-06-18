@@ -33,24 +33,25 @@ Update later with `npx skills@latest update`. No `skills` CLI? Run
 This repo also ships the **Intuned Agent Plugin**, it runs
 the full Intuned automation agent locally in your own project: the workflow and
 capability skills, the browser MCP, and the CDP hooks. It lives under
-[`intuned-plugin/`](./intuned-plugin) and installs differently from the skills
-above.
+[`intuned-agent-plugin/`](./intuned-agent-plugin) and installs as a Claude Code
+plugin from this repo's marketplace.
 
-Install it with the Intuned CLI:
+First install and sign in to the Intuned CLI (the plugin drives it):
 
 ```bash
 npm install -g @intuned/cli
-intuned install plugin          # installs into ./intuned-plugin
+intuned auth login
 ```
 
-Then launch Claude Code with it from your project:
+Then add the marketplace and install the plugin:
 
 ```bash
-claude --plugin-dir ./intuned-plugin
+claude plugin marketplace add Intuned/skills && claude plugin install intuned-agent-plugin@intuned-skills
 ```
 
-See [`intuned-plugin/README.md`](./intuned-plugin/README.md) for what it provides
-and how it works.
+Run `/reload-plugins` afterward to activate it. See
+[`intuned-agent-plugin/README.md`](./intuned-agent-plugin/README.md) for what it
+provides and how it works.
 
 ## Contributing
 
