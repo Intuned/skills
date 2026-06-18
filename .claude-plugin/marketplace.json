@@ -1,0 +1,15 @@
+{
+  "name": "intuned-skills",
+  "owner": {
+    "name": "Intuned",
+    "email": "founders@intunedhq.com"
+  },
+  "description": "Intuned plugins for building, editing, testing, and debugging browser-automation projects.",
+  "plugins": [
+    {
+      "name": "intuned-agent-plugin",
+      "source": "./intuned-agent-plugin",
+      "description": "Build, edit, test, and debug Intuned browser-automation projects locally with the Intuned agent"
+    }
+  ]
+}
