@@ -1,105 +1,62 @@
 # Intuned Agent Plugin
 
-A Claude Code plugin that brings the **Intuned automation agent** into your
-workflow — build, edit, test, and debug browser automations locally, right in
-your own project, from the command line.
+A Claude Code plugin that runs the **Intuned automation agent** locally in your
+own project — build, edit, test, and debug browser automations from the command
+line.
 
-Plugin name: **`intuned-mcp-plugin`** → skills invoke as `/intuned:create-intuned-project`,
-etc.; browser tools are `mcp__plugin_intuned_browser__*`.
+Run **`/intuned:intuned`** for a guided overview of what you can do.
 
-**Run `/intuned`** for a guided overview — what Intuned is, what you can
-ask the agent to do, and recommended patterns to get started.
+## Install
 
-## Features
-
-- **Project authoring skills** — scaffold, implement, and ship Intuned projects:
-  `initialize-project`, `create-intuned-project`, `implement-api`,
-  `edit-intuned-project`, `test-intuned-project`, `project-settings`.
-- **Browser automation** — navigation, waiting, content extraction, pagination,
-  and file handling via the `intuned-browser` skill and the bundled browser MCP
-  server.
-- **Selector & network tooling** — `build-selectors`, `find-network-requests`,
-  and `trace-debugging` for authoring reliable automations and debugging runs.
-- **Platform operations** — `manage-jobs`, `manage-env-vars`,
-  `handle-attachments`, `auth-sessions`, and `proxy` for the full Intuned
-  platform surface.
-- **Resilience helpers** — `bot-detection`, `platform-errors`, and
-  `investigate-and-fix` for diagnosing and hardening automations.
-- **Live docs** — the `intuned-docs` MCP server exposes Intuned documentation
-  directly to the agent.
-- **Automatic CLI hooks** — a SessionStart hook wires up artifact capture,
-  result compaction, and browser network tracking with no manual setup.
-
-## Installation
+The plugin drives the Intuned CLI, so install and sign in first:
 
 ```bash
-claude plugin marketplace add Intuned/skills && claude plugin install intuned@intuned-skills
+npm install -g @intuned/cli
+intuned auth login
 ```
 
-The first command registers the Intuned marketplace; the second installs the
-plugin. Run `/reload-plugins` afterward to activate it in an existing session.
-
-## Usage
-
-### Skills
-
-Skills are namespaced by the plugin name. **Start with `/intuned`** for an
-overview of what you can do and how the plugin works, then jump into a workflow.
-
-Start a new project and implement an
-API:
+Then add this repo as a marketplace and install the plugin:
 
 ```text
-/intuned:create-intuned-project
-/intuned:implement-api
-/intuned:test-intuned-project
+/plugin marketplace add Intuned/skills
+/plugin install intuned-agent-plugin@intuned-skills
 ```
 
-Editing or debugging an existing project:
+Run `/reload-plugins` to activate. The browser tooling also needs `uv` + Python
+on your `PATH` (the MCP server launches via `uvx intuned-agent-mcp`).
 
-```text
-/intuned:edit-intuned-project
-/intuned:investigate-and-fix
-/intuned:trace-debugging
-```
+Skills invoke under the `intuned` namespace (e.g. `/intuned:create-intuned-project`);
+browser tools are `mcp__plugin_intuned_browser__*`.
 
-The agent also invokes these skills automatically when a prompt matches — e.g.
-asking it to "fix the selector on the login page" pulls in `build-selectors`.
+## Available skills
 
-### Browser MCP tools
+The agent loads skills automatically from plain-English requests — you never have
+to name them. The main entry points:
 
-The bundled `browser` MCP server provides browser-automation tools under the
-`mcp__plugin_intuned_browser__*` namespace (navigation, extraction, pagination,
-file handling). The agent calls these while authoring and running automations.
+### `intuned`
 
-### Hooks
+Start here. What Intuned is, what you can ask for, and recommended patterns. Use
+when you run `/intuned:intuned`, ask "what can you do", or "how do I get started".
 
-- **SessionStart** runs `intuned dev agent-hooks setup`, materializing the CLI
-  hooks into your project's `.intuned/` directory (artifact capture, result
-  compaction, network tracking). Hooks are merged by name, so any hooks you add
-  yourself are preserved.
-- **PreToolUse** injects CDP connection details before each browser tool call.
+### `create-intuned-project`
 
-## Configuration
+Build a new automation for a site — scraping, crawling, RPA, or action
+workflows. Use when there's no project yet for what you want done.
 
-- **AI gateway** — all AI browser tools authenticate through the gateway
-  resolved from your `intuned auth login` session (`INTUNED_USE_CLI_AI_GATEWAY`).
-- **Docs MCP** — the `intuned-docs` server points at
-  `https://intunedhq.com/docs/mcp`.
-- **Stealth, CAPTCHA, and proxy** — stealth mode and the CAPTCHA solver only
-  engage once your project is **deployed**; they do not run during local dev, so
-  there is nothing to exercise locally. Proxy configuration is managed through
-  the `proxy` skill and project settings.
+### `edit-intuned-project`
 
-## Requirements
+Change, add, or fix something in an existing project — a new API, adjusted
+fields, a new page to handle, a break to repair.
 
-- **`intuned` CLI** on `PATH`, signed in:
+### `test-intuned-project`
 
-  ```bash
-  npm install -g @intuned/cli
-  intuned auth login
-  ```
+Run your automation locally or as an end-to-end platform test job.
 
-- **`uv` + Python** for the browser MCP server. `.mcp.json` launches it with
-  `uvx intuned-agent-mcp`, so `uv` just needs to be on `PATH`; it fetches and
-  caches the published `intuned-agent-mcp` package on first run.
+### `investigate-and-fix` / `trace-debugging`
+
+Diagnose and fix failing runs. `trace-debugging` handles Playwright trace files
+(`.zip`).
+
+Plus capability skills the agent pulls in as needed: browser control, selector
+building, network requests, auth sessions, jobs, env vars, attachments, bot
+detection, proxies, and platform concepts.
