@@ -1,5 +1,6 @@
 ---
 name: implement-api
+user-invocable: false
 description: "Write correct, robust Intuned API code: the right file shapes, a filled DATA_SCHEMA with validation, Intuned helpers over raw Playwright, timeout handling, and the common best-practice and validation pitfalls to avoid."
 ---
 

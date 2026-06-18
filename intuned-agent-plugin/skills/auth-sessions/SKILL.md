@@ -1,5 +1,6 @@
 ---
 name: auth-sessions
+user-invocable: false
 description: How authentication works in Intuned projects — login flows, auth session APIs, CLI, and calling site backends after auth. Load for login walls, gated content, CSRF/API 403s, or restricted resources.
 ---
 

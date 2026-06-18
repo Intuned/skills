@@ -1,5 +1,6 @@
 ---
 name: handle-attachments
+user-invocable: false
 description: "Capture downloadable files (PDFs, .docx/.xlsx/.csv/.zip, export/download links) as Intuned attachments — download them, upload to S3, and return the Attachment object for an attachment-type schema field. Load whenever a page exposes downloadable files you need to capture."
 ---
 

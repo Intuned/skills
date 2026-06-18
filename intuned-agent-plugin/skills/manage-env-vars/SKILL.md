@@ -1,5 +1,6 @@
 ---
 name: manage-env-vars
+user-invocable: false
 description: "Give an Intuned project's APIs the environment variables and secrets they need (API keys, tokens, endpoints, config) — deciding between a local `.env`, project-scoped, or workspace-scoped store, and getting the AUTHORING/PUBLISHED environments right so the value is actually available where it runs. Load when an API needs a secret or configurable value, or when you're collecting config that isn't an auth-session login."
 ---
 

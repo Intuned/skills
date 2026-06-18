@@ -1,5 +1,6 @@
 ---
 name: intuned-overview
+user-invocable: false
 description: "What Intuned is and its core concepts — projects, the project layout, what an API is and how its file is structured, jobs, and attachments. Load for orientation when you're new to how an Intuned project and the platform fit together."
 ---
 

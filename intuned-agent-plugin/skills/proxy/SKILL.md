@@ -1,5 +1,6 @@
 ---
 name: proxy
+user-invocable: false
 description: "Route browser traffic through a proxy to beat IP blocks, geo-restrictions, and rate limiting — either a user-supplied proxy (works in local dev and once deployed) or Intuned's platform auto proxy (deployed only, no proxy of your own needed). Load when a site IP-blocks, geo-restricts, or rate-limits you."
 ---
 

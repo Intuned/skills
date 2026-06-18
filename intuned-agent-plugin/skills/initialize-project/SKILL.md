@@ -1,5 +1,6 @@
 ---
 name: initialize-project
+user-invocable: false
 description: "Turn an empty workspace into an Intuned project — pick the language and template and install dependencies. Use when the workspace has no project files yet."
 ---
 

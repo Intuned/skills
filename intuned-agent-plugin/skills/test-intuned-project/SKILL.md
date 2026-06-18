@@ -1,13 +1,13 @@
 ---
 name: test-intuned-project
-description: "Run and monitor a platform end-to-end test job for Intuned APIs. Use to validate the full chained run on the platform — when the user mentions a platform test, test job, or e2e test."
+description: "Run a local API test or Run and monitor a platform end-to-end test job for Intuned APIs. Use to validate the full chained run on the platform — when the user mentions testing an API, testing a code change, or platform test, test job, e2e test."
 ---
 
 # Types of testing
 
 ## Local Testing
 
-Local testing is simply running the API locally with `intuned dev attempt api <name> <parameters path> [--auth-session]` or `intuned dev run api <name> <parameters path> [--auth-session]`
+Local testing is simply running the API locally with `intuned dev attempt api <name> <parameters_path> [--auth-session <id>]` or `intuned dev run api <name> <parameters_path> [--auth-session <id>]`
 
 It also includes running the Auth-session APIs:
 

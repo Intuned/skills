@@ -1,5 +1,6 @@
 ---
 name: project-settings
+user-invocable: false
 description: "Reference for the `Intuned.json` project configuration file — what each field means (replication, apiAccess, headful, browserSize, region, authSessions, stealthMode, captchaSolver) and how to set default result sinks. Load when inspecting or editing Intuned.json settings."
 ---
 

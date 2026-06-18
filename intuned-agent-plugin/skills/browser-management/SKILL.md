@@ -1,5 +1,6 @@
 ---
 name: browser-management
+user-invocable: false
 description: "Start, stop, and manage the tabs of the persistent local browser that Intuned automations and the selector tools run against (`intuned dev browser`). Must Load when you need to start a browser or tab to work in, when creating separate tabs so parallel work doesn't collide, When no browser executable is found or when the browser is stuck and needs recovering."
 ---
 

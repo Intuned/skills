@@ -1,13 +1,14 @@
-# Intuned Skills
+# Intuned
 
-Agent skills and the **Intuned Agent Plugin** for building, editing, testing, and
-debugging browser automations on [Intuned](https://intunedhq.com) — packaged for
-the open Agent Skills ecosystem and installable with the [`skills`](https://skills.sh)
-CLI or as a Claude Code plugin.
+[Intuned](https://intunedhq.com) browser automation for your coding agent.
 
-## Install the plugin (Claude Code)
+## Intuned Agent Plugin
 
-The plugin drives the Intuned CLI, so install and sign in first:
+The full Intuned automation agent, running locally in your own project: the
+workflow and capability skills, the browser MCP, and the CDP hooks. Use it to
+build, edit, test, and debug browser automations from the command line.
+
+It drives the Intuned CLI, so install and sign in first:
 
 ```bash
 npm install -g @intuned/cli
@@ -22,11 +23,19 @@ Then add this repo as a marketplace and install the plugin:
 ```
 
 Run `/reload-plugins` to activate, then `/intuned:agent` for an overview. See
-[`intuned-agent-plugin/README.md`](./intuned-agent-plugin) for details.
+[`intuned-agent-plugin/`](./intuned-agent-plugin) for what it provides and how it
+works.
 
-## Install skills (Agent Skills CLI)
+---
 
-All skills at once:
+## Intuned Skills
+
+A collection of agent **skills** for working with Intuned — authoring,
+migrating, deploying, and operating browser automations on the Intuned platform.
+Install them into Claude Code, Cursor, Codex, and any other
+[skills.sh](https://skills.sh)-compatible agent with one command.
+
+All skills at once, via the [`skills` CLI](https://skills.sh):
 
 ```bash
 npx skills@latest add Intuned/skills
@@ -38,21 +47,18 @@ A single skill:
 npx skills@latest add Intuned/skills --skill webwright-to-intuned
 ```
 
-Update later with `npx skills@latest update`.
+Update later with `npx skills@latest update`. No `skills` CLI? Run
+`scripts/install-local.sh` to symlink the skills straight into `~/.claude/skills/`.
 
-## What's included
-
-### Intuned Agent Plugin
-
-Runs the full Intuned automation agent locally in your own project — the workflow
-and capability skills, the browser MCP, and the CDP hooks. Lives under
-[`intuned-agent-plugin/`](./intuned-agent-plugin).
-
-### Skills
+### Available skills
 
 | Skill                                                   | What it does                                                                                                                                                                                                |
 | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`webwright-to-intuned`](./skills/webwright-to-intuned) | Turn a [Webwright](https://github.com/microsoft/Webwright) "Crafted CLI" into a deployed, verified Intuned project. Includes 4 example crafts to port under [`examples/`](./examples/webwright-to-intuned). |
+
+More skills coming.
+
+---
 
 ## Contributing
 

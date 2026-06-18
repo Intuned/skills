@@ -1,5 +1,6 @@
 ---
 name: build-selectors
+user-invocable: false
 description: "Build reliable selectors for an Intuned API using the browser selector tools — never by hand. Load whenever you need selectors for a page before writing or fixing API code, including auth-session login flows."
 ---
 

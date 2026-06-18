@@ -1,5 +1,6 @@
 ---
 name: intuned-browser
+user-invocable: false
 description: "Reference for the intuned_browser / @intuned/browser helper library — navigation, waiting, extraction, pagination, and file/attachment handling. Load when writing or fixing automation code."
 ---
 

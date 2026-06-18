@@ -1,5 +1,6 @@
 ---
 name: platform-errors
+user-invocable: false
 description: "Understand and resolve Intuned platform errors — Execution Timeout, Result Too Big / Out of Memory, CAPTCHA Solving Timeout, and related codes. Covers how to identify each in logs and traces, which are code-fixable vs platform-level, and how to remediate. Load when diagnosing a platform error code or failure."
 ---
 
