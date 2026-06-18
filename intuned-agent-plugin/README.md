@@ -71,12 +71,15 @@ call them directly.
 The plugin wires two Claude Code hooks (see [`hooks/hooks.json`](./hooks/hooks.json)):
 
 - **`setup-cli-hooks.sh`** runs on **session start**. It calls
-  `intuned dev agent-hooks setup`, which materializes the Intuned CLI's own agent
-  hooks into your project's `.intuned/` (writing `.intuned/hooks.json` and
-  `.intuned/agent-hooks/`). Those hooks validate the Intuned CLI commands the
-  agent runs and force their output to the `.intuned-agent/` directory. Existing
-  hooks are merged by name, so any you've added are preserved; if it fails the
-  session still works.
+  `intuned dev agent-hooks setup`, which installs the plugin's
+  [Intuned CLI hooks](./cli-hooks) into your project's `.intuned/agent-hooks/`.
+  These are event handlers the `intuned` CLI fires around every command it runs —
+  they shape commands the agent runs (force output paths into `.intuned-agent/`,
+  add `--non-interactive`, write settings as JSON), capture run artifacts, and
+  manage browser/tab network tracking. See
+  [`cli-hooks/README.md`](./cli-hooks) for what each one does. Existing hooks are
+  merged by name, so any you've added are preserved; if it fails the session
+  still works.
 
 - **`inject-cdp.sh`** runs **before every browser tool call**
   (`mcp__plugin_intuned_browser__*`). It looks up the running local browser via
