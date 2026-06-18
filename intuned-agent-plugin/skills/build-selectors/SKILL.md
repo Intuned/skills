@@ -86,6 +86,10 @@ For quick navigation actions (scroll, expand, switch tabs) use the `computer` to
 
 If a page is blocked / 403 / unreachable, stop — selectors built there would be invalid. Defer the bot-detection strategy to the **bot-detection** skill.
 
+## Authenticated access
+
+**If the prompt says there's a 2FA / OTP / TOTP step:**: generate a code with `/intuned-agent-plugin/skills/auth-sessions/scripts/generate-2fa-code.sh <param-file>` and fill it into the OTP input, then build reliable selectors for the OTP input and verify button. Then to generate the code: Use the language's import (`import * as OTPAuth from "otpauth"` for TS, `import pyotp` for Python). Read `/intuned-agent-plugin/skills/auth-sessions/resources/handling-2fa.md` for details. Never ask the user for a code. You must produce a code that generates the TOTP programatically from the user's token.
+
 ## Parallel tool calling
 
 When you are finding elements that are not correlated, and building reliable selectors or building field selecotrs for different elements, call these tools in parallel for optimal execution time.

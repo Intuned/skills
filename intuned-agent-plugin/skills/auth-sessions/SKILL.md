@@ -1,14 +1,21 @@
 ---
 name: auth-sessions
 user-invocable: false
-description: How authentication works in Intuned projects — login flows, auth session APIs, CLI, and calling site backends after auth. Load for login walls, gated content, CSRF/API 403s, or restricted resources.
+description: How authentication works in Intuned projects — login flows, auth session APIs, CLI, and calling site backends after auth. Load when the task requires logging in, or the website has gated content, CSRF/API 403s, OAuth Login, SSO, or restricted resources.
 ---
 
 # Auth Sessions
 
 Authentication in Intuned is handled through auth sessions — the capability of logging into a protected site once, preserving that browser state, and reusing it across API runs. A project includes auth sessions only when its target website sits behind a login wall.
 
-> **2FA is not supported.** If you logged in and then the site asks for a 2FA / OTP / TOTP / authenticator code, stop and tell the user to contact `support@intunedhq.com`. Don't ask the user for the code.
+## 2FA
+
+Two-factor-auth is not supported in Intuned, because in browser-automation, we are writing an automation that will be automated and run on its own, without the user's attendance. So if the auth-session requires a 2FA, Email/SMS verifcation codes, or anything that requires a user input, then it should be rejected because the user will not be able to provide this code when the automation runs.
+
+You should always reject if the website requires real-time user input to proceed, you can't write a plan or generate a code if the website can't be logged in programatically (i.e using playwright code).
+
+There is only One exception to this, TOTP tokens. If the user is using TOTP 2fa, and has the secret token to his TOTP app,
+then you can generate the code with `otpauth` (TypeScript) or `pyotp` (Python) using the user's secret token and generate a TOTP code and fill it during login. See `/intuned-agent-plugin/skills/auth-sessions/resources/handling-2fa.md`. If the user can't provide a secret/token, stop and tell them to contact `support@intunedhq.com`, don't ask the user to type codes manually.
 
 ## What Auth Sessions Are
 
@@ -78,6 +85,7 @@ Each task has a dedicated resource that holds the exact CLI commands and functio
 - **Implementing `create` or `check`** → the guide for your language:
   - Python: `resources/python/writing-create-and-check-apis.md`
   - TypeScript: `resources/typescript/writing-create-and-check-apis.md`
+- **Login asks for a 2FA / OTP / TOTP code and the user has a TOTP secret/token** → Read `/intuned-agent-plugin/skills/auth-sessions/resources/handling-2fa.md`
 - **Creating auth-sessions as code `.auth-session.json` resource files** → `resources/auth-sessions-as-code.md`
 - **Implementing an API that hits the site backend after auth (XHR/GraphQL / `page.context.request`)** → see [Authenticated backend calls](#authenticated-backend-calls) above
 

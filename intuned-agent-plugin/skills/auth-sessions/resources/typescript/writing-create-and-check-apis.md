@@ -25,8 +25,8 @@ export interface Params {
 export default async function create(
   params: Params,
   page: Page,
-  context: BrowserContext
-): Promise<void>
+  context: BrowserContext,
+): Promise<void>;
 ```
 
 ### Best Practices
@@ -51,7 +51,7 @@ export interface Params {
 export default async function create(
   params: Params,
   page: Page,
-  context: BrowserContext
+  context: BrowserContext,
 ): Promise<void> {
   await goToUrl({ page, url: "https://example.com/login" });
 
@@ -61,9 +61,52 @@ export default async function create(
   await page.locator("#submit-button").click();
 
   // Verify login succeeded — wait for element only visible when logged in
-  await page.locator("#dashboard-title").waitFor({ state: "visible", timeout: 10_000 });
+  await page
+    .locator("#dashboard-title")
+    .waitFor({ state: "visible", timeout: 10_000 });
 }
 ```
+
+### Handling 2FA (TOTP)
+
+Build a `TOTP` from the secret and call `.generate()`, it returns the current 6-digit code. The defaults (SHA1, 6 digits, 30s period) match what most services use. Generate the code **inside** `create` so it's fresh every run, and add the secret to `Params`:
+
+````typescript
+import { BrowserContext, Page } from "playwright";
+import { goToUrl } from "@intuned/browser";
+import * as OTPAuth from "otpauth";
+
+export interface Params {
+  username: string;
+  password: string;
+  otpSecret: string; // TOTP secret (base32)
+}
+
+export default async function create(
+  params: Params,
+  page: Page,
+  context: BrowserContext
+): Promise<void> {
+  await goToUrl({ page, url: "https://example.com/login" });
+
+  await page.locator("#email-input").fill(params.username);
+  await page.locator("#password-input").fill(params.password);
+  await page.locator("#submit-button").click();
+
+  // 2FA step — generate a fresh code right before filling it
+  const otpInput = page.locator("#otp-input"); // use a reliable selector
+  await otpInput.waitFor({ state: "visible", timeout: 10_000 });
+  const totp = new OTPAuth.TOTP({ secret: params.otpSecret });
+  const code = totp.generate();
+  await otpInput.fill(code);
+  await page.locator("#verify-button").click();
+
+  // Verify login succeeded
+  await page
+    .locator("#dashboard-title")
+    .waitFor({ state: "visible", timeout: 10_000 });
+}
+
 
 ## The Check API (`auth-sessions/check.ts`)
 
@@ -75,9 +118,9 @@ import { goToUrl } from "@intuned/browser";
 
 export default async function check(
   page: Page,
-  context: BrowserContext
-): Promise<boolean>
-```
+  context: BrowserContext,
+): Promise<boolean>;
+````
 
 Note: `check` does **not** receive a `params` argument — only `page` and `context`.
 
@@ -96,7 +139,7 @@ import { goToUrl } from "@intuned/browser";
 
 export default async function check(
   page: Page,
-  context: BrowserContext
+  context: BrowserContext,
 ): Promise<boolean> {
   await goToUrl({ page, url: "https://example.com/dashboard" });
 

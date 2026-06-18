@@ -65,6 +65,44 @@ async def create(page: Page, params: Params | None = None, **_kwargs):
     await dashboard_heading.wait_for(state="visible", timeout=10_000)
 ```
 
+### Handling 2FA (TOTP)
+
+If the login asks for a 2FA / OTP / TOTP code, you need the TOTP **secret** stored as a credential (see `/intuned-agent-plugin/skills/auth-sessions/resources/handling-2fa.md` for the overall flow, how to collect it, and installing `pyotp`).
+
+`pyotp.TOTP(secret).now()` returns the current 6-digit TOTP. Generate the code **inside** `create` so it's fresh every run, and add the secret to `Params`:
+
+```python
+from typing import TypedDict
+import pyotp
+from intuned_browser import go_to_url
+from playwright.async_api import Page
+
+class Params(TypedDict):
+    username: str
+    password: str
+    otpSecret: str  # TOTP secret (base32)
+
+async def create(page: Page, params: Params | None = None, **_kwargs):
+    if params is None:
+        raise ValueError("Params with username, password and otpSecret are required")
+
+    await go_to_url(page=page, url="https://example.com/login")
+
+    await page.locator("#email-input").fill(params["username"])
+    await page.locator("#password-input").fill(params["password"])
+    await page.locator("#submit-button").click()
+
+    # 2FA step — generate a fresh code right before filling it
+    otp_input = page.locator("#otp-input")  # use a reliable selector
+    await otp_input.wait_for(state="visible", timeout=10_000)
+    code = pyotp.TOTP(params["otpSecret"]).now()
+    await otp_input.fill(code)
+    await page.locator("#verify-button").click()
+
+    # Verify login succeeded
+    await page.locator("#dashboard-title").wait_for(state="visible", timeout=10_000)
+```
+
 ## The Check API (`auth-sessions/check.py`)
 
 ### Function Signature

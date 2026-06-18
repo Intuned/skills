@@ -75,7 +75,7 @@ If you encounter any bot detection signal — **stop, do not reject, do not cont
 
 ### Handling authentication
 
-**If you discover restricted content** (login walls, gated downloads, "sign in to view", etc.) — handle it now, not after the plan. Ask the user if they have credentials, load the `auth-sessions` skill, create `.parameters/auth-sessions/create/<name>.json` (default name `default`) with the login fields as empty placeholders, and ask the user to fill in the values there — not in chat; you won't read them back. Then log in, verify it works, and continue exploring with an authenticated browser. You need to see the authenticated content to build a complete plan.
+**If the task requires logging in** (login walls, gated downloads, "sign in to view", OAuth flows, etc.) — handle it now, not after the plan. Ask the user if they have credentials, load the `auth-sessions` skill, create `.parameters/auth-sessions/create/<name>.json` (default name `default`) with the login fields as empty placeholders, and ask the user to fill in the values there — not in chat; you won't read them back. Then log in, verify it works, and continue exploring with an authenticated browser. You need to see the authenticated content to build a complete plan.
 
 **Important:** Even if you are in plan mode and you are read-only, it is ok to create the auth-session file, since the user will write to it, not you. So you should create the file and you should not exit plan mode.
 
@@ -494,6 +494,13 @@ Independent APIs can be built **in parallel** — one sub-agent each (for exampl
 When the plan includes auth session APIs (`auth-sessions/create` and `auth-sessions/check`), build them **before** all other APIs and **not in parallel with them** — auth work changes the browser's login state, so it must be serialized. Once `auth-sessions/create` is implemented and run, every other API can use the resulting auth session.
 
 The two auth APIs are coupled — run a **single localization** for both (`create` + `check` together), then a **single codegen** for both. Don't run separate passes per auth API.
+
+#### If the login has a 2FA / OTP / TOTP step
+
+If exploration revealed a 2FA step (and the user provided a TOTP secret), read `/intuned-agent-plugin/skills/auth-sessions/resources/handling-2fa.md`. Two extra things are your responsibility as orchestrator:
+
+1. **Make sure the 2FA library is installed** — Eusnure (`otpauth` for TypeScript, `pyotp` for Python) are installed. Verify it's present before auth API generation; TypeScript → `npm install otpauth`, Python → `uv add pyotp`.
+2. **Tell auth sub-agent about the 2FA step in its prompts**: Add to the subaget prompt: "The login has a 2FA step. The TOTP secret is stored under the `otpSecret` credential key. After filling username/password, generate a code with `/intuned-agent-plugin/skills/auth-sessions/scripts/generate-2fa-code.sh .parameters/auth-sessions/create/default.json` and fill the OTP input, then build reliable selectors for the OTP input and verify button." . Then add: "The login has a 2FA step; generate the TOTP code inside `create` from the `otpSecret` param every run, see `handling-2fa.md` and your language's writing-create-and-check guide."
 
 #### Why the browser must start logged out
 

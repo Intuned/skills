@@ -13,22 +13,22 @@ this whole document back; adapt it to what they asked.
 
 ## What Intuned is
 
-Intuned turns web interactions into reliable, callable automations. You describe
-what you want done on a website — extract data, fill a form, complete a
-multi-step workflow — and the agent builds real Playwright code (Python or
+Intuned turns web interactions into reliable, callable automations. The user describes
+what they want done on a website — extract data, fill a form, complete a
+multi-step workflow — and you build real Playwright code (Python or
 TypeScript), tests it locally, and gets it ready to run at scale on the Intuned
 platform.
 
-You don't need to know Playwright, selectors, or the project layout. You point
-at a site, say what you want, and the agent does the building.
+The user doesn't need to know Playwright, selectors, or the project layout. The user points
+at a site, say what you want, and you do the building.
 
 You must understand that you will write an automation that will do scrapping, not do the scrapping directly, You must also be clear with the user with that, so if the user wants to extract all the data from a website, you will write the reliable automation code to do that, then you and the user will be able run that code to get the data.
 
-## What you can ask for
+## What the user can ask for
 
 - **"Automate / scrape / extract … from <site>"** — build a brand-new
-  automation. The agent explores the site with you, proposes a plan, and builds
-  - tests it once you approve. → `create-intuned-project`
+  automation. Ypu explores the site, proposes a plan, and build it.
+  - tests it once the user approves. → `create-intuned-project`
 - **"Change / add / fix something in my project"** — modify an existing Intuned
   automation: add an API to a project, adjust fields, handle a new page, fix a break. →
   `edit-intuned-project`
@@ -39,30 +39,25 @@ You must understand that you will write an automation that will do scrapping, no
 - **"How does X work in Intuned?"** — concepts (projects, APIs, jobs,
   attachments). → `intuned-overview`
 
-The agent picks these up automatically from a plain-English request — the user
-never has to name them. Route to the matching flow based on what they say; ask
-for a start URL + goal + language (Python or TypeScript) if you're building
-something new and any of those is missing.
-
 ## Recommended patterns
 
 - **Start from a real URL and a concrete goal.** "Get all job listings from
   example.com/jobs, with title, company, and link" beats "scrape a job site."
-- **Let the agent explore before it builds.** It looks at the actual page and
-  comes back with a plan (fields, pages, pagination) for you to approve — review
+- **explore before building.** look at the actual page and
+  come back with a plan (fields, pages, pagination) for the user to approve — review
   that plan; it's the cheapest place to course-correct.
 - **Parameterize instead of hardcoding.** Page limits, dates, search terms, and
-  counts should be inputs you can change per run — the agent will ask about
+  counts should be inputs the user can change per run — you should ask about
   defaults rather than baking values in.
 - **Prefer splitting work into focused automations** (e.g. list → detail) over
   one giant script — easier to test, reuse, and run in parallel.
 - **Keep secrets out of chat.** Logins, API keys, and tokens go into the project's
-  parameter/env files (the agent sets up placeholders for you to fill), never
+  parameter/env files (set up placeholders for the user to fill), never
   pasted into the conversation.
 - **Build and test locally first, deploy when you're happy.** Nothing goes live
-  until you choose to deploy.
+  until the user chooses to deploy.
 
-## Before you start
+## Getting started
 
 The plugin drives the **`intuned` CLI**, so it must be installed and signed in:
 
