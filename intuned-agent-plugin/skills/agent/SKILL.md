@@ -1,5 +1,5 @@
 ---
-name: intuned
+name: agent
 description: "Entry point and user guide for the Intuned plugin: what Intuned is, what you can ask the agent to do, and recommended patterns. Use on any user request that is related to Intuned, including Creating Browser automation projects, Creating scrappers, crawlers, RPAs, or editing them. Also use when investigating and debugging Intuned related erros, like failed jobs, failed runs, incorrect data, and also use for user queries about bot detections, intuned proxies, stealth browsers or authenticated access."
 ---
 

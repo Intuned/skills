@@ -4,7 +4,7 @@ A Claude Code plugin that runs the **Intuned automation agent** locally in your
 own project — build, edit, test, and debug browser automations from the command
 line.
 
-Run **`/intuned:intuned`** for a guided overview of what you can do.
+Run **`/intuned:agent`** for a guided overview of what you can do.
 
 ## Install
 
@@ -33,10 +33,10 @@ browser tools are `mcp__plugin_intuned_browser__*`.
 The agent loads skills automatically from plain-English requests — you never have
 to name them. The main entry points:
 
-### `intuned`
+### `agent`
 
 Start here. What Intuned is, what you can ask for, and recommended patterns. Use
-when you run `/intuned:intuned`, ask "what can you do", or "how do I get started".
+when you run `/intuned:agent`, ask "what can you do", or "how do I get started".
 
 ### `create-intuned-project`
 
