@@ -21,7 +21,7 @@ Then add this repo as a marketplace and install the plugin:
 /plugin install intuned-agent-plugin@intuned-skills
 ```
 
-Run `/reload-plugins` to activate, then `/intuned:intuned` for an overview. See
+Run `/reload-plugins` to activate, then `/intuned:agent` for an overview. See
 [`intuned-agent-plugin/README.md`](./intuned-agent-plugin) for details.
 
 ## Install skills (Agent Skills CLI)
