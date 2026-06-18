@@ -7,6 +7,9 @@ your own project, from the command line.
 Plugin name: **`intuned-mcp-plugin`** → skills invoke as `/intuned:create-intuned-project`,
 etc.; browser tools are `mcp__plugin_intuned_browser__*`.
 
+**Run `/intuned`** for a guided overview — what Intuned is, what you can
+ask the agent to do, and recommended patterns to get started.
+
 ## Features
 
 - **Project authoring skills** — scaffold, implement, and ship Intuned projects:
@@ -40,7 +43,10 @@ plugin. Run `/reload-plugins` afterward to activate it in an existing session.
 
 ### Skills
 
-Skills are namespaced by the plugin name. Start a new project and implement an
+Skills are namespaced by the plugin name. **Start with `/intuned`** for an
+overview of what you can do and how the plugin works, then jump into a workflow.
+
+Start a new project and implement an
 API:
 
 ```text
