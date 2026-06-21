@@ -1,7 +1,6 @@
 {
   "name": "intuned",
   "description": "Build, edit, test, and debug Intuned browser-automation projects locally with the Intuned agent",
-  "version": "0.1.0",
   "author": {
     "name": "Intuned"
   }
