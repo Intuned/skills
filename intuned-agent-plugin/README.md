@@ -65,14 +65,3 @@ call them directly.
 | [`proxy`](./skills/proxy)                                 | Route browser traffic through a proxy.            |
 | [`platform-errors`](./skills/platform-errors)             | Diagnose platform error codes.                    |
 | [`intuned-cli`](./skills/intuned-cli)                     | `intuned` CLI command reference.                  |
-
-## Hooks
-
-The plugin wires one Claude Code hook (see [`hooks/hooks.json`](./hooks/hooks.json)):
-
-- **`inject-cdp.sh`** runs **before every browser tool call**
-  (`mcp__plugin_intuned_browser__*`). It looks up the running local browser via
-  the Intuned CLI and injects the live CDP address and tab→target map (plus the
-  auth-params directory, when present) into the tool input, so the browser tools
-  attach to the right browser and tab. If the browser isn't running, it blocks the
-  call with a clear "start the browser" message instead of letting it fail.

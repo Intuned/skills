@@ -1,0 +1,37 @@
+{
+  "hooks": [
+    {
+      "name": "cleanup-tab-data",
+      "file": "cleanup-tab-data.sh",
+      "runtime": "bash",
+      "async": false
+    },
+    {
+      "name": "network-tracking-hint",
+      "file": "network-tracking-hint.sh",
+      "runtime": "bash",
+      "async": false
+    },
+    {
+      "name": "validate-output-path",
+      "file": "validate-output-path.ts",
+      "runtime": "bun",
+      "async": false
+    },
+    {
+      "name": "artifacts-command-start-mutation",
+      "file": "artifacts-command-start-mutation.ts",
+      "runtime": "bun",
+      "async": false,
+      "needsArtifactsEnv": true
+    },
+    {
+      "name": "artifacts-command-events-capture",
+      "file": "artifacts-command-events-capture.ts",
+      "runtime": "bun",
+      "async": true,
+      "needsArtifactsEnv": true
+    }
+  ],
+  "supportFiles": ["artifacts-common.ts"]
+}
