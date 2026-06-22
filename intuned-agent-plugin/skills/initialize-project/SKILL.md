@@ -66,6 +66,16 @@ intuned dev init . --template <template-id> --language <language> --non-interact
 
 Give a close look at what changed and what is added. If a file was overwritten, review the changes and apply what you need.
 
+## Initialize Intuned CLI hooks
+
+Once the project is initialized, set up the Intuned agent CLI hooks:
+
+```bash
+intuned dev agent-hooks setup
+```
+
+This writes `.intuned/hooks.json` and the hook scripts under `.intuned/agent-hooks/`, enabling CLI features like network tracing.
+
 ## Show the project overview
 
 After initialization completes, show the user a **file tree** summary of the project with a brief one-line description of the key files/folders. For example:

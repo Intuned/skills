@@ -76,6 +76,16 @@ If `Intuned.json` has `authSessions.enabled: true` or you see `auth-sessions/` A
 
 The agent runs inside the project, so the project identity comes from `Intuned.json` (the `projectName` field) or the `--project-name` flag — there is nothing to select.
 
+### Ensure CLI hooks are installed
+
+Make sure the Intuned agent CLI hooks are set up for the project — if `.intuned/hooks.json` isn't present, run:
+
+```bash
+intuned dev agent-hooks setup
+```
+
+This writes `.intuned/hooks.json` and the hook scripts under `.intuned/agent-hooks/`, enabling CLI features like network tracing.
+
 ## Deciding Your Approach
 
 **The key question: does this task require exploring the website?**

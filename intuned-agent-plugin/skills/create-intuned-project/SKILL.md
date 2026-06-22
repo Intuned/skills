@@ -698,13 +698,13 @@ Two layers of testing. The **local API tests are already done by the API sub-age
 
 ### Local API tests
 
-Each API was **already tested locally by its sub-agent in Phase 4**: the sub-agent ran `intuned dev attempt api <name> <param> --cdp-browser-name default --cdp-tab-id <tab_id>` and reported pass/fail, and the full result was saved under `.intuned-agent/platform-attempts/...`. Take the sub-agents' results instead: read the saved result files and confirm the whole set holds together (the automation works, every expected field is populated, no execution errors).
+Each API was **already tested locally by its sub-agent in Phase 4**: the sub-agent ran `intuned dev attempt api <name> <param> --cdp-browser-name default --cdp-tab-id <tab_id>` and reported pass/fail, and the full result was saved under `.intuned-agent/artifacts/...`. Take the sub-agents' results instead: read the saved result files and confirm the whole set holds together (the automation works, every expected field is populated, no execution errors).
 
 Local testing is **limited**: it covers one API at a time and does NOT exercise `extend_payload` / API chaining (that only runs as a job, see the e2e test below).
 
 ### Show the user results, then ask about the platform job run
 
-A. Prove the APIs work. The API sub-agent will already have run the code (because you asked it to) and written the results to `.intuned-agent/platform-attempts/*`. You should make sure there are no duplicate data (infinite extracting loops), no corrupted data (e.g: all nulls) and return to the user one friendly, well-structured message.
+A. Prove the APIs work. The API sub-agent will already have run the code (because you asked it to) and written the results to `.intuned-agent/artifacts/*`. You should make sure there are no duplicate data (infinite extracting loops), no corrupted data (e.g: all nulls) and return to the user one friendly, well-structured message.
 
 b. Write a message to the user: Keep it user-facing: no selectors, internal paths, or process detail, gives a feeling of success. It will show a summary of what was implemented (do not mentioned selectors and implementation details), how many data extracted, where to view them.
 
