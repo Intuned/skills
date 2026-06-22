@@ -1,7 +1,7 @@
 ---
 name: intuned-cli
 user-invocable: false
-description: "Reference for the intuned CLI — what each command does and when to use it. Load when you need the right command for a browser, dev, or platform operation."
+description: "Reference for the intuned CLI — what each command does and when to use it. Load when you need the right command for a browser, dev, or platform operation. Also includes CLI-Hooks guide and how-to install."
 ---
 
 # Intuned CLI
@@ -77,3 +77,24 @@ Use the platform commands below to analyze runs, download logs, and inspect trac
 ## Consulting the docs
 
 For more info, search the Intuned docs using the `search_intuned` and `query_docs_filesystem_intuned` tools.
+
+## CLI Hooks
+
+Intuned CLI hooks are event handlers for the `intuned` commands, they fire around
+every command it runs (`onCommandStart` / `onCommandComplete`), receiving the
+command and its result as JSON on stdin. They are **not** Claude Code hooks.
+
+You can install them by running this command:
+
+```bash
+intuned dev agent-hooks setup
+```
+
+This writes the hook scripts into `.intuned/agent-hooks/` and registers them in
+`.intuned/hooks.json`. It installs 5 hooks:
+
+- **`validate-output-path.ts`** (`onCommandStart`): For `platform attempts trace` / `log`, injects a default `-o` output path under `.intuned-agent/platform-attempts/<runId>/` when the user didn't pass one — so results always land in a known place.
+- **`artifacts-command-start-mutation.ts`** (`onCommandStart`): For API and auth-session attempt commands: creates the run directory under the artifacts root, redirects the command's output there, and obfuscates sensitive parameter values (e.g. auth-session credentials).
+- **`artifacts-command-events-capture.ts`** (command lifecycle): Records command start/complete events and writes result and metadata artifacts into the per-run folder under `.intuned-agent/`.
+- **`network-tracking-hint.sh`** (`onCommandComplete`): On browser start or tab create, prints where the tab's network traces are recorded (`.intuned-agent/tab_<id>/network/`).
+- **`cleanup-tab-data.sh`** (`onCommandComplete`): On browser stop, tab close, or stealth/captcha toggle, removes the matching `.intuned-agent/tab_*` folders.
