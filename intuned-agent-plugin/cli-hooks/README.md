@@ -22,8 +22,7 @@ Adjust a command's options _before_ it runs:
 
 ## Browser & tab lifecycle (`onCommandComplete`)
 
-| Hook                         | What it does                                                                                                                                           |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `connect-browser-control.sh` | On browser start, tab create, or stealth/captcha toggle, tells the MCP control server to connect to the browser so network tracking starts immediately |
-| `network-tracking-hint.sh`   | On browser start or tab create, prints where the tab's network traces are recorded (`.intuned-agent/tab_<id>/network/`).                               |
-| `cleanup-tab-data.sh`        | On browser stop, tab close, or stealth/captcha toggle, removes the matching `.intuned-agent/tab_*` folders.                                            |
+| Hook                       | What it does                                                                                                             |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `network-tracking-hint.sh` | On browser start or tab create, prints where the tab's network traces are recorded (`.intuned-agent/tab_<id>/network/`). |
+| `cleanup-tab-data.sh`      | On browser stop, tab close, or stealth/captcha toggle, removes the matching `.intuned-agent/tab_*` folders.              |
