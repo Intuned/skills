@@ -30,27 +30,30 @@ An **Issue** is a confirmed problem on a deployed project, they are raised on Jo
 - You clear an issue by **dismissing** it — with the CLI (`intuned platform issues dismiss <issue-refs...>`) or the **"Dismiss"** button in the platform Issues panel. This applies both to false positives and to issues you've fixed.
 - **Dismissing is not fixing** — it only removes the issue from the open list. If the root cause is still there, monitoring **re-raises** the issue on the next job runs.
 
-## Platform auto-healing toggles
+## Platform self-healing levels
 
-On the platform, self-healing can run hands-off via these settings:
+Self-healing is configured per-project via `intuned platform self-healing set <level>`:
 
-| Toggle                  | What it does                                                                  |
-| ----------------------- | ----------------------------------------------------------------------------- |
-| **Advanced monitoring** | Automatically detect and surface issues from runs.                            |
-| **Auto-fix**            | Automatically open an agent session to fix raised issues **on a new branch**. |
-| **Auto-merge fixes**    | Automatically merge fix branches.                                             |
-| **Auto-deploy fixes**   | Automatically deploy the project after a fix branch is merged.                |
+| Level           | What it does                                                                  |
+| --------------- | ----------------------------------------------------------------------------- |
+| **off**         | Self-healing disabled entirely.                                               |
+| **monitor**     | Automatically detect and surface issues from runs.                            |
+| **auto-fix**    | Automatically open an agent session to fix raised issues **on a new branch**. |
+| **auto-merge**  | Automatically merge fix branches.                                             |
+| **auto-deploy** | Automatically deploy the project after a fix branch is merged.                |
+
+`auto-fix`, `auto-merge`, and `auto-deploy` require a **Hosted** project. Connected (CLI) projects can only use `off` or `monitor`.
 
 In the UI a user can also **attach an issue to a message** — reference it in the agent input to start a conversation, and the agent loads the issue context and begins investigating.
 
-`fix-open-issues` is the **manual, CLI-side equivalent of Auto-fix**: it does the discovery → triage → investigate → fix that Auto-fix automates, but it stops at a **deploy gate** so the user owns the deploy (the equivalent of Auto-merge / Auto-deploy) instead of it happening automatically.
+`fix-open-issues` is the **manual, CLI-side equivalent of auto-fix**: it does the discovery → triage → investigate → fix that auto-fix automates, but it stops at a **deploy gate** so the user owns the deploy (the equivalent of auto-merge / auto-deploy) instead of it happening automatically.
 
-## Enabling Advanced monitoring
+## Enabling self-healing (monitor level)
 
-You can enable the advanced monitoring feature to automatically detect Issues from job runs or standalone runs by running this command:
+To automatically detect Issues from job runs or standalone runs, set the self-healing level to `monitor`:
 
 ```bash
-intuned platform project advanced-monitoring enable
+intuned platform self-healing set monitor
 ```
 
-This will setup the advance-monitoring feature on your project, So from now any run with failing metrics will raise an Issue.
+From that point on, any run with failing metrics will raise an Issue. Check the current level with `intuned platform project get`.

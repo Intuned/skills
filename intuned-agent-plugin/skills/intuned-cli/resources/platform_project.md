@@ -11,13 +11,15 @@ Manage and inspect projects on the Intuned platform.
     - `--json`: Output as JSON. Returns `[{ "name": "...", "language": "TypeScript" | "Python" }]`.
 
 - `intuned platform project get [options]`:
-  - Get detailed information about a specific project, including its advanced-monitoring / self-healing level.
+  - Get detailed information about a specific project, including whether self-healing is enabled.
   - Options:
     - `-p, --project-name <name>`: Project name (overrides settings file).
-    - `--json`: Output as JSON.
+    - `--json`: Output as JSON. Includes `self_healing: { enabled: true | false }`.
 
-- `intuned platform project advanced-monitoring enable [options]`:
-  - Enable advanced monitoring on the project — sets the healing level to **"detect issues"**. Once enabled, any run with failing metrics raises an Issue (see the `self-healing` skill). Check the current level with `intuned platform project get`.
+- `intuned platform self-healing set <level> [options]`:
+  - Set the self-healing level for a project. Available levels: `off`, `monitor`, `auto-fix`, `auto-merge`, `auto-deploy`. `auto-fix`, `auto-merge`, and `auto-deploy` require a Hosted project (Connected/CLI projects can only use `off` or `monitor`).
+  - Prompts for confirmation before applying. Use `-y` / `--yes` to skip.
   - Options:
     - `-p, --project-name <name>`: Project name (overrides settings file).
-    - `--json [filename]`: Output as JSON; if a filename is given, write the results to that file.
+    - `-y, --yes`: Skip confirmation prompt.
+    - `--json`: Output as JSON.
