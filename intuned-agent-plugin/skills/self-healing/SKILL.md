@@ -1,7 +1,7 @@
 ---
 name: self-healing
 user-invocable: false
-description: "Concept reference for Intuned self-healing and project Issues — what an Issue is, how the platform raises and groups them from run anomalies, the issue record fields, the dismiss-vs-re-raise lifecycle, and the platform auto-fix/auto-merge/auto-deploy toggles. Load when working with a project's Issues (e.g. the fix-open-issues or investigate-and-fix flows) to understand where issues come from and what 'resolved' actually means."
+description: "Concept reference for Intuned self-healing, advanced-monitoring and project Issues — what an Issue is, how the platform raises and groups them from run anomalies, the issue record fields, the dismiss-vs-re-raise lifecycle, and the platform auto-fix/auto-merge/auto-deploy toggles. Load when working with a project's Issues (e.g. the fix-open-issues or investigate-and-fix flows) to understand where issues come from and what 'resolved' actually means, and when working with Intuned'd advanced monitoring feature."
 ---
 
 # Self-Healing Projects and Issues
@@ -44,3 +44,13 @@ On the platform, self-healing can run hands-off via these settings:
 In the UI a user can also **attach an issue to a message** — reference it in the agent input to start a conversation, and the agent loads the issue context and begins investigating.
 
 `fix-open-issues` is the **manual, CLI-side equivalent of Auto-fix**: it does the discovery → triage → investigate → fix that Auto-fix automates, but it stops at a **deploy gate** so the user owns the deploy (the equivalent of Auto-merge / Auto-deploy) instead of it happening automatically.
+
+## Enabling Advanced monitoring
+
+You can enable the advanced monitoring feature to automatically detect Issues from job runs or standalone runs by running this command:
+
+```bash
+intuned platform project advanced-monitoring enable
+```
+
+This will setup the advance-monitoring feature on your project, So from now any run with failing metrics will raise an Issue.

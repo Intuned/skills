@@ -11,7 +11,13 @@ Manage and inspect projects on the Intuned platform.
     - `--json`: Output as JSON. Returns `[{ "name": "...", "language": "TypeScript" | "Python" }]`.
 
 - `intuned platform project get [options]`:
-  - Get detailed information about a specific project.
+  - Get detailed information about a specific project, including its advanced-monitoring / self-healing level.
   - Options:
     - `-p, --project-name <name>`: Project name (overrides settings file).
     - `--json`: Output as JSON.
+
+- `intuned platform project advanced-monitoring enable [options]`:
+  - Enable advanced monitoring on the project — sets the healing level to **"detect issues"**. Once enabled, any run with failing metrics raises an Issue (see the `self-healing` skill). Check the current level with `intuned platform project get`.
+  - Options:
+    - `-p, --project-name <name>`: Project name (overrides settings file).
+    - `--json [filename]`: Output as JSON; if a filename is given, write the results to that file.
