@@ -25,6 +25,16 @@ Once you identify the type, use the matching lookup command below to retrieve th
 - **Issue ID / Multiple Issue IDs** → follow the **[Handling Issues](#handling-issues)** section (it has its own dedicated steps)
 - **All other types** → jump to **Step 3: Reproduce Locally** after fetching the context below
 
+### Ensure CLI hooks are installed
+
+Make sure the Intuned agent CLI hooks are set up for the project — if `.intuned/hooks.json` isn't present, run:
+
+```bash
+intuned dev agent-hooks setup
+```
+
+This writes `.intuned/hooks.json` and the hook scripts under `.intuned/agent-hooks/`, enabling CLI features like network tracing.
+
 ### Run ID → fetch run details
 
 ```bash
