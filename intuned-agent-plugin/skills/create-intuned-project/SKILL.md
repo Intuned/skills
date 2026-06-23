@@ -12,10 +12,21 @@ description: "Create a new Intuned project for something the user wants automate
 You need three things before you can plan:
 
 - The **start URL** — where the automation will run.
-- The **goal** — what the user wants done with the site.
+- The **goal** — what the user wants done with the site. It should be either a Scrapper, a Crawler, or a browser-automation RPA.
 - The **language** — Python or TypeScript.
 
 A URL with no goal isn't enough, and a goal with no URL isn't either. If any of the three is missing, ask. If the user gave a URL but didn't say what they want done with it, don't infer — ask. Settle the **language up front**, so the plan and every API are written in the right one from the start. (If the user later says "crawler" with no language preference, Python is the better fit.)
+
+The Goal is just what the user wants from the project, it is one of these four **project types**:
+
+- Scrapper: Scrapes a website either by DOM extraction or Network API tracing
+- A Crawler: Traverses a website across multiple pages or links, discovering and following URLs to collect data at scale
+- An RPA: Drives a browser to perform a sequence of actions (clicking, filling forms, navigating, downloading) to complete a multi-step workflow
+- Any web-automating task: Automates any interaction with a website that a human could do in a browser, from simple one-off actions to complex stateful flows
+
+When the goal is missing, ask for it with these four as the options — not data granularity (list vs list+details, fields, how many APIs); those are Phase 2 decisions you make yourself.
+
+The user can run this project manually or schedule it with a job, enabling users to run it period
 
 Phrase your messages from the user's perspective. They don't know what an "Intuned project," "skill," or "API" is internally — talk about what you'll do for them, not the mechanics.
 
