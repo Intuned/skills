@@ -361,6 +361,9 @@ After successfully fixing the issue or making a code change, end with a concise 
 - **State the fix** — what you changed and which API/files it touched.
 - **Flag anything unresolved** or any limitation.
 - **No jargon** — no selectors, no internal process details.
+- **Cleanup** - You must cleanup any downloaded traces and logs. they pollute the user's directory, make sure to delete them when you are done with them.
+
+Important: The downloaded logs, results and traces pollute the user's environment, so make sure to clean them up and leave the project in a clean state.
 
 To ship the fix to the platform, deploy with `intuned dev deploy`. Mention this as the next step if the user wants it live. Skip the summary for rejected tasks, non-fixable platform errors, or failures where no code was changed.
 
