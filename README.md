@@ -8,21 +8,28 @@ The full Intuned automation agent, running locally in your own project: the
 workflow and capability skills, the browser MCP, and the CDP hooks. Use it to
 build, edit, test, and debug browser automations from the command line.
 
-It drives the Intuned CLI, so install and sign in first:
+Requirements:
 
-```bash
-npm install -g @intuned/cli
-intuned auth login
-```
+- **Intuned CLI**, installed and signed in — the plugin drives it:
 
-Then add this repo as a marketplace and install the plugin:
+  ```bash
+  npm install -g @intuned/cli
+  intuned auth login
+  ```
+
+- **`uv`** on your `PATH` — uv provides the Python the browser tooling needs and
+  launches the MCP server via `uvx intuned-agent-mcp`. Install it with the
+  [uv installation guide](https://docs.astral.sh/uv/getting-started/installation/).
+
+Then open Claude Code and run these commands to add this repo as a marketplace and install the plugin:
 
 ```text
 /plugin marketplace add Intuned/skills
 /plugin install intuned-agent-plugin@intuned-skills
+/reload-plugins
 ```
 
-Run `/reload-plugins` to activate, then `/intuned:agent` for an overview. See
+Run `/intuned:agent` for an overview. See
 [`intuned-agent-plugin/`](./intuned-agent-plugin) for what it provides and how it
 works.
 
