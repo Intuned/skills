@@ -21,7 +21,7 @@ Requirements:
   launches the MCP server via `uvx intuned-agent-mcp`. Install it with the
   [uv installation guide](https://docs.astral.sh/uv/getting-started/installation/).
 
-Then add this repo as a marketplace and install the plugin:
+Then open Claude Code and run these commands to add this repo as a marketplace and install the plugin:
 
 ```text
 /plugin marketplace add Intuned/skills

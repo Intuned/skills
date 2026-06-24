@@ -21,7 +21,7 @@ Run **`/intuned:agent`** for a guided overview of what you can do.
 
 ## Install
 
-Add this repo as a marketplace and install the plugin:
+Open Claude Code and run these commands to add this repo as a marketplace and install the plugin:
 
 ```text
 /plugin marketplace add Intuned/skills
