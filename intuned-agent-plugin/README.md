@@ -6,24 +6,34 @@ line.
 
 Run **`/intuned:agent`** for a guided overview of what you can do.
 
+## Requirements
+
+- **Intuned CLI**, installed and signed in — the plugin drives it:
+
+  ```bash
+  npm install -g @intuned/cli
+  intuned auth login
+  ```
+
+- **`uv`** on your `PATH` — uv provides the Python the browser tooling needs and
+  launches the MCP server via `uvx intuned-agent-mcp`. Install it with the
+  [uv installation guide](https://docs.astral.sh/uv/getting-started/installation/).
+
 ## Install
 
-The plugin drives the Intuned CLI, so install and sign in first:
-
-```bash
-npm install -g @intuned/cli
-intuned auth login
-```
-
-Then add this repo as a marketplace and install the plugin:
+Open Claude Code and run these commands to add this repo as a marketplace and install the plugin:
 
 ```text
 /plugin marketplace add Intuned/skills
 /plugin install intuned-agent-plugin@intuned-skills
+/reload-plugins
 ```
 
-Run `/reload-plugins` to activate. The browser tooling also needs `uv` + Python
-on your `PATH` (the MCP server launches via `uvx intuned-agent-mcp`).
+Then run this command to get started with the agent, it will show an overview of what is the agent capable of:
+
+```text
+/intuned:agent
+```
 
 Skills invoke under the `intuned` namespace (e.g. `/intuned:create-intuned-project`);
 browser tools are `mcp__plugin_intuned_browser__*`.
