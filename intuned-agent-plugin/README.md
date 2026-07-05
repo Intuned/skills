@@ -72,8 +72,7 @@ one-time escalation Codex requests for it. Everything else runs sandboxed once
 the browser is up.
 
 Alternatively, run Codex with the sandbox disabled
-(`codex --sandbox danger-full-access`) — no config needed, but the config
-above is the safer option.
+(`codex --sandbox danger-full-access`) — no config needed, but the config above is the safer option.
 
 ## Available skills
 

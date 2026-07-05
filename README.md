@@ -63,8 +63,7 @@ denies) — approve the one-time escalation Codex requests for it; everything
 after that runs sandboxed.
 
 Alternatively, run Codex with the sandbox disabled
-(`codex --sandbox danger-full-access`) — no config needed, but the config
-above is the safer option.
+(`codex --sandbox danger-full-access`) — no config needed, but the config above is the safer option.
 
 See [`intuned-agent-plugin/`](./intuned-agent-plugin) for what the plugin
 provides and how it works.
