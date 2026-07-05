@@ -62,10 +62,9 @@ sandbox (Chromium's process model requires mach-port registration the sandbox
 denies) — approve the one-time escalation Codex requests for it; everything
 after that runs sandboxed.
 
-Alternatively, you can run Codex with the sandbox disabled
-(`codex --sandbox danger-full-access`) and skip the config entirely — but the
-config above is safer: it keeps OS sandboxing on for the whole workflow and
-only opens the specific network and cache access the Intuned CLI needs.
+Alternatively, run Codex with the sandbox disabled
+(`codex --sandbox danger-full-access`) — no config needed, but the config
+above is the safer option.
 
 See [`intuned-agent-plugin/`](./intuned-agent-plugin) for what the plugin
 provides and how it works.
