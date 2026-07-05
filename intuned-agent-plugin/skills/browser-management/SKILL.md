@@ -56,7 +56,7 @@ Then navigate and interact with each tab by passing its `tab_id` to the browser 
 
 ## Sandboxed environments (e.g. Codex)
 
-If your environment runs shell commands inside an OS sandbox, run `intuned dev browser start` with escalated (unsandboxed) permissions **from the start**, asking for approval if required — the browser cannot boot inside the sandbox, so an in-sandbox attempt always fails with "Browser started but CDP is not responding". Only this command needs escalation: everything else — tab management, attempts, platform commands — works sandboxed once the browser is up, since they only connect to it over localhost CDP.
+If your environment runs shell commands inside an OS sandbox, run `intuned dev browser start` with escalated (unsandboxed) permissions, asking for approval if required — the browser cannot boot inside the sandbox, so an in-sandbox attempt fails with "Browser started but CDP is not responding". Only this command needs escalation: everything else — tab management, attempts, platform commands — works sandboxed once the browser is up, since they only connect to it over localhost CDP.
 
 ## Browser crash recovery
 
