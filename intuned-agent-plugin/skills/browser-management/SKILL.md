@@ -54,6 +54,10 @@ intuned dev browser tabs create   # → tab_id_3 → https://example.com/page/3
 
 Then navigate and interact with each tab by passing its `tab_id` to the browser tools.
 
+## Sandboxed environments (e.g. Codex)
+
+If your environment runs shell commands inside an OS sandbox and `intuned dev browser start` fails with **"Browser started but CDP is not responding"**, do not retry inside the sandbox. Run that one command with escalated (unsandboxed) permissions, asking for approval if required. Everything else — tab management, attempts, platform commands — works sandboxed once the browser is up, since they only connect to it over localhost CDP.
+
 ## Browser crash recovery
 
 If a browser tool is denied with "Browser is closed", or the browser crashed: restart with `intuned dev browser start --headless`, then resume unfinished work with freshly created tabs — old tab IDs are no longer valid.

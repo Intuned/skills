@@ -21,6 +21,8 @@ Run **`/intuned:agent`** for a guided overview of what you can do.
 
 ## Install
 
+### Claude Code
+
 Open Claude Code and run these commands to add this repo as a marketplace and install the plugin:
 
 ```text
@@ -37,6 +39,37 @@ Then run this command to get started with the agent, it will show an overview of
 
 Skills invoke under the `intuned` namespace (e.g. `/intuned:create-intuned-project`);
 browser tools are `mcp__plugin_intuned_browser__*`.
+
+### Codex
+
+Add this repo as a plugin marketplace and install:
+
+```bash
+codex plugin marketplace add Intuned/skills
+codex plugin add intuned@intuned-skills
+```
+
+(Or browse and install via `/plugins` inside Codex.) Then start a new session
+and run `$intuned:agent` for the overview. Skills invoke as
+`$intuned:<skill-name>` (e.g. `$intuned:create-intuned-project`), or mention
+`@intuned`; browser tools are `mcp__browser.*` and docs tools are
+`mcp__intuned_docs.*`.
+
+**Recommended sandbox config** — the `intuned` CLI needs network access and a
+few home-directory paths that Codex's default `workspace-write` sandbox blocks.
+Add this to `~/.codex/config.toml` to avoid an approval prompt on every
+command:
+
+```toml
+[sandbox_workspace_write]
+network_access = true
+writable_roots = ["~/.intuned", "~/.npm", "~/.cache"]
+```
+
+One exception: `intuned dev browser start` cannot run inside the macOS sandbox
+(Chromium requires mach-port registrations the sandbox denies) — approve the
+one-time escalation Codex requests for it. Everything else runs sandboxed once
+the browser is up.
 
 ## Available skills
 

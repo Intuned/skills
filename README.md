@@ -21,7 +21,9 @@ Requirements:
   launches the MCP server via `uvx intuned-agent-mcp`. Install it with the
   [uv installation guide](https://docs.astral.sh/uv/getting-started/installation/).
 
-Then open Claude Code and run these commands to add this repo as a marketplace and install the plugin:
+### Claude Code
+
+Open Claude Code and run these commands to add this repo as a marketplace and install the plugin:
 
 ```text
 /plugin marketplace add Intuned/skills
@@ -29,9 +31,39 @@ Then open Claude Code and run these commands to add this repo as a marketplace a
 /reload-plugins
 ```
 
-Run `/intuned:agent` for an overview. See
-[`intuned-agent-plugin/`](./intuned-agent-plugin) for what it provides and how it
-works.
+Run `/intuned:agent` for an overview.
+
+### Codex
+
+Add this repo as a plugin marketplace, then install:
+
+```bash
+codex plugin marketplace add Intuned/skills
+codex plugin add intuned@intuned-skills
+```
+
+(Or browse and install interactively via `/plugins` inside Codex.) Then start a
+new session and invoke `$intuned:agent` — or just describe what you want
+automated.
+
+**Recommended sandbox config** — the plugin drives the `intuned` CLI, which
+needs network access and a few home-directory paths that Codex's default
+`workspace-write` sandbox blocks. Add this to `~/.codex/config.toml` to avoid
+an approval prompt on every command:
+
+```toml
+[sandbox_workspace_write]
+network_access = true
+writable_roots = ["~/.intuned", "~/.npm", "~/.cache"]
+```
+
+One exception remains: `intuned dev browser start` cannot run inside the macOS
+sandbox (Chromium's process model requires mach-port registration the sandbox
+denies) — approve the one-time escalation Codex requests for it; everything
+after that runs sandboxed.
+
+See [`intuned-agent-plugin/`](./intuned-agent-plugin) for what the plugin
+provides and how it works.
 
 ---
 

@@ -67,7 +67,7 @@ async def create(page: Page, params: Params | None = None, **_kwargs):
 
 ### Handling 2FA (TOTP)
 
-If the login asks for a 2FA / OTP / TOTP code, you need the TOTP **secret** stored as a credential (see `/intuned-agent-plugin/skills/auth-sessions/resources/handling-2fa.md` for the overall flow, how to collect it, and installing `pyotp`).
+If the login asks for a 2FA / OTP / TOTP code, you need the TOTP **secret** stored as a credential (see the `auth-sessions` skill's `resources/handling-2fa.md` for the overall flow, how to collect it, and installing `pyotp`).
 
 `pyotp.TOTP(secret).now()` returns the current 6-digit TOTP. Generate the code **inside** `create` so it's fresh every run, and add the secret to `Params`:
 

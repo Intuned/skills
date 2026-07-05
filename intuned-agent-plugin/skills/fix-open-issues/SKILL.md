@@ -51,7 +51,7 @@ Your job here is orchestration:
 
 Once every fixable issue's change is made and locally validated and tested, **stop**. Do **not** run `intuned dev deploy` on your own initiative.
 
-Summarize the changes and ask the user how to proceed: deploy now, or hold. use AskUserQuestion to confirm with the user.
+Summarize the changes and ask the user how to proceed: deploy now, or hold. Confirm with the user — use a structured question tool if your environment has one available, otherwise ask normally in chat.
 
 A. If the user doesn't approve the deployment. Then stop with a summary if what fixes were dont and that the issues are still open, and write a reminder to the user that the fix will not take effect until the project is deployed. And also tell the use that they can manually dimiss the issue from the Intuned platform UI at `https://app.intuned.io/projects/<id>` which will be on the right panel containing Issues liss, by clicking on "Dismiss" button. The deployment for the issues fix can only be done through CLI to capture the local changes, not through UI.
 

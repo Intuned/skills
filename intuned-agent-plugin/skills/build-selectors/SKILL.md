@@ -88,7 +88,7 @@ If a page is blocked / 403 / unreachable, stop — selectors built there would b
 
 ## Authenticated access
 
-**If the prompt says there's a 2FA / OTP / TOTP step:**: generate a code with `/intuned-agent-plugin/skills/auth-sessions/scripts/generate-2fa-code.sh <param-file>` and fill it into the OTP input, then build reliable selectors for the OTP input and verify button. Then to generate the code: Use the language's import (`import * as OTPAuth from "otpauth"` for TS, `import pyotp` for Python). Read `/intuned-agent-plugin/skills/auth-sessions/resources/handling-2fa.md` for details. Never ask the user for a code. You must produce a code that generates the TOTP programatically from the user's token.
+**If the prompt says there's a 2FA / OTP / TOTP step:**: generate a code with the `auth-sessions` skill's `scripts/generate-2fa-code.sh <param-file>` and fill it into the OTP input, then build reliable selectors for the OTP input and verify button. Then to generate the code: Use the language's import (`import * as OTPAuth from "otpauth"` for TS, `import pyotp` for Python). Read the `auth-sessions` skill's `resources/handling-2fa.md` for details. Never ask the user for a code. You must produce a code that generates the TOTP programatically from the user's token.
 
 ## Parallel tool calling
 

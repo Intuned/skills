@@ -82,7 +82,7 @@ For more info, search the Intuned docs using the `search_intuned` and `query_doc
 
 Intuned CLI hooks are event handlers for the `intuned` commands, they fire around
 every command it runs (`onCommandStart` / `onCommandComplete`), receiving the
-command and its result as JSON on stdin. They are **not** Claude Code hooks.
+command and its result as JSON on stdin. They are **not** coding-agent hooks (Claude Code / Codex hooks).
 
 You can install them by running this command:
 
