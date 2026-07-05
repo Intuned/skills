@@ -71,6 +71,11 @@ One exception: `intuned dev browser start` cannot run inside the macOS sandbox
 one-time escalation Codex requests for it. Everything else runs sandboxed once
 the browser is up.
 
+Alternatively, you can run Codex with the sandbox disabled
+(`codex --sandbox danger-full-access`) and skip the config entirely — but the
+config above is safer: it keeps OS sandboxing on for the whole workflow and
+only opens the specific network and cache access the Intuned CLI needs.
+
 ## Available skills
 
 User-invocable — call them directly, or just describe what you want and the agent
