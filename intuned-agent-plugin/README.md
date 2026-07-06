@@ -38,7 +38,7 @@ Then run this command to get started with the agent, it will show an overview of
 ```
 
 Skills invoke under the `intuned` namespace (e.g. `/intuned:create-intuned-project`);
-browser tools are `mcp__plugin_intuned_browser__*`.
+browser tools are `mcp__plugin_intuned_intuned-browser__*`.
 
 ### Codex
 
@@ -52,7 +52,7 @@ codex plugin add intuned@intuned-skills
 (Or browse and install via `/plugins` inside Codex.) Then start a new session
 and run `$intuned:agent` for the overview. Skills invoke as
 `$intuned:<skill-name>` (e.g. `$intuned:create-intuned-project`), or mention
-`@intuned`; browser tools are `mcp__browser.*` and docs tools are
+`@intuned`; browser tools are `mcp__intuned-browser.*` and docs tools are
 `mcp__intuned_docs.*`.
 
 **Recommended sandbox config** — the `intuned` CLI needs network access and a
