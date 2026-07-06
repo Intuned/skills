@@ -1,7 +1,7 @@
 ---
 name: intuned-cli
 user-invocable: false
-description: "Reference for the intuned CLI — what each command does and when to use it. Load when you need the right command for a browser, dev, or platform operation. Also includes CLI-Hooks guide and how-to install."
+description: "Reference for the intuned CLI — what each command does and when to use it. Load when you need the right command for a browser, dev, or platform operation. Also includes CLI-Hooks guide and how-to install. (100 lines)"
 ---
 
 # Intuned CLI

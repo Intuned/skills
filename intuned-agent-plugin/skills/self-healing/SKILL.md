@@ -1,7 +1,7 @@
 ---
 name: self-healing
 user-invocable: false
-description: "Concept reference for Intuned self-healing, advanced-monitoring and project Issues — what an Issue is, how the platform raises and groups them from run anomalies, the issue record fields, the dismiss-vs-re-raise lifecycle, and the platform auto-fix/auto-merge/auto-deploy toggles. Load when working with a project's Issues (e.g. the fix-open-issues or investigate-and-fix flows) to understand where issues come from and what 'resolved' actually means, and when working with Intuned'd advanced monitoring feature."
+description: "Concept reference for Intuned self-healing, advanced-monitoring and project Issues — what an Issue is, how the platform raises and groups them from run anomalies, the issue record fields, the dismiss-vs-re-raise lifecycle, and the platform auto-fix/auto-merge/auto-deploy toggles. Load when working with a project's Issues (e.g. the fix-open-issues or investigate-and-fix flows) to understand where issues come from and what 'resolved' actually means, and when working with Intuned'd advanced monitoring feature. (59 lines)"
 ---
 
 # Self-Healing Projects and Issues

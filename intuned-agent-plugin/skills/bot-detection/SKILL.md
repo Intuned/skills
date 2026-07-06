@@ -1,7 +1,7 @@
 ---
 name: bot-detection
 user-invocable: false
-description: "Get past bot-detection blocks, IP restrictions, and CAPTCHAs: detect the block, pick the right lever (proxy / stealth mode / CAPTCHA solver), configure stealth and the CAPTCHA solver in Intuned.json, and wire the CAPTCHA wait helpers into automation code. Load whenever a page is blocked, shows a CAPTCHA, or returns bot-detection signals."
+description: "Get past bot-detection blocks, IP restrictions, and CAPTCHAs: detect the block, pick the right lever (proxy / stealth mode / CAPTCHA solver), configure stealth and the CAPTCHA solver in Intuned.json, and wire the CAPTCHA wait helpers into automation code. Load whenever a page is blocked, shows a CAPTCHA, or returns bot-detection signals. (181 lines)"
 ---
 
 # Handling Bot Detection and CAPTCHAs

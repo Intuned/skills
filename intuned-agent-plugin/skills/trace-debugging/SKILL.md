@@ -1,6 +1,6 @@
 ---
 name: trace-debugging
-description: "Debug an automation failure by reading its Playwright trace (.zip): extract it, pinpoint the failure, propose and verify a fix. Includes the Playwright trace file-format reference (.trace/.network/.stacks and resources/)."
+description: "Debug an automation failure by reading its Playwright trace (.zip): extract it, pinpoint the failure, propose and verify a fix. Includes the Playwright trace file-format reference (.trace/.network/.stacks and resources/). (569 lines)"
 ---
 
 # Debug Playwright Trace

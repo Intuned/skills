@@ -1,6 +1,6 @@
 ---
 name: test-intuned-project
-description: "Run a local API test or Run and monitor a platform end-to-end test job for Intuned APIs. Use to validate the full chained run on the platform — when the user mentions testing an API, testing a code change, or platform test, test job, e2e test."
+description: "Run a local API test or Run and monitor a platform end-to-end test job for Intuned APIs. Use to validate the full chained run on the platform — when the user mentions testing an API, testing a code change, or platform test, test job, e2e test. (377 lines)"
 ---
 
 # Types of testing

@@ -1,6 +1,6 @@
 ---
 name: investigate-and-fix
-description: "Investigate and fix a broken Intuned project. Use when the user reports something failing or returning wrong data, or gives a Run ID, Job Run ID, Issue ID, or free-text symptom. Pulls platform data, reproduces locally, diagnoses, fixes, and tests."
+description: "Investigate and fix a broken Intuned project. Use when the user reports something failing or returning wrong data, or gives a Run ID, Job Run ID, Issue ID, or free-text symptom. Pulls platform data, reproduces locally, diagnoses, fixes, and tests. (383 lines)"
 ---
 
 # Investigate and Fix

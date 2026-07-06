@@ -1,6 +1,6 @@
 ---
 name: create-intuned-project
-description: "Create a new Intuned project for something the user wants automated on a website — scraping/data extraction, action automation, Crawlers, or RPA. Use when no Intuned project exists yet for what they're asking, including one-time needs. Explores the site with the user, plans, then builds and tests the APIs locally."
+description: "Create a new Intuned project for something the user wants automated on a website — scraping/data extraction, action automation, Crawlers, or RPA. Use when no Intuned project exists yet for what they're asking, including one-time needs. Explores the site with the user, plans, then builds and tests the APIs locally. (836 lines)"
 ---
 
 # Create Intuned Project

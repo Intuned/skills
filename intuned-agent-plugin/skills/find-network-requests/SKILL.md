@@ -1,7 +1,7 @@
 ---
 name: find-network-requests
 user-invocable: false
-description: "Identify and document the network request(s) an Intuned API depends on, using the on-disk traffic captures. Load when an API depends on a backend/XHR/fetch request rather than DOM scraping."
+description: "Identify and document the network request(s) an Intuned API depends on, using the on-disk traffic captures. Load when an API depends on a backend/XHR/fetch request rather than DOM scraping. (33 lines)"
 ---
 
 # Find Network Requests
