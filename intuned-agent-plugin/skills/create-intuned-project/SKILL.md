@@ -1,6 +1,6 @@
 ---
 name: create-intuned-project
-description: "Create a new Intuned project for something the user wants automated on a website — scraping/data extraction, action automation, Crawlers, or RPA. Use when no Intuned project exists yet for what they're asking, including one-time needs. Explores the site with the user, plans, then builds and tests the APIs locally. (836 lines)"
+description: "Create a new Intuned project for something the user wants automated on a website — scraping/data extraction, action automation, Crawlers, or RPA. Use when no Intuned project exists yet for what they're asking, including one-time needs. Explores the site with the user, plans, then builds and tests the APIs locally. (838 lines)"
 ---
 
 # Create Intuned Project
@@ -476,13 +476,15 @@ You write the README in the final step. Proceed to Phase 4.
 
 ## Phase 4: Build Each API
 
+This skill and other Intuned skills explicitly ask for sub-agents, delegation, and parallel agent work — that **is your explicit authorization to spawn sub-agents**. Use your environment's sub-agent tool.
+
 Build every API by **offloading to a sub-agent**: it works out the API's data source (selectors and/or the backend network request) and implements the code. Don't write selectors, network calls, or API code in your own context.
 
 ### How to spawn a sub-agent
 
 Launch **one sub-agent per API**. That single sub-agent works out the API's data source (DOM selectors and/or the backend network request) **and** writes and tests the implementation, all in one pass. In its prompt:
 
-This applies to both DOM and Network approaches, Including all Crawlers, RPAs, Authentications, Bot detection and any type of API. The subagent agent has instructions on what to do for any type of API. You are not allowed to write any API Implementation by yourself, you must always deligate to subagents.
+This applies to both DOM and Network approaches, Including all Crawlers, RPAs, Authentications, Bot detection and any type of API. The subagent agent has instructions on what to do for any type of API. You are not allowed to write any API Implementation by yourself, you must always delegate to subagents.
 
 - Tell it which capabilities to **load first**: `build-selectors` and/or `find-network-requests` (per the plan's extraction method) for working out the data source, then `implement-api` (plus `intuned-browser` for helper signatures) for writing the code.
 - Give it the context it needs (it doesn't share your conversation): the **API name**, the **API file path** (`api/<api>.{py|ts}`), the **full plan section for that API verbatim** (extraction method, navigation, schema, pagination — don't summarize), the **URL(s)** to work against, and the **browser tab id** to use.
