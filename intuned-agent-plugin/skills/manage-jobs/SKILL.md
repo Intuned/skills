@@ -1,7 +1,7 @@
 ---
 name: manage-jobs
 user-invocable: false
-description: "Create, edit, and manage Intuned Jobs — the .job.json schema, code-origin vs api-origin handling, name-uniqueness rules, schedules, auth_session, sinks, and intuned platform jobs commands. Load when creating or editing a job config or managing platform jobs. (206 lines)"
+description: "Create, edit, and manage Intuned Jobs — the .job.json schema, code-origin vs api-origin handling, name-uniqueness rules, schedules, auth_session, sinks, and intuned platform jobs commands. Load when creating or editing a job config or managing platform jobs."
 ---
 
 # Manage Jobs

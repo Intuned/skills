@@ -1,6 +1,6 @@
 ---
 name: fix-open-issues
-description: "Sweep, triage, and fix all open issues on a deployed Intuned project. Use when the user wants to clear open issues: 'fix my open issues', 'what issues are open / what's broken on my project', 'resolve all my issues', 'self-heal my project', 'go through my issues and fix them', or 'run self-healing'. Discovers open issues from the platform, fixes them, then stops at a deploy gate and guides the rerun. For a single known Run/Job Run/Issue ID or free-text symptom, use investigate-and-fix instead. (95 lines)"
+description: "Sweep, triage, and fix all open issues on a deployed Intuned project. Use when the user wants to clear open issues: 'fix my open issues', 'what issues are open / what's broken on my project', 'resolve all my issues', 'self-heal my project', 'go through my issues and fix them', or 'run self-healing'. Discovers open issues from the platform, fixes them, then stops at a deploy gate and guides the rerun. For a single known Run/Job Run/Issue ID or free-text symptom, use investigate-and-fix instead."
 ---
 
 # Fix Open Issues

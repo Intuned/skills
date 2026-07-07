@@ -1,6 +1,6 @@
 ---
 name: edit-intuned-project
-description: "Add, change, or extend APIs in an existing local Intuned project. Must Use whenever working on an existing Intuned project, example: add a feature, change a schema, update selectors, fix an API, or edit Intuned.json/job config. (236 lines)"
+description: "Add, change, or extend APIs in an existing local Intuned project. Must Use whenever working on an existing Intuned project, example: add a feature, change a schema, update selectors, fix an API, or edit Intuned.json/job config."
 ---
 
 # Edit Intuned Project
