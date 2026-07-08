@@ -55,7 +55,7 @@ and run `$intuned:agent` for the overview. Skills invoke as
 `@intuned`; browser tools are `mcp__intuned-browser.*` and docs tools are
 `mcp__intuned_docs.*`.
 
-**Sandbox approvals** — the `intuned` CLI needs network access and a few
+**Sandbox approvals:** the `intuned` CLI needs network access and a few
 home-directory paths that Codex's default `workspace-write` sandbox blocks, so
 Codex will ask for approval on nearly every command. If you don't want to be
 bothered with approvals, add this to `~/.codex/config.toml`:
@@ -66,12 +66,12 @@ network_access = true
 writable_roots = ["~/.intuned", "~/.npm", "~/.cache"]
 ```
 
-or run Codex with the sandbox disabled (`codex --sandbox danger-full-access`) —
-the config above is the safer option.
+or run Codex with the sandbox disabled (`codex --sandbox danger-full-access`).
+The config above is the safer option.
 
 One exception either way: `intuned dev browser start` cannot run inside the
-macOS sandbox (Chromium requires mach-port registrations the sandbox denies) —
-approve the one-time escalation Codex requests for it.
+macOS sandbox (Chromium requires mach-port registrations the sandbox denies),
+so approve the one-time escalation Codex requests for it.
 
 ## Available skills
 
