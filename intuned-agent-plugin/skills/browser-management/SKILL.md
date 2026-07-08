@@ -54,7 +54,7 @@ intuned dev browser tabs create   # → tab_id_3 → https://example.com/page/3
 
 Then navigate and interact with each tab by passing its `tab_id` to the browser tools.
 
-## Sandboxed environments (e.g. Codex)
+## Sandboxed environments
 
 If your environment runs shell commands inside an OS sandbox, run `intuned dev browser start` with escalated (unsandboxed) permissions, asking for approval if required — the browser cannot boot inside the sandbox.
 
