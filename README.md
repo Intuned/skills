@@ -46,10 +46,11 @@ codex plugin add intuned@intuned-skills
 new session and invoke `$intuned:agent` — or just describe what you want
 automated.
 
-**Recommended sandbox config** — the plugin drives the `intuned` CLI, which
-needs network access and a few home-directory paths that Codex's default
-`workspace-write` sandbox blocks. Add this to `~/.codex/config.toml` to avoid
-an approval prompt on every command:
+**Sandbox approvals** — the plugin drives the `intuned` CLI, which needs
+network access and a few home-directory paths that Codex's default
+`workspace-write` sandbox blocks, so Codex will ask for approval on nearly
+every command. If you don't want to be bothered with approvals, add this to
+`~/.codex/config.toml`:
 
 ```toml
 [sandbox_workspace_write]
@@ -57,13 +58,12 @@ network_access = true
 writable_roots = ["~/.intuned", "~/.npm", "~/.cache"]
 ```
 
-One exception remains: `intuned dev browser start` cannot run inside the macOS
-sandbox (Chromium's process model requires mach-port registration the sandbox
-denies) — approve the one-time escalation Codex requests for it; everything
-after that runs sandboxed.
+or run Codex with the sandbox disabled (`codex --sandbox danger-full-access`) —
+the config above is the safer option.
 
-Alternatively, run Codex with the sandbox disabled
-(`codex --sandbox danger-full-access`) — no config needed, but the config above is the safer option.
+One exception either way: `intuned dev browser start` cannot run inside the
+macOS sandbox (Chromium's process model requires mach-port registration the
+sandbox denies) — approve the one-time escalation Codex requests for it.
 
 See [`intuned-agent-plugin/`](./intuned-agent-plugin) for what the plugin
 provides and how it works.
