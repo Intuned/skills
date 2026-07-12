@@ -56,7 +56,7 @@ Then navigate and interact with each tab by passing its `tab_id` to the browser 
 
 ## Sandboxed environments
 
-If your environment runs shell commands inside an OS sandbox, run `intuned dev browser start` with escalated (unsandboxed) permissions, asking for approval if required — the browser cannot boot inside the sandbox.
+In Codex (or any host that runs shell commands inside an OS sandbox), run `intuned dev browser start` with escalated (unsandboxed) permissions, asking for approval if required — the browser cannot boot inside the sandbox.
 
 ## Browser crash recovery
 

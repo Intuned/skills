@@ -39,7 +39,7 @@ You will work on a chromium browser, you will control it via intuned CLI, you mu
 
 ## Phase 2: Exploration & Planning
 
-If your environment has a plan mode, enter it once you reach this phase — it helps the user read and review the plan. If it doesn't (or you can't switch modes yourself), act as if you were in plan mode: plan normally with the user — explore without writing project code, then present the plan in chat and wait for approval.
+If you have access to a tool for entering plan mode (e.g. `EnterPlanMode` in Claude Code), call it once you reach this phase — plan mode helps the user read and review the plan. If you don't have such a tool (or can't switch modes yourself), act as if you were in plan mode: plan normally with the user — explore without writing project code, then present the plan in chat and wait for approval.
 Start planning Before exploring, not after it.
 **WRONG**:
 navigate -> discover, explore, ask user questions -> start planning (plan mode) -> write plan -> present plan for approval
