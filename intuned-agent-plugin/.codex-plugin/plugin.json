@@ -1,0 +1,16 @@
+{
+  "name": "intuned",
+  "version": "0.1.0",
+  "description": "Build, edit, test, and debug Intuned browser-automation projects locally with the Intuned agent",
+  "author": {
+    "name": "Intuned"
+  },
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Intuned Agent",
+    "shortDescription": "Build, edit, test, and debug Intuned browser automations",
+    "developerName": "Intuned",
+    "category": "Developer Tools"
+  }
+}

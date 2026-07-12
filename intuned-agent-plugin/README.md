@@ -21,6 +21,8 @@ Run **`/intuned:agent`** for a guided overview of what you can do.
 
 ## Install
 
+### Claude Code
+
 Open Claude Code and run these commands to add this repo as a marketplace and install the plugin:
 
 ```text
@@ -36,7 +38,48 @@ Then run this command to get started with the agent, it will show an overview of
 ```
 
 Skills invoke under the `intuned` namespace (e.g. `/intuned:create-intuned-project`);
-browser tools are `mcp__plugin_intuned_browser__*`.
+browser tools are `mcp__plugin_intuned_intuned-browser__*`.
+
+### Codex
+
+Add this repo as a plugin marketplace and install:
+
+```bash
+codex plugin marketplace add Intuned/skills
+codex plugin add intuned@intuned-skills
+```
+
+(Or browse and install via `/plugins` inside Codex.) Then start a new session
+and run `$intuned:agent` for the overview. Skills invoke as
+`$intuned:<skill-name>` (e.g. `$intuned:create-intuned-project`), or mention
+`@intuned`; browser tools are `mcp__intuned-browser.*` and docs tools are
+`mcp__intuned_docs.*`.
+
+**Sandbox approvals:** the `intuned` CLI needs network access and a few
+home-directory paths that Codex's default `workspace-write` sandbox blocks, so
+Codex will ask for approval on nearly every command. If you don't want to be
+bothered with approvals, add this to `~/.codex/config.toml`:
+
+```toml
+[sandbox_workspace_write]
+network_access = true
+writable_roots = ["~/.intuned", "~/.npm", "~/.cache"]
+```
+
+If you'd rather not change your Codex config, pass the same settings as flags
+for a single session:
+
+```bash
+codex -c sandbox_workspace_write.network_access=true \
+      -c 'sandbox_workspace_write.writable_roots=["~/.intuned","~/.npm","~/.cache"]'
+```
+
+or run Codex with the sandbox disabled (`codex --sandbox danger-full-access`).
+The scoped settings above are the safer option.
+
+One exception either way: `intuned dev browser start` cannot run inside the
+macOS sandbox (Chromium requires mach-port registrations the sandbox denies),
+so approve the one-time escalation Codex requests for it.
 
 ## Available skills
 

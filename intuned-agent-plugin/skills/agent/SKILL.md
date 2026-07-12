@@ -74,9 +74,9 @@ It is also recommended to have an Intuned project setup and ready to go, `intune
 
 Based on the user's requests, you can go into different directions:
 
-1. Create a new automation: Use `/intuned:create-intuned-project` skill.
-2. Edit an existing project: The user must point to the project directory to work with, Use `/intuned:edit-intuned-project` skill.
-3. Investigate an issue or an error: The user must provide what to investigate and a project directory for the project to fix. Use `/intuned:investigate-and-fix` skill.
+1. Create a new automation: Use the `create-intuned-project` skill.
+2. Edit an existing project: The user must point to the project directory to work with, Use the `edit-intuned-project` skill.
+3. Investigate an issue or an error: The user must provide what to investigate and a project directory for the project to fix. Use the `investigate-and-fix` skill.
 4. Generic Intuned related questions: The user wants to ask something about intuned, like auth-sessions, bot detections, jobs, runs, or anything related to intuned in general.
 
 ## Going deeper

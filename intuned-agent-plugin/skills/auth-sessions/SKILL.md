@@ -15,7 +15,7 @@ Two-factor-auth is not supported in Intuned, because in browser-automation, we a
 You should always reject if the website requires real-time user input to proceed, you can't write a plan or generate a code if the website can't be logged in programatically (i.e using playwright code).
 
 There is only One exception to this, TOTP tokens. If the user is using TOTP 2fa, and has the secret token to his TOTP app,
-then you can generate the code with `otpauth` (TypeScript) or `pyotp` (Python) using the user's secret token and generate a TOTP code and fill it during login. See `/intuned-agent-plugin/skills/auth-sessions/resources/handling-2fa.md`. If the user can't provide a secret/token, stop and tell them to contact `support@intunedhq.com`, don't ask the user to type codes manually.
+then you can generate the code with `otpauth` (TypeScript) or `pyotp` (Python) using the user's secret token and generate a TOTP code and fill it during login. See this skill's `resources/handling-2fa.md`. If the user can't provide a secret/token, stop and tell them to contact `support@intunedhq.com`, don't ask the user to type codes manually.
 
 ## What Auth Sessions Are
 
@@ -85,7 +85,7 @@ Each task has a dedicated resource that holds the exact CLI commands and functio
 - **Implementing `create` or `check`** → the guide for your language:
   - Python: `resources/python/writing-create-and-check-apis.md`
   - TypeScript: `resources/typescript/writing-create-and-check-apis.md`
-- **Login asks for a 2FA / OTP / TOTP code and the user has a TOTP secret/token** → Read `/intuned-agent-plugin/skills/auth-sessions/resources/handling-2fa.md`
+- **Login asks for a 2FA / OTP / TOTP code and the user has a TOTP secret/token** → Read this skill's `resources/handling-2fa.md`
 - **Creating auth-sessions as code `.auth-session.json` resource files** → `resources/auth-sessions-as-code.md`
 - **Implementing an API that hits the site backend after auth (XHR/GraphQL / `page.context.request`)** → see [Authenticated backend calls](#authenticated-backend-calls) above
 

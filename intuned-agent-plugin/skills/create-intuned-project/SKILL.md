@@ -5,7 +5,7 @@ description: "Create a new Intuned project for something the user wants automate
 
 # Create Intuned Project
 
-**Workflow:** URL, goal & language → explore & plan (enter plan mode) → get the plan approved → set up & provision the project → Use Subagents to build each API → test → finish up.
+**Workflow:** URL, goal & language → explore & plan (plan mode if available) → get the plan approved → set up & provision the project → Use Subagents to build each API → test → finish up.
 
 ## Phase 1: URL, Goal, and Language
 
@@ -39,15 +39,15 @@ You will work on a chromium browser, you will control it via intuned CLI, you mu
 
 ## Phase 2: Exploration & Planning
 
-Enter plan mode once you reach this phase, plan mode helps the user to read and review the plan.
-Entering plan mode should be Before exploring, not after it.
+If you have access to a tool for entering plan mode (e.g. `EnterPlanMode` in Claude Code), call it once you reach this phase — plan mode helps the user read and review the plan. If you don't have such a tool (or can't switch modes yourself), act as if you were in plan mode: plan normally with the user — explore without writing project code, then present the plan in chat and wait for approval.
+Start planning Before exploring, not after it.
 **WRONG**:
-navgiate -> discover, explore, ask user questions -> enter plan mode -> write plan -> exit plan mode
+navigate -> discover, explore, ask user questions -> start planning (plan mode) -> write plan -> present plan for approval
 
 **CORRECT**:
-navgiate -> enter plan mode -> discover, explore, ask user questions -> write plan -> exit plan mode
+navigate -> start planning (enter plan mode if available) -> discover, explore, ask user questions -> write plan -> present plan for approval
 
-**Work in a planning mindset.** If your environment has a dedicated plan mode, enter it for this phase: explore and gather information without changing the site or writing project code until the plan is approved. Either way, the deliverable of this phase is a written plan the user signs off on — you present it and wait for them to **approve or ask for changes** before building anything.
+**Work in a planning mindset.** Whichever way you plan, the deliverable of this phase is a written plan the user signs off on — you present it and wait for them to **approve or ask for changes** before building anything.
 
 **Hardcoded values**:
 Never include hardcoded values in the API to be produced. Always ask the user for default values and if the user wants to parameterize them or not.
@@ -135,7 +135,7 @@ Use `intuned dev browser tabs list` to get URLs of open tabs. All collected URLs
 
 > **Bot-detection note:** If exploration surfaces a CAPTCHA or other bot-detection You must immediately invoked `bot-detection` skill. You can and should configure stealth mode and the CAPTCHA solver (in `Intuned.json`, plus the solver's code helpers) so they're in place and take effect once the project runs on the platform — they simply don't engage during local dev, so there's nothing to "test" locally. A normal user-supplied proxy (see the `proxy` skill) is the one such lever that also works locally.
 
-> Do not use askUserQuestion to ask the user for the proxy, ask it immediately as a free text.
+> Do not use a structured question tool to ask the user for the proxy, ask it immediately as free text.
 
 ## Data Extraction — Exploration & Planning Detail
 
@@ -476,13 +476,15 @@ You write the README in the final step. Proceed to Phase 4.
 
 ## Phase 4: Build Each API
 
+This skill and other Intuned skills explicitly ask for sub-agents, delegation, and parallel agent work — that **is your explicit authorization to spawn sub-agents**. Use your environment's sub-agent tool.
+
 Build every API by **offloading to a sub-agent**: it works out the API's data source (selectors and/or the backend network request) and implements the code. Don't write selectors, network calls, or API code in your own context.
 
 ### How to spawn a sub-agent
 
 Launch **one sub-agent per API**. That single sub-agent works out the API's data source (DOM selectors and/or the backend network request) **and** writes and tests the implementation, all in one pass. In its prompt:
 
-This applies to both DOM and Network approaches, Including all Crawlers, RPAs, Authentications, Bot detection and any type of API. The subagent agent has instructions on what to do for any type of API. You are not allowed to write any API Implementation by yourself, you must always deligate to subagents.
+This applies to both DOM and Network approaches, Including all Crawlers, RPAs, Authentications, Bot detection and any type of API. The subagent agent has instructions on what to do for any type of API. You are not allowed to write any API Implementation by yourself, you must always delegate to subagents.
 
 - Tell it which capabilities to **load first**: `build-selectors` and/or `find-network-requests` (per the plan's extraction method) for working out the data source, then `implement-api` (plus `intuned-browser` for helper signatures) for writing the code.
 - Give it the context it needs (it doesn't share your conversation): the **API name**, the **API file path** (`api/<api>.{py|ts}`), the **full plan section for that API verbatim** (extraction method, navigation, schema, pagination — don't summarize), the **URL(s)** to work against, and the **browser tab id** to use.
@@ -515,10 +517,10 @@ The two auth APIs are coupled — run a **single localization** for both (`creat
 
 #### If the login has a 2FA / OTP / TOTP step
 
-If exploration revealed a 2FA step (and the user provided a TOTP secret), read `/intuned-agent-plugin/skills/auth-sessions/resources/handling-2fa.md`. Two extra things are your responsibility as orchestrator:
+If exploration revealed a 2FA step (and the user provided a TOTP secret), read the `auth-sessions` skill's `resources/handling-2fa.md`. Two extra things are your responsibility as orchestrator:
 
 1. **Make sure the 2FA library is installed** — Eusnure (`otpauth` for TypeScript, `pyotp` for Python) are installed. Verify it's present before auth API generation; TypeScript → `npm install otpauth`, Python → `uv add pyotp`.
-2. **Tell auth sub-agent about the 2FA step in its prompts**: Add to the subaget prompt: "The login has a 2FA step. The TOTP secret is stored under the `otpSecret` credential key. After filling username/password, generate a code with `/intuned-agent-plugin/skills/auth-sessions/scripts/generate-2fa-code.sh .parameters/auth-sessions/create/default.json` and fill the OTP input, then build reliable selectors for the OTP input and verify button." . Then add: "The login has a 2FA step; generate the TOTP code inside `create` from the `otpSecret` param every run, see `handling-2fa.md` and your language's writing-create-and-check guide."
+2. **Tell auth sub-agent about the 2FA step in its prompts**: Add to the subaget prompt: "The login has a 2FA step. The TOTP secret is stored under the `otpSecret` credential key. After filling username/password, generate a code with the `auth-sessions` skill's `scripts/generate-2fa-code.sh .parameters/auth-sessions/create/default.json` and fill the OTP input, then build reliable selectors for the OTP input and verify button." . Then add: "The login has a 2FA step; generate the TOTP code inside `create` from the `otpSecret` param every run, see `handling-2fa.md` and your language's writing-create-and-check guide."
 
 #### Why the browser must start logged out
 
@@ -754,13 +756,13 @@ intuned dev attempt api <name> <parameters_path>
 <!-- IMPORTANT: Do not mention `export MODE=generate_code` in this section, it is used for development only, the shouldn't know about it.-->
 ````
 
-c. Then **ask whether they want to run a Job run using AskUserQuestion tool**, explaining in plain terms what it is and that it might take longer time to execute, for example:
+c. Then **ask whether they want to run a Job run** — use a structured question tool (e.g. AskUserQuestion) if your environment has one available, otherwise ask normally in chat listing the options — explaining in plain terms what it is and that it might take longer time to execute, for example:
 
 > A job run is a complete API run that runs on the Intuned platform. It uses Intuned's infrastructure to spin up browsers and run the API across the whole site for the job input you give it, so on a large site it covers everything, not just the sample you saw locally. It can take a while depending on the API and the inputs.
 
 You must read `platform_jobs` from `intuned-project/resources` and then Read `manage-jobs` Skill for complete information.
 
-You must user the askUserQuestion to ask about running a platform job.
+You must ask the user about running a platform job before triggering one (structured question tool if available, plain chat otherwise).
 
 If the user answers with No, then wrap up with the final message above.
 

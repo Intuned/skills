@@ -16,7 +16,7 @@ Before reaching for any proxy, confirm the site is actually **IP-blocking** (tes
 
 **If the user has their own proxy** — use it. Ask them for the URL; **never invent one**. A user-supplied proxy works in **both** local dev and deployed runs, so you can apply and verify it locally. Format: `http://username:password@domain:port`.
 
-> Do not use askUserQuestion to ask the user for the proxy, ask it immediately as a free text.
+> Do not use a structured question tool to ask the user for the proxy, ask it immediately as free text.
 
 **If the user does NOT have a proxy** — suggest Intuned's **auto proxy** (`intuned://auto`). It's platform-provided, so the user doesn't need to supply or pay for one. Like stealth mode and the CAPTCHA solver, it's a **deployed** feature: configure it now and it takes effect once the project runs on the platform — it does **not** engage in local dev (the CLI will note "auto proxy is not available in connected mode; it will be resolved on deployed projects"). Set it on the **deployed** proxy only:
 

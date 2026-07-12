@@ -54,6 +54,10 @@ intuned dev browser tabs create   # → tab_id_3 → https://example.com/page/3
 
 Then navigate and interact with each tab by passing its `tab_id` to the browser tools.
 
+## Sandboxed environments
+
+In Codex (or any host that runs shell commands inside an OS sandbox), run `intuned dev browser start` with escalated (unsandboxed) permissions, asking for approval if required — the browser cannot boot inside the sandbox.
+
 ## Browser crash recovery
 
 If a browser tool is denied with "Browser is closed", or the browser crashed: restart with `intuned dev browser start --headless`, then resume unfinished work with freshly created tabs — old tab IDs are no longer valid.

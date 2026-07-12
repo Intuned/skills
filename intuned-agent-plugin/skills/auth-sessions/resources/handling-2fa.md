@@ -16,8 +16,10 @@ At the 2FA step, find the OTP input and the verify/submit button. You will gener
 Run the script, it picks the right library for the project automatically (`otpauth` for a Node/TypeScript project, `pyotp` for Python, and an ephemeral `pyotp` run when there's no project yet, e.g. during planning). The secret is read inside the runtime and never touches the command line; the script prints only the 6-digit code.
 
 ```bash
-/intuned-agent-plugin/skills/auth-sessions/scripts/generate-2fa-code.sh .parameters/auth-sessions/create/default.json
+<auth-sessions skill dir>/scripts/generate-2fa-code.sh .parameters/auth-sessions/create/default.json
 ```
+
+(`<auth-sessions skill dir>` is the installed directory of the `auth-sessions` skill — the folder containing its `SKILL.md`.)
 
 Arguments: `[path-to-param.json]` (default `.parameters/auth-sessions/create/default.json`) and an optional `[secret-key]` (default `otpSecret`). The code is valid ~30s, so generate it right before filling it.
 
@@ -30,8 +32,8 @@ If it failed to login, try one more time with a fresh token and submit it right 
 
 The real generation lives **inside** `create` function so it's fresh on every run. The library is imported at runtime there, so `uvx`/`npx` can't replace a real dependency for the `create` code itself. See the per-language guide for the in-code wiring:
 
-- Python: `/intuned-agent-plugin/skills/auth-sessions/resources/python/writing-create-and-check-apis.md`
-- TypeScript: `/intuned-agent-plugin/skills/auth-sessions/resources/typescript/writing-create-and-check-apis.md`
+- Python: the `auth-sessions` skill's `resources/python/writing-create-and-check-apis.md`
+- TypeScript: the `auth-sessions` skill's `resources/typescript/writing-create-and-check-apis.md`
 
 ## Notes
 
