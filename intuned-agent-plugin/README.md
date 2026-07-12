@@ -66,8 +66,16 @@ network_access = true
 writable_roots = ["~/.intuned", "~/.npm", "~/.cache"]
 ```
 
+If you'd rather not change your Codex config, pass the same settings as flags
+for a single session:
+
+```bash
+codex -c sandbox_workspace_write.network_access=true \
+      -c 'sandbox_workspace_write.writable_roots=["~/.intuned","~/.npm","~/.cache"]'
+```
+
 or run Codex with the sandbox disabled (`codex --sandbox danger-full-access`).
-The config above is the safer option.
+The scoped settings above are the safer option.
 
 One exception either way: `intuned dev browser start` cannot run inside the
 macOS sandbox (Chromium requires mach-port registrations the sandbox denies),
