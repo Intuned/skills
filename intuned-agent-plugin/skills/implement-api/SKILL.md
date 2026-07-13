@@ -235,10 +235,6 @@ For **URL-based** pagination (`?page=N`), build the absolute URL yourself and na
 
 When an API extracts data from a network endpoint instead of the DOM, reproduce the request with `page.evaluate()` + the browser's `fetch()` (never an external HTTP lib) and map the response to the schema — see the network-call variant in `resources/api-patterns.md`. The **`find-network-requests`** skill covers discovering and capturing the right request.
 
-## File contents
-
-When an API must read the **data inside** a file (PDF/DOCX/XLSX/images) — not just store it as an attachment — load the **`intuned-files`** skill and use its SDK (`extract_markdown_from_file` / `extract_tables_from_file` / `extract_structured_data_from_file`, TypeScript: `extractMarkdownFromFile` / `extractTablesFromFile` / `extractStructuredDataFromFile`). Never use third-party parsing libraries (`pdfplumber`, `openpyxl`, `pdftotext`, OCR libs) unless the SDK is confirmed out of scope. These APIs usually receive a file URL or download a file rather than scraping the page; call `extend_timeout()` / `extendTimeout()` before each file operation.
-
 ## Default input file
 
 - **Entry-point APIs** (no forwarded payload) — the parameters a run would start with, e.g. `{"max_pages": 2}`, or `{}` if the API takes none. Note that some apis may have large data quantities or may have many pages, so use small values in the .parameters/ so that you can attempt APIs faster instead of running an API across everything.
