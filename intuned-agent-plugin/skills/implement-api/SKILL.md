@@ -127,7 +127,7 @@ Prefer Intuned's helpers over raw Playwright in API code — they are more relia
 | `scroll_to_load_content`                                                       | `scrollToLoadContent`                                                       | Pages with infinite scroll/lazy loading                                                      |
 | `click_until_exhausted`                                                        | `clickUntilExhausted`                                                       | "Load more" buttons that need repeated clicks                                                |
 | `save_file_to_s3`                                                              | `saveFileToS3`                                                              | Upload downloaded files as attachments                                                       |
-| `to_markdown` / `extract_tables` / `extract_structured_data` (`intuned_files`) | `toMarkdown` / `extractTables` / `extractStructuredData` (`@intuned/files`) | Reading data from inside files (PDF/DOCX/XLSX/images) — read the `intuned-files` skill first |
+| `extract_markdown_from_file` / `extract_tables_from_file` / `extract_structured_data_from_file` (`intuned_files`) | `extractMarkdownFromFile` / `extractTablesFromFile` / `extractStructuredDataFromFile` (`@intuned/files`) | Reading data from inside files (PDF/DOCX/XLSX/images) — read the `intuned-files` skill first |
 
 ### Execution control
 
@@ -237,7 +237,7 @@ When an API extracts data from a network endpoint instead of the DOM, reproduce 
 
 ## File contents
 
-When an API must read the **data inside** a file (PDF/DOCX/XLSX/images) — not just store it as an attachment — load the **`intuned-files`** skill and use its SDK (`to_markdown` / `extract_tables` / `extract_structured_data`, TypeScript: `toMarkdown` / `extractTables` / `extractStructuredData`). Never use third-party parsing libraries (`pdfplumber`, `openpyxl`, `pdftotext`, OCR libs) unless the SDK is confirmed out of scope. These APIs usually receive a file URL or download a file rather than scraping the page; call `extend_timeout()` / `extendTimeout()` before each file operation.
+When an API must read the **data inside** a file (PDF/DOCX/XLSX/images) — not just store it as an attachment — load the **`intuned-files`** skill and use its SDK (`extract_markdown_from_file` / `extract_tables_from_file` / `extract_structured_data_from_file`, TypeScript: `extractMarkdownFromFile` / `extractTablesFromFile` / `extractStructuredDataFromFile`). Never use third-party parsing libraries (`pdfplumber`, `openpyxl`, `pdftotext`, OCR libs) unless the SDK is confirmed out of scope. These APIs usually receive a file URL or download a file rather than scraping the page; call `extend_timeout()` / `extendTimeout()` before each file operation.
 
 ## Default input file
 

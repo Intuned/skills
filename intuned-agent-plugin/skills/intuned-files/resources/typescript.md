@@ -22,25 +22,25 @@ Prefer `download` for files coming from the site being automated (works with aut
 
 ## Operations
 
-### toMarkdown
+### extractMarkdownFromFile
 
 ```typescript
-import { toMarkdown } from "@intuned/files";
+import { extractMarkdownFromFile } from "@intuned/files";
 
-const markdown = await toMarkdown(
+const markdown = await extractMarkdownFromFile(
   { type: "pdf", url: "https://example.com/report.pdf" },
   { label: "convert_report" }
 );
 ```
 
-### extractTables
+### extractTablesFromFile
 
 Returns `ExtractedTable[]` with `pageNumber`, `title` (nullable), and `content` (2D array of cell strings).
 
 ```typescript
-import { extractTables } from "@intuned/files";
+import { extractTablesFromFile } from "@intuned/files";
 
-const tables = await extractTables(
+const tables = await extractTablesFromFile(
   {
     type: "pdf",
     download: downloadFile({ page, trigger: page.locator("a.download-report") }),
@@ -49,15 +49,15 @@ const tables = await extractTables(
 );
 ```
 
-### extractStructuredData
+### extractStructuredDataFromFile
 
 Converts the file to markdown, then runs AI extraction. `dataSchema` is required and accepts a JSON Schema object or a zod schema. Other options: `prompt`, `model`, `maxRetries`, `enableCache`, `apiKey`.
 
 ```typescript
-import { extractStructuredData } from "@intuned/files";
+import { extractStructuredDataFromFile } from "@intuned/files";
 import { z } from "zod";
 
-const data = await extractStructuredData(
+const data = await extractStructuredDataFromFile(
   {
     type: "pdf",
     download: downloadFile({ page, trigger: page.locator("a.invoice-pdf") }),
@@ -81,7 +81,7 @@ import { extendTimeout } from "@intuned/runtime";
 
 for (const link of invoiceLinks) {
   extendTimeout();
-  const data = await extractStructuredData(
+  const data = await extractStructuredDataFromFile(
     { type: "pdf", download: downloadFile({ page, trigger: link }) },
     { dataSchema: invoiceSchema, label: "parse_invoice" }
   );
@@ -91,4 +91,4 @@ for (const link of invoiceLinks) {
 
 ## Available Exports
 
-`toMarkdown`, `extractTables`, and `extractStructuredData` are the ONLY functions available from `@intuned/files` — do NOT import anything else. Exported types: `File`, `PdfFile`, `ImageFile`, `SpreadsheetFile`, `DocumentFile`, `ExtractedTable`, `FileOperationOptions`, `ExtractStructuredDataOptions`.
+`extractMarkdownFromFile`, `extractTablesFromFile`, and `extractStructuredDataFromFile` are the ONLY functions available from `@intuned/files` — do NOT import anything else. Exported types: `File`, `PdfFile`, `ImageFile`, `SpreadsheetFile`, `DocumentFile`, `ExtractedTable`, `FileOperationOptions`, `ExtractStructuredDataOptions`.

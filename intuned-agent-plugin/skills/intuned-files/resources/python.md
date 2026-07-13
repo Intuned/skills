@@ -22,38 +22,38 @@ Prefer `download` for files coming from the site being automated (works with aut
 
 ## Operations
 
-### to_markdown
+### extract_markdown_from_file
 
 ```python
-from intuned_files import to_markdown
+from intuned_files import extract_markdown_from_file
 
-markdown = await to_markdown(
+markdown = await extract_markdown_from_file(
     {"type": "pdf", "url": "https://example.com/report.pdf"},
     label="convert_report",
 )
 ```
 
-### extract_tables
+### extract_tables_from_file
 
 Returns a list of `ExtractedTable` with `page_number`, `title` (optional), and `content` (2D array of cell strings).
 
 ```python
-from intuned_files import extract_tables
+from intuned_files import extract_tables_from_file
 
-tables = await extract_tables(
+tables = await extract_tables_from_file(
     {"type": "pdf", "download": download_file(page, page.locator("a.download-report"))},
     label="report_tables",
 )
 ```
 
-### extract_structured_data
+### extract_structured_data_from_file
 
 Converts the file to markdown, then runs AI extraction. `data_schema` accepts a JSON Schema dict or a Pydantic model class. Other optional kwargs: `prompt`, `model`, `max_retries`, `enable_cache`, `api_key`.
 
 ```python
-from intuned_files import extract_structured_data
+from intuned_files import extract_structured_data_from_file
 
-data = await extract_structured_data(
+data = await extract_structured_data_from_file(
     {"type": "pdf", "download": download_file(page, page.locator("a.invoice-pdf"))},
     data_schema={
         "type": "object",
@@ -76,7 +76,7 @@ from intuned_runtime import extend_timeout
 
 for link in invoice_links:
     extend_timeout()
-    data = await extract_structured_data(
+    data = await extract_structured_data_from_file(
         {"type": "pdf", "download": download_file(page, link)},
         data_schema=invoice_schema,
         label="parse_invoice",
@@ -86,4 +86,4 @@ for link in invoice_links:
 
 ## Available Exports
 
-`to_markdown`, `extract_tables`, and `extract_structured_data` are the ONLY functions available from `intuned_files` — do NOT import anything else. Typed models are also exported if preferred over dicts: `PdfFile`, `ImageFile`, `SpreadsheetFile`, `DocumentFile`, `ExtractedTable`.
+`extract_markdown_from_file`, `extract_tables_from_file`, and `extract_structured_data_from_file` are the ONLY functions available from `intuned_files` — do NOT import anything else. Typed models are also exported if preferred over dicts: `PdfFile`, `ImageFile`, `SpreadsheetFile`, `DocumentFile`, `ExtractedTable`.

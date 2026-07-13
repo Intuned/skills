@@ -6,7 +6,7 @@ description: "Read and process file contents with the Intuned files SDK (intuned
 
 # Intuned Files SDK
 
-Read and process file **contents**: convert to markdown (`to_markdown` / `toMarkdown`), extract tables (`extract_tables` / `extractTables`), and extract schema-shaped structured data (`extract_structured_data` / `extractStructuredData`). Supported types: **PDF**, **image** (PNG/JPEG), **spreadsheet** (`.xlsx` only), and **document** (`.docx` only).
+Read and process file **contents**: convert to markdown (`extract_markdown_from_file` / `extractMarkdownFromFile`), extract tables (`extract_tables_from_file` / `extractTablesFromFile`), and extract schema-shaped structured data (`extract_structured_data_from_file` / `extractStructuredDataFromFile`). Supported types: **PDF**, **image** (PNG/JPEG), **spreadsheet** (`.xlsx` only), and **document** (`.docx` only).
 
 This is different from attachments (`save_file_to_s3` / `saveFileToS3`), which store files without reading them. Use this SDK when the automation needs the **data inside** a file.
 
@@ -46,5 +46,5 @@ Read the resource for the project's language — it has signatures, examples, an
 
 **Do NOT read from `venv/`, `node_modules/`, or source files to discover function signatures. The docs are the source of truth.**
 
-1. `search_intuned` — find the page for the helper you need (e.g. `toMarkdown`, `extract_tables`).
+1. `search_intuned` — find the page for the helper you need (e.g. `extractMarkdownFromFile`, `extract_tables_from_file`).
 2. `query_docs_filesystem_intuned` — read that page for full arguments, return types, and examples.
