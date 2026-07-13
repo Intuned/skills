@@ -90,6 +90,8 @@ await click_until_exhausted(page=page, button_locator=load_more_button, max_clic
 
 **Note:** `save_file_to_s3` and `upload_file_to_s3` upload to Intuned's default managed S3 bucket (or your own, if you pass `S3Configs` / set `AWS_*` env vars).
 
+**These helpers store files without reading them.** To read file **contents** (convert PDF/DOCX/XLSX/images to markdown, extract tables, or extract structured data), load the `intuned-files` skill — its `download` source accepts the result of `download_file` directly.
+
 ### save_file_to_s3
 
 Download a file and upload it to S3 in one step. Recommended for most attachment scenarios.

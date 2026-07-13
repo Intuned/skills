@@ -277,6 +277,8 @@ Make minimal, focused changes. Fix the root cause — don't refactor surrounding
 
 For a small fix you edit directly, load the `intuned-browser` skill for the available helpers and Playwright best practices (prefer intuned helpers like `go_to_url` and `wait_for_network_settled` over raw Playwright); for substantial code changes let `implement-api` handle it.
 
+If the fix involves reading data from inside files (PDF/DOCX/XLSX/images), load the `intuned-files` skill. You may inspect files directly while diagnosing, but the automation code must depend on the Intuned files SDK.
+
 ### Step 7: Test
 
 Re-run the API locally with trace enabled:

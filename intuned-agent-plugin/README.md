@@ -109,6 +109,7 @@ call them directly.
 | [`build-selectors`](./skills/build-selectors)             | Build reliable selectors via the browser tools.    |
 | [`find-network-requests`](./skills/find-network-requests) | Find the backend request an API depends on.        |
 | [`intuned-browser`](./skills/intuned-browser)             | Browser helper library reference.                  |
+| [`intuned-files`](./skills/intuned-files)                 | File-content SDK reference (PDF/DOCX/XLSX/images). |
 | [`browser-management`](./skills/browser-management)       | Start/stop the local browser and tabs.             |
 | [`auth-sessions`](./skills/auth-sessions)                 | Login flows and authenticated access.              |
 | [`handle-attachments`](./skills/handle-attachments)       | Capture downloadable files as attachments.         |

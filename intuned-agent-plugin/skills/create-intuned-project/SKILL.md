@@ -80,6 +80,10 @@ Examples:
 
 A project can have both types — e.g., a data extraction API that scrapes a list, chained to an action automation API that submits each item to a form.
 
+### File-Based Data (PDF / DOCX / XLSX / images)
+
+If the requested data lives **inside files** rather than in the page's DOM, you may inspect sample files directly during exploration — you have vision, and that's how you design the extraction schema. But the **plan must make the automation depend on the Intuned files SDK** (`intuned-files` skill) — generated code has no vision. For each file-processing API, record the file operation, source type, and extraction schema in the plan (see the plan template), and list the package under Dependencies so it gets installed during Phase 3 project setup.
+
 ### Handling Bot Detection
 
 If you encounter any bot detection signal — **stop, do not reject, do not continue exploring**. Read the bot-detection skill immediately to handle it.
@@ -348,10 +352,15 @@ Include all URLs you visited during exploration. The sub-agent that builds each 
 - **Schema**: {fields to extract}
 - **Pagination**: {type and exhaustion condition}
 - **Chains to**: {next API or none}
+- **File processing** (only if the API reads data from inside files): {file type, SDK operation, source type, and the extraction schema for the file contents}
 
 ### Relationships
 
 - {how APIs connect}
+
+### Dependencies (only if extra packages are needed)
+
+- {e.g. `intuned-files` (Python) / `@intuned/files` (TypeScript) — for file content extraction. Omit this section when no extra packages are needed.}
 ```
 
 ---
@@ -449,6 +458,7 @@ Once the plan is approved, set up the project yourself directly. You stub the AP
    - a **navigate** function, an **action/extract** function, and **pagination** functions if the plan calls for them; name them from the plan and leave each body as a `# TODO:` / `// TODO:` describing the plan's steps and returning an empty result;
    - the **`automation`** (Python) or **`handler`** (TypeScript) entry point wiring navigate, then action, then `validate_data_using_schema`, plus an `extend_payload` block only for APIs that chain;
    - `auth-sessions/create` and `check` stubs only if the plan has auth.
+   - For an API whose plan section says it reads data from **inside files** (PDF/DOCX/XLSX/images): the stub's `# TODO:` / `// TODO:` must copy the plan's file operation, source type (url / download / base64 / buffer), and extraction schema verbatim — that gives the Phase 4 sub-agent everything it needs. If the plan includes an extraction schema for the file, paste it into the stub verbatim as a constant (e.g. `PDF_EXTRACTION_SCHEMA`); `DATA_SCHEMA` follows the normal rule — leave its properties empty. The implementation will use the files SDK from the `intuned-files` skill (`to_markdown` / `extract_tables` / `extract_structured_data`, TypeScript: `toMarkdown` / `extractTables` / `extractStructuredData`) — not `intuned_browser.ai` extraction or third-party parsers.
    - Important: Do not write any selectors or logic here (that is Phase 4). Do not fill in locators, queries, inputs or anything, this is subagents' work.
    - The language's type/build check may fail since these are Stubs, ignore these and leave the fix for the subagents. Your job is to write the stub, placeholders and TODOs, not fill in the the code and writing implementations.
 
@@ -457,7 +467,7 @@ Once the plan is approved, set up the project yourself directly. You stub the AP
    - `metadata.defaultRunPlaygroundInput` = `{ "apiName": "<entry-point API>", "parameters": <default params> }` (the entry-point API's filename without extension; first one if several).
    - Leave everything else unchanged.
 4. **`.gitignore`** — ensure it ignores `.intuned/`, `.intuned-agent/`, `traces/`, `.env`, `.venv/`, `node_modules/`, `__pycache__/`. Append any missing lines; don't reorder existing ones.
-5. **Install dependencies** if not already: `uv sync` (Python) or `yarn install` (TypeScript).
+5. **Install dependencies** if not already: `uv sync` (Python) or `yarn install` (TypeScript). If the plan's Dependencies section lists `intuned-files` / `@intuned/files`, install it now: Python → `uv add intuned-files`, TypeScript → `yarn add @intuned/files`.
 6. **Provision the project** — register the platform-side project now. This does **not** deploy or run anything; it just creates the project so platform-scoped features (project env vars, and **attachment / managed-S3 uploads**, and End-To-End testing) work while you build, and so deploying at the end is a single step. Provisioning is what lets the runtime upload attachments — without it, attachment uploads fail with a `401`.
    1. **Pick a name for the project**: Pick a descriptive name for the project you are creating and provision it, proceed with this without confirming with the user.
       **Name rules:** 1–200 chars; letters, numbers, hyphens, underscores only; must start and end with a letter or number; hyphens/underscores only between alphanumeric segments.
@@ -486,7 +496,7 @@ Launch **one sub-agent per API**. That single sub-agent works out the API's data
 
 This applies to both DOM and Network approaches, Including all Crawlers, RPAs, Authentications, Bot detection and any type of API. The subagent agent has instructions on what to do for any type of API. You are not allowed to write any API Implementation by yourself, you must always delegate to subagents.
 
-- Tell it which capabilities to **load first**: `build-selectors` and/or `find-network-requests` (per the plan's extraction method) for working out the data source, then `implement-api` (plus `intuned-browser` for helper signatures) for writing the code.
+- Tell it which capabilities to **load first**: `build-selectors` and/or `find-network-requests` (per the plan's extraction method) for working out the data source, then `implement-api` (plus `intuned-browser` for helper signatures) for writing the code. If the API reads data from inside files (PDF/DOCX/XLSX/images), also tell it to load `intuned-files` — the implementation must use the Intuned files SDK, never third-party parsers.
 - Give it the context it needs (it doesn't share your conversation): the **API name**, the **API file path** (`api/<api>.{py|ts}`), the **full plan section for that API verbatim** (extraction method, navigation, schema, pagination — don't summarize), the **URL(s)** to work against, and the **browser tab id** to use.
 - **Very important:** it works only on its assigned tab — it must not use or close other tabs.
 - It should read `api-patterns` to understand how to write patterns correctly.

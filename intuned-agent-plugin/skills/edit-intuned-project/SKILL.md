@@ -158,6 +158,8 @@ Pick selectors, the network request, or both per API depending on where the data
 
 When you write or edit API code directly (a small inline change), let `implement-api` handle substantial work — load the `intuned-browser` skill for the available helpers and Playwright best practices (preferring intuned helpers like `go_to_url` and `wait_for_network_settled` over raw Playwright), and follow `implement-api` for how API files are structured.
 
+If the change involves reading data from inside files (PDF/DOCX/XLSX/images), load the `intuned-files` skill. You may inspect files directly while investigating, but the automation code must depend on the Intuned files SDK.
+
 ## Editing Jobs
 
 If the user asks to add, change, or remove a job (schedule, payload, configuration, proxy, etc.), read the files in the `intuned-resources/jobs/` directory and edit the relevant `.job.json` file directly.

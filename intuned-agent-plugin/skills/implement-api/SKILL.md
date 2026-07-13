@@ -117,16 +117,17 @@ First investigate _why_ it failed — schema mismatch, data edge case, or extrac
 
 Prefer Intuned's helpers over raw Playwright in API code — they are more reliable and less flaky than custom implementations. The **`intuned-browser`** skill has the full helper reference; this is the quick reference for the ones you reach for most:
 
-| Python Helper              | TypeScript Helper        | When to Use                                            |
-| -------------------------- | ------------------------ | ------------------------------------------------------ |
-| `go_to_url`                | `goToUrl`                | Navigate to any URL (auto-retries on network failures) |
-| `resolve_url`              | `resolveUrl`             | Convert relative URLs to absolute                      |
-| `wait_for_network_settled` | `withNetworkSettledWait` | After clicks/navigation that trigger API calls         |
-| `wait_for_dom_settled`     | `withDomSettledWait`     | After actions that update the DOM dynamically          |
-| `extract_markdown`         | `extractMarkdown`        | Convert HTML content to clean markdown                 |
-| `scroll_to_load_content`   | `scrollToLoadContent`    | Pages with infinite scroll/lazy loading                |
-| `click_until_exhausted`    | `clickUntilExhausted`    | "Load more" buttons that need repeated clicks          |
-| `save_file_to_s3`          | `saveFileToS3`           | Upload downloaded files as attachments                 |
+| Python Helper                                                                  | TypeScript Helper                                                           | When to Use                                                                                  |
+| ------------------------------------------------------------------------------ | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `go_to_url`                                                                    | `goToUrl`                                                                   | Navigate to any URL (auto-retries on network failures)                                       |
+| `resolve_url`                                                                  | `resolveUrl`                                                                | Convert relative URLs to absolute                                                            |
+| `wait_for_network_settled`                                                     | `withNetworkSettledWait`                                                    | After clicks/navigation that trigger API calls                                               |
+| `wait_for_dom_settled`                                                         | `withDomSettledWait`                                                        | After actions that update the DOM dynamically                                                |
+| `extract_markdown`                                                             | `extractMarkdown`                                                           | Convert HTML content to clean markdown                                                       |
+| `scroll_to_load_content`                                                       | `scrollToLoadContent`                                                       | Pages with infinite scroll/lazy loading                                                      |
+| `click_until_exhausted`                                                        | `clickUntilExhausted`                                                       | "Load more" buttons that need repeated clicks                                                |
+| `save_file_to_s3`                                                              | `saveFileToS3`                                                              | Upload downloaded files as attachments                                                       |
+| `to_markdown` / `extract_tables` / `extract_structured_data` (`intuned_files`) | `toMarkdown` / `extractTables` / `extractStructuredData` (`@intuned/files`) | Reading data from inside files (PDF/DOCX/XLSX/images) — read the `intuned-files` skill first |
 
 ### Execution control
 
@@ -234,6 +235,10 @@ For **URL-based** pagination (`?page=N`), build the absolute URL yourself and na
 
 When an API extracts data from a network endpoint instead of the DOM, reproduce the request with `page.evaluate()` + the browser's `fetch()` (never an external HTTP lib) and map the response to the schema — see the network-call variant in `resources/api-patterns.md`. The **`find-network-requests`** skill covers discovering and capturing the right request.
 
+## File contents
+
+When an API must read the **data inside** a file (PDF/DOCX/XLSX/images) — not just store it as an attachment — load the **`intuned-files`** skill and use its SDK (`to_markdown` / `extract_tables` / `extract_structured_data`, TypeScript: `toMarkdown` / `extractTables` / `extractStructuredData`). Never use third-party parsing libraries (`pdfplumber`, `openpyxl`, `pdftotext`, OCR libs) unless the SDK is confirmed out of scope. These APIs usually receive a file URL or download a file rather than scraping the page; call `extend_timeout()` / `extendTimeout()` before each file operation.
+
 ## Default input file
 
 - **Entry-point APIs** (no forwarded payload) — the parameters a run would start with, e.g. `{"max_pages": 2}`, or `{}` if the API takes none. Note that some apis may have large data quantities or may have many pages, so use small values in the .parameters/ so that you can attempt APIs faster instead of running an API across everything.
@@ -254,4 +259,4 @@ Confirm the code compiles cleanly from the project root and fix errors before re
   1. **Static types (Pyright)**: `uvx pyright --pythonpath "$(uv run which python)"`
   2. **Syntax / import graph (bytecode compile)**: `uv run python -m compileall . -x "\.venv" -q`
 
-If the error involves an unknown function or method from `intuned_browser` / `@intuned/browser` or `intuned_runtime` / `@intuned/runtime`, load the **`intuned-browser`** skill and validate the signature.
+If the error involves an unknown function or method from `intuned_browser` / `@intuned/browser` or `intuned_runtime` / `@intuned/runtime`, load the **`intuned-browser`** skill and validate the signature. For `intuned_files` / `@intuned/files`, load the **`intuned-files`** skill (its `resources/python.md` / `resources/typescript.md` list every export).
