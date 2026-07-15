@@ -11,6 +11,12 @@ A webtask is a web automation described in natural language. Send an instruction
 
 Webskillet is available on `https://webskillet.ai/`. It can also be consumed programmatically in three ways, all of which need an API key: sign in to `https://webskillet.ai/`, click **Get Code** on the task input, and copy the key from the drawer that opens.
 
+If it is not already clear from context, ask the user how they want to consume Webskillet:
+
+- **SDK** — embedding webtasks in an application: typed TypeScript/Python clients with built-in polling and error handling
+- **CLI** — agents and agentic workflows: a single command to shell out to, with `--json` for programmatically readable output
+- **cURL** — quick one-shot requests: nothing to install, just an HTTP call from anywhere
+
 ### CLI
 
 Install and authenticate:
