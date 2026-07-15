@@ -41,7 +41,6 @@ Example:
 ```bash
 webskillet run "Extract the title and URL of the top story" \
   --start-url https://news.ycombinator.com \
-  --output-schema ./schema.json \
   --wait 5m --json
 ```
 
@@ -122,14 +121,7 @@ curl -X POST https://webskillet.ai/api/v1/runs/start \
   -d '{
     "task": "Extract the title and URL of the top story",
     "startUrl": "https://news.ycombinator.com",
-    "outputSchema": {
-      "type": "object",
-      "properties": {
-        "title": { "type": "string" },
-        "url": { "type": "string" }
-      }
     }
-  }'
 ```
 
 Returns `{ "id": "...", "status": "pending" }`. Poll until `status` is `completed` or `canceled` (in-flight runs report `pending`, then `started`). A completed run has `outcome` (`success` | `failed`) and `result` — the structured output matching your schema, or `{ "type": "file", "file": { "url", "contentType", "sizeBytes", "expiresAt" } }` with an expiring download URL for large outputs:
