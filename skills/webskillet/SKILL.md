@@ -124,7 +124,7 @@ curl -X POST https://webskillet.ai/api/v1/runs/start \
     }
 ```
 
-Returns `{ "id": "...", "status": "pending" }`. Poll until `status` is `completed` or `canceled` (in-flight runs report `pending`, then `started`). A completed run has `outcome` (`success` | `failed`) and `result` — the structured output matching your schema, or `{ "type": "file", "file": { "url", "contentType", "sizeBytes", "expiresAt" } }` with an expiring download URL for large outputs:
+Returns `{ "id": "...", "status": "pending" }`. Poll until `status` is `completed` or `canceled` (in-flight runs report `pending`, then `started`). A completed run has `outcome` (`success` | `failed`) and `result` — the structured output matching your schema if provided, or `{ "type": "file", "file": { "url", "contentType", "sizeBytes", "expiresAt" } }` with an expiring download URL for large outputs:
 
 ```bash
 curl https://webskillet.ai/api/v1/runs/<id> \
