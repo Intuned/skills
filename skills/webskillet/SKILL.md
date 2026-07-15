@@ -39,6 +39,8 @@ webskillet run "Extract the title and URL of the top story" \
   --wait 5m --json
 ```
 
+<!-- TODO: link to the CLI reference docs -->
+
 ### SDK
 
 SDK Clients exist for TypeScript and Python. Both group run operations under `client.runs` — `start`, `get`, `list`, `update`, and `run` (start + poll every 5s until `completed` or `canceled`) — and default to `https://webskillet.ai` (override with the `baseUrl` / `base_url` option).
@@ -99,6 +101,8 @@ with WebskilletClient(api_key="your-webskillet-api-key") as client:
 
 The other methods are `client.runs.start(body=...)`, `client.runs.get(run_id=...)`, and `client.runs.list(limit=..., offset=...)`. `run()` raises `RunFailedError` when the run completes with outcome `failed`.
 
+<!-- TODO: link to the TypeScript and Python SDK docs -->
+
 ### cURL
 
 The API lives at `https://webskillet.ai`; pass the key in the `x-api-key` header.
@@ -135,3 +139,5 @@ List recent webtasks:
 curl "https://webskillet.ai/api/v1/runs?limit=20&offset=0" \
   -H "x-api-key: $WEBSKILLET_API_KEY"
 ```
+
+<!-- TODO: link to the API reference docs -->
