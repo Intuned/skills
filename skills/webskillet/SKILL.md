@@ -3,13 +3,28 @@ name: webskillet
 description: Turn web tasks described in natural language into structured results, covering scraping, data extraction, multi-page form filling, and repetitive browser automation. This skill explains the three ways to consume it: the SDK, the CLI, and cURL against the HTTP API.
 ---
 
-# Webtask
+# Webskillet
 
-A webtask is a web automation described in natural language. Send an instruction like ("extract all listings from this directory") with an optional starting URL, parameters, and output schema. Webskillet's browser agent writes and runs whatever code the task needs and returns structured results. Runs are asynchronous: start one, poll until it completes, then read the result inline or from a download link. Every run belongs to a skillet, a saved automation that keeps the generated code and learned site knowledge, so passing the same `skilletId` makes repeat runs faster and cheaper.
+A webskillet is an automation that lets you scrape, crawl, fill forms, and do any web automation task. Webskillet gives you an API for websites that have no API.
+
+You can send plain-English instructions with an optional start URL, optional parameters, and an optional output schema. The webskillet agent will write and run the code the task needs and return the structured results.
+
+Webskillet improves with every run. Every run belongs to a skillet, and running the same skillet multiple times makes it faster, cheaper, and more accurate with each run.
+
+Webskillet runs asynchronously: start a run and poll until it completes.
+
+Capabilities and typical use cases:
+
+- **Extract** — pull structured data out of any page: prices, listings, posts, directory entries
+- **Compare** — run the same query across several sites: prices, plans, availability, package health
+- **Lookup** — run point checks behind search forms: name availability, reservations, quotes, public records
+- **Crawl** — sweep a site page by page: docs sites and help centers, listings, SEO/QA audits
+- **Files** — download and parse documents: PDFs, reports, and filings into structured data
+- **Government** — search public-sector portals: bids and solicitations, records, filings
 
 ## Install and consume
 
-Webskillet is available on `https://webskillet.ai/`. It can also be consumed programmatically in three ways, all of which need an API key: sign in to `https://webskillet.ai/`, click **Get Code** on the task input, and copy the key from the drawer that opens.
+Webskillet is available on `https://webskillet.ai/`. It can also be consumed programmatically in three ways, all of which need an API key that the user must provide: they can get it by signing in to `https://webskillet.ai/`, clicking **Get Code** on the task input, and copying the key from the drawer that opens.
 
 If it is not already clear from context, ask the user how they want to consume Webskillet:
 
@@ -120,11 +135,11 @@ curl -X POST https://webskillet.ai/api/v1/runs/start \
   -H "Content-Type: application/json" \
   -d '{
     "task": "Extract the title and URL of the top story",
-    "startUrl": "https://news.ycombinator.com",
-    }
+    "startUrl": "https://news.ycombinator.com"
+  }'
 ```
 
-Returns `{ "id": "...", "status": "pending" }`. Poll until `status` is `completed` or `canceled` (in-flight runs report `pending`, then `started`). A completed run has `outcome` (`success` | `failed`) and `result` — the structured output matching your schema if provided, or `{ "type": "file", "file": { "url", "contentType", "sizeBytes", "expiresAt" } }` with an expiring download URL for large outputs:
+Returns `{ "id": "...", "status": "pending" }`. Poll until `status` is `completed` or `canceled` (in-flight runs report `pending`, then `started`). A completed run has `outcome` (`success` | `failed`) and `result` — the structured output matching your schema if provided.
 
 ```bash
 curl https://webskillet.ai/api/v1/runs/<id> \
