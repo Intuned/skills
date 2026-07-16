@@ -1,156 +1,203 @@
 ---
 name: webskillet
-description: Turn web tasks described in natural language into structured results, covering scraping, data extraction, multi-page form filling, and repetitive browser automation. This skill explains the three ways to consume it: the SDK, the CLI, and cURL against the HTTP API.
+description: "Webskillet runs web tasks described in plain English — scraping, form-filling, multi-step site automation — in a cloud browser agent and returns structured JSON. Use it whenever a task needs live data or actions on a real website."
 ---
 
 # Webskillet
 
-A webskillet is an automation that lets you scrape, crawl, fill forms, and do any web automation task. Webskillet gives you an API for websites that have no API.
+Webskillet is a web-task service: you describe what you want done on a website in plain English, and a cloud browser agent figures out how, does it, and returns the result as structured JSON. It can scrape listings and tables, extract data from pages, fill forms, and run multi-step flows — with no selectors or automation scripts to write.
 
-You can send plain-English instructions with an optional start URL, optional parameters, and an optional output schema. The webskillet agent will write and run the code the task needs and return the structured results.
+## A task
 
-Webskillet improves with every run. Every run belongs to a skillet, and running the same skillet multiple times makes it faster, cheaper, and more accurate with each run.
+The instruction (`task`) is the only required input. Everything else is optional and narrows or guides it:
 
-Webskillet runs asynchronously: start a run and poll until it completes.
+- **`task`** (required) — the plain-English instruction.
+- **`startUrl`** (optional) — where to begin; omit it and the agent finds the page itself.
+- **`parameters`** (optional) — inputs that vary between runs (a search term, a date range) as structured values instead of edits to the task text.
+- **`outputSchema`** (optional) — the JSON shape you want back; the result is validated against it.
 
-Capabilities and typical use cases:
+A full task looks like this (the same example is used in every section below):
 
-- **Extract** — pull structured data out of any page: prices, listings, posts, directory entries
-- **Compare** — run the same query across several sites: prices, plans, availability, package health
-- **Lookup** — run point checks behind search forms: name availability, reservations, quotes, public records
-- **Crawl** — sweep a site page by page: docs sites and help centers, listings, SEO/QA audits
-- **Files** — download and parse documents: PDFs, reports, and filings into structured data
-- **Government** — search public-sector portals: bids and solicitations, records, filings
-
-## Install and consume
-
-Webskillet is available on `https://webskillet.ai/`. It can also be consumed programmatically in three ways, all of which need an API key that the user must provide: they can get it by signing in to `https://webskillet.ai/`, clicking **Get Code** on the task input, and copying the key from the drawer that opens.
-
-If it is not already clear from context, ask the user how they want to consume Webskillet:
-
-- **SDK** — embedding webtasks in an application: typed TypeScript/Python clients with built-in polling and error handling
-- **CLI** — agents and agentic workflows: a single command to shell out to, with `--json` for programmatically readable output
-- **cURL** — quick one-shot requests: nothing to install, just an HTTP call from anywhere
-
-### CLI
-
-Install and authenticate:
-
-```bash
-npm install -g webskillet
-webskillet auth login
-```
-
-Subcommands:
-
-- `webskillet start <task>` — start a webtask and print its run ID immediately. Non-blocking.
-- `webskillet run <task>` — start a webtask and poll every 5s until it finishes; `--wait <duration>` (`30s`, `10m`, `2h`) caps the wait, bare `--wait` means 10 minutes, omitted means wait indefinitely. Blocking.
-- `webskillet result <web-task-id>` — get a webtask's status and result
-- `webskillet list` — list recent webtasks (`-l, --limit`, default 20; `-o, --offset`)
-- `webskillet auth login` / `webskillet auth logout` — manage stored credentials
-
-`start` and `run` share the task flags: `--start-url <url>`, `--parameters <json-or-file>`, `--output-schema <json-or-file>`, `--skillet-id <id>` (reuse a saved skillet), and `--model <haiku|sonnet|opus>`. `--parameters` and `--output-schema` accept inline JSON or a path to a JSON file. `start`, `run`, `result`, and `list` accept `--json [filename]` for machine-readable output (printed, or written to the file when a filename is given).
-
-Example:
-
-```bash
-webskillet run "Extract the title and URL of the top story" \
-  --start-url https://news.ycombinator.com \
-  --wait 5m --json
-```
-
-<!-- TODO: link to the CLI reference docs -->
-
-### SDK
-
-SDK Clients exist for TypeScript and Python. Both group run operations under `client.runs` — `start`, `get`, `list`, `update`, and `run` (start + poll every 5s until `completed` or `canceled`) — and default to `https://webskillet.ai` (override with the `baseUrl` / `base_url` option).
-
-**TypeScript (`npm install webskillet`).**
-
-```typescript
-import { WebskilletClient } from "webskillet/client-sdk";
-
-const client = new WebskilletClient({
-  apiKey: process.env.WEBSKILLET_API_KEY!,
-});
-
-// Start and poll in one call; pass timeoutMs to cap the wait
-const result = await client.runs.run({
-  task: "Extract the title and URL of the top story",
-  startUrl: "https://news.ycombinator.com",
-  outputSchema: {
-    type: "object",
-    properties: { title: { type: "string" }, url: { type: "string" } },
-  },
-});
-if (result.status === "completed") {
-  console.log(result.result); // structured output matching outputSchema
+```json
+{
+  "task": "Extract the title and points of the top Hacker News stories",
+  "startUrl": "https://news.ycombinator.com",
+  "parameters": { "count": 5 },
+  "outputSchema": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "points": { "type": "number" }
+      }
+    }
+  }
 }
-
-// Or manage the lifecycle yourself
-const { id } = await client.runs.start({
-  task: "Extract the title",
-});
-const current = await client.runs.get(id);
-const recent = await client.runs.list({ limit: 20 });
 ```
 
-Constructor options go in a second argument — `new WebskilletClient({ apiKey }, { baseUrl })`. `run()` throws `WebskilletRunFailedError` when the run completes with outcome `failed`, and `WebskilletTimeoutError` when `timeoutMs` expires.
+## Skillets — what makes Webskillet different
 
-**Python (`pip install webskillet-client`)**
-pass the key explicitly — there is no env-var fallback. `AsyncWebskilletClient` mirrors the same API:
+The first time Webskillet runs a task, it doesn't just return the result — it builds a reusable automation for that task (generated code plus what it learned about the site) and saves it as a **skillet**, returning the skillet's id alongside the result.
+
+Pass that id on later runs and Webskillet executes the saved automation directly instead of figuring the task out from scratch — much faster and much cheaper. The skillet keeps getting better: successful runs save anything new it learned, and if the site changes and the code breaks, Webskillet repairs it mid-run and keeps the fix. A failed run never leaves a skillet worse than it started.
+
+A skillet is a parameterized automation, not a recording of one run. The same skillet handles different URLs, parameter values, and phrasings of the same task — so reuse one id for each *kind* of task ("extract products from a category page"), and start a new id only for a genuinely different automation.
+
+## CLI
+
+The preferred way to use Webskillet. No API key needed — `auth login --browser` opens a browser login without prompting. `auth status` exits nonzero when not authenticated, so log in only when needed:
+
+```bash
+npx webskillet auth status || npx webskillet auth login --browser
+
+# Start a run and wait for the result
+npx webskillet run "Extract the title and points of the top Hacker News stories" \
+  --start-url https://news.ycombinator.com \
+  --parameters '{"count": 5}' \
+  --output-schema '{"type":"array","items":{"type":"object","properties":{"title":{"type":"string"},"points":{"type":"number"}}}}' \
+  --wait 5m --json
+
+# Or fire and forget, then fetch the result later
+npx webskillet start "Extract the title and points of the top Hacker News stories" --start-url https://news.ycombinator.com --json
+npx webskillet result <run-id> --json
+
+# Reuse the skillet from a previous run (its id is in the run output)
+npx webskillet run "Extract the title and points of the top Hacker News stories" \
+  --skillet-id <skillet-id> --parameters '{"count": 10}' --wait 5m --json
+```
+
+Other commands and flags (`list`, `--model <haiku|sonnet|opus>`, JSON files for `--parameters`/`--output-schema`): `npx webskillet --help`, or the docs: <https://webskillet.ai/docs/cli-reference>
+
+## Python SDK
+
+Use when building Webskillet into a Python codebase.
+
+```bash
+pip install webskillet
+```
 
 ```python
 from webskillet_client import WebskilletClient
 
-with WebskilletClient(api_key="your-webskillet-api-key") as client:
-    result = client.runs.run(
-        body={
-            "task": "Extract the title and URL of the top story",
-            "startUrl": "https://news.ycombinator.com",
-            "outputSchema": {
-                "type": "object",
-                "properties": {"title": {"type": "string"}, "url": {"type": "string"}},
-            },
+client = WebskilletClient(api_key="YOUR_WEBSKILLET_API_KEY")  # user gets this from the Webskillet app
+
+body = {
+    "task": "Extract the title and points of the top Hacker News stories",
+    "start_url": "https://news.ycombinator.com",
+    "parameters": {"count": 5},
+    "output_schema": {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {"title": {"type": "string"}, "points": {"type": "number"}},
         },
-        timeout_seconds=600,  # omit to wait indefinitely
-    )
-    if result.status == "completed":
-        print(result.result)  # structured output matching outputSchema
+    },
+}
+
+# Start a run and wait for the result
+run = client.runs.run(body=body, timeout_seconds=600)
+print(run.result)
+
+# Or fire and forget, then fetch the result later
+started = client.runs.start(body=body)
+current = client.runs.get(run_id=started.id)
+
+# Reuse the skillet from a previous run
+run = client.runs.run(
+    body={**body, "skillet_id": run.skillet.id, "parameters": {"count": 10}},
+    timeout_seconds=600,
+)
 ```
 
-The other methods are `client.runs.start(body=...)`, `client.runs.get(run_id=...)`, and `client.runs.list(limit=..., offset=...)`. `run()` raises `RunFailedError` when the run completes with outcome `failed`.
+Write the key as a placeholder or read it from an env var — the user supplies the real one.
 
-<!-- TODO: link to the TypeScript and Python SDK docs -->
+Beyond the happy path: `runs.run()` raises `RunFailedError` when the run fails; `client.runs` also has `list` / `update`, `client.skillets.list()` shows saved skillets, and `AsyncWebskilletClient` mirrors it all with `await`. Details: <https://webskillet.ai/docs/sdks>
 
-### cURL
+## TypeScript SDK
 
-The API lives at `https://webskillet.ai`; pass the key in the `x-api-key` header.
-
-Start a webtask. Only `task` is required; optional fields are `startUrl`, `parameters` (free-form JSON object), `outputSchema` (JSON Schema), `skilletId` (reuse a saved skillet), `model` (`haiku` | `sonnet` | `opus`), `proxy`, and `auth`. Unknown fields are rejected:
+Use when building Webskillet into a TypeScript or JavaScript codebase.
 
 ```bash
+npm install webskillet
+```
+
+```ts
+import { WebskilletClient } from "webskillet/client-sdk";
+
+const client = new WebskilletClient({ apiKey: process.env.WEBSKILLET_API_KEY! });
+
+const body = {
+  task: "Extract the title and points of the top Hacker News stories",
+  startUrl: "https://news.ycombinator.com",
+  parameters: { count: 5 },
+  outputSchema: {
+    type: "array",
+    items: {
+      type: "object",
+      properties: { title: { type: "string" }, points: { type: "number" } },
+    },
+  },
+};
+
+// Start a run and wait for the result
+const run = await client.runs.run(body, { timeoutMs: 600_000 });
+if (run.status === "completed") console.log(run.result);
+
+// Or fire and forget, then fetch the result later
+const started = await client.runs.start(body);
+const current = await client.runs.get(started.id);
+
+// Reuse the skillet from a previous run
+const rerun = await client.runs.run(
+  { ...body, skilletId: run.skillet.id, parameters: { count: 10 } },
+  { timeoutMs: 600_000 }
+);
+```
+
+Beyond the happy path: `runs.run()` throws `WebskilletRunFailedError` when the run fails; `client.runs` also has `list` / `update`, and `client.skillets.list()` shows saved skillets. Details: <https://webskillet.ai/docs/sdks>
+
+## HTTP API
+
+Only when the user explicitly asks for the raw API.
+
+The API key is in the Webskillet app at <https://webskillet.ai> — in the sidebar. Tell the user to set it as an environment variable in the terminal, and give them this command to run:
+
+```bash
+export WEBSKILLET_API_KEY="paste-your-key-here"
+```
+
+Then reference it from the environment in your requests — never paste the key itself into a command:
+
+```bash
+# Start a run
 curl -X POST https://webskillet.ai/api/v1/runs/start \
-  -H "x-api-key: $WEBSKILLET_API_KEY" \
-  -H "Content-Type: application/json" \
+  -H "x-api-key: $WEBSKILLET_API_KEY" -H "Content-Type: application/json" \
   -d '{
-    "task": "Extract the title and URL of the top story",
-    "startUrl": "https://news.ycombinator.com"
+    "task": "Extract the title and points of the top Hacker News stories",
+    "startUrl": "https://news.ycombinator.com",
+    "parameters": { "count": 5 },
+    "outputSchema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": { "title": { "type": "string" }, "points": { "type": "number" } }
+      }
+    }
   }'
+# => { "id": "ru_...", "status": "pending" }
+
+# Fetch the result — poll every ~5s until status is "completed" or "canceled"
+curl https://webskillet.ai/api/v1/runs/ru_... -H "x-api-key: $WEBSKILLET_API_KEY"
+
+# Reuse the skillet from a previous run: add "skilletId" to the start body
+#   { "task": "...", "skilletId": "<skillet-id>", "parameters": { "count": 10 } }
 ```
 
-Returns `{ "id": "...", "status": "pending" }`. Poll until `status` is `completed` or `canceled` (in-flight runs report `pending`, then `started`). A completed run has `outcome` (`success` | `failed`) and `result` — the structured output matching your schema if provided.
+Full reference: <https://webskillet.ai/docs/api-reference>
 
-```bash
-curl https://webskillet.ai/api/v1/runs/<id> \
-  -H "x-api-key: $WEBSKILLET_API_KEY"
-```
+## Tips
 
-List recent webtasks:
-
-```bash
-curl "https://webskillet.ai/api/v1/runs?limit=20&offset=0" \
-  -H "x-api-key: $WEBSKILLET_API_KEY"
-```
-
-<!-- TODO: link to the API reference docs -->
+- Put values that vary between runs in `parameters` instead of editing the task text.
+- Set `outputSchema` when code consumes the result — the run validates against it.
+- Always set a wait deadline (`--wait` / `timeout_seconds` / `timeoutMs`); waiting is unbounded by default.
