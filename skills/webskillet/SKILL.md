@@ -200,5 +200,4 @@ Full reference: <https://webskillet.ai/docs/api-reference>
 ## Tips
 
 - Put values that vary between runs in `parameters` instead of editing the task text.
-- Set `outputSchema` when code consumes the result — the run validates against it.
 - Always set a wait deadline (`--wait` / `timeout_seconds` / `timeoutMs`); waiting is unbounded by default.
