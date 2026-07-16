@@ -67,7 +67,7 @@ npx webskillet run "Extract the title and points of the top Hacker News stories"
   --skillet-id <skillet-id> --parameters '{"count": 10}' --wait 5m --json
 ```
 
-Other commands and flags (`list`, `--model <haiku|sonnet|opus>`, JSON files for `--parameters`/`--output-schema`): `npx webskillet --help`, or the docs: <https://webskillet.ai/docs/cli-reference>
+Other commands and flags (`list`, `--model`, JSON files for `--parameters`/`--output-schema`): `npx webskillet --help`, or the docs: <https://webskillet.ai/docs/cli-reference>
 
 ## Python SDK
 
@@ -142,7 +142,8 @@ const body = {
 
 // Start a run and wait for the result
 const run = await client.runs.run(body, { timeoutMs: 600_000 });
-if (run.status === "completed") console.log(run.result);
+if (run.status !== "completed") throw new Error(`Run ${run.id} was ${run.status}`);
+console.log(run.result);
 
 // Or fire and forget, then fetch the result later
 const started = await client.runs.start(body);
@@ -150,7 +151,7 @@ const current = await client.runs.get(started.id);
 
 // Reuse the skillet from a previous run
 const rerun = await client.runs.run(
-  { ...body, skilletId: run.skillet.id, parameters: { count: 10 } },
+  { ...body, skilletId: run.skillet?.id, parameters: { count: 10 } },
   { timeoutMs: 600_000 }
 );
 ```
