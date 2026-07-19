@@ -3,18 +3,5 @@
   "interface": {
     "displayName": "Intuned Skills"
   },
-  "plugins": [
-    {
-      "name": "intuned",
-      "source": {
-        "source": "local",
-        "path": "./intuned-agent-plugin"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Developer Tools"
-    }
-  ]
+  "plugins": []
 }

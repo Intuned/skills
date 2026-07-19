@@ -2,82 +2,6 @@
 
 [Intuned](https://intunedhq.com) browser automation for your coding agent.
 
-## Intuned Agent Plugin
-
-The full Intuned automation agent, running locally in your own project: the
-workflow and capability skills, the browser MCP, and the CDP hooks. Use it to
-build, edit, test, and debug browser automations from the command line.
-
-Requirements:
-
-- **Intuned CLI**, installed and signed in — the plugin drives it:
-
-  ```bash
-  npm install -g @intuned/cli
-  intuned auth login
-  ```
-
-- **`uv`** on your `PATH` — uv provides the Python the browser tooling needs and
-  launches the MCP server via `uvx intuned-agent-mcp`. Install it with the
-  [uv installation guide](https://docs.astral.sh/uv/getting-started/installation/).
-
-### Claude Code
-
-Open Claude Code and run these commands to add this repo as a marketplace and install the plugin:
-
-```text
-/plugin marketplace add Intuned/skills
-/plugin install intuned-agent-plugin@intuned-skills
-/reload-plugins
-```
-
-Run `/intuned:agent` for an overview.
-
-### Codex
-
-Add this repo as a plugin marketplace, then install:
-
-```bash
-codex plugin marketplace add Intuned/skills
-codex plugin add intuned@intuned-skills
-```
-
-(Or browse and install interactively via `/plugins` inside Codex.) Then start a
-new session and invoke `$intuned:agent`, or just describe what you want
-automated.
-
-**Sandbox approvals:** the plugin drives the `intuned` CLI, which needs
-network access and a few home-directory paths that Codex's default
-`workspace-write` sandbox blocks, so Codex will ask for approval on nearly
-every command. If you don't want to be bothered with approvals, add this to
-`~/.codex/config.toml`:
-
-```toml
-[sandbox_workspace_write]
-network_access = true
-writable_roots = ["~/.intuned", "~/.npm", "~/.cache"]
-```
-
-If you'd rather not change your Codex config, pass the same settings as flags
-for a single session:
-
-```bash
-codex -c sandbox_workspace_write.network_access=true \
-      -c 'sandbox_workspace_write.writable_roots=["~/.intuned","~/.npm","~/.cache"]'
-```
-
-or run Codex with the sandbox disabled (`codex --sandbox danger-full-access`).
-The scoped settings above are the safer option.
-
-One exception either way: `intuned dev browser start` cannot run inside the
-macOS sandbox (Chromium's process model requires mach-port registration the
-sandbox denies), so approve the one-time escalation Codex requests for it.
-
-See [`intuned-agent-plugin/`](./intuned-agent-plugin) for what the plugin
-provides and how it works.
-
----
-
 ## Intuned Skills
 
 A collection of agent **skills** for working with Intuned — authoring,
@@ -103,10 +27,19 @@ Update later with `npx skills@latest update`. No `skills` CLI? Run
 ### Available skills
 
 | Skill                                                   | What it does                                                                                                                                                                                                |
-| ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`webwright-to-intuned`](./skills/webwright-to-intuned) | Turn a [Webwright](https://github.com/microsoft/Webwright) "Crafted CLI" into a deployed, verified Intuned project. Includes 4 example crafts to port under [`examples/`](./examples/webwright-to-intuned). |
 
 More skills coming.
+
+---
+
+## Looking for the Intuned Agent Plugin?
+
+The Intuned Agent Plugin (run the Intuned agent locally in Claude Code or
+Codex) is in **private preview** and is no longer distributed from this repo.
+If you'd like access, [contact our
+team](https://intunedhq.com/docs/main/06-resources/help-and-support).
 
 ---
 
