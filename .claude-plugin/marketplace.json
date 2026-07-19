@@ -1,9 +1,0 @@
-{
-  "name": "intuned-skills",
-  "owner": {
-    "name": "Intuned",
-    "email": "founders@intunedhq.com"
-  },
-  "description": "Intuned skills for working with the Intuned browser-automation platform.",
-  "plugins": []
-}

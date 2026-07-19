@@ -34,15 +34,6 @@ More skills coming.
 
 ---
 
-## Looking for the Intuned Agent Plugin?
-
-The Intuned Agent Plugin (run the Intuned agent locally in Claude Code or
-Codex) is in **private preview** and is no longer distributed from this repo.
-If you'd like access, [contact our
-team](https://intunedhq.com/docs/main/06-resources/help-and-support).
-
----
-
 ## Contributing
 
 Want to add a skill? See [`CLAUDE.md`](./CLAUDE.md) for conventions.
